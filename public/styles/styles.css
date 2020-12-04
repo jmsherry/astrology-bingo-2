@@ -81,3 +81,26 @@ body {
 svg {
   cursor: pointer;
 }
+
+.controls {
+  padding: 15px;
+}
+
+.footer-nav {
+  display: flex;
+  border: none;
+  box-shadow: none;
+  justify-content: space-around;
+}
+
+.footer-nav a {
+  display: flex;
+  margin-inline-end: 15px;
+}
+.footer-nav a:last-child {
+  margin-inline-end: 0;
+}
+
+.btn-danger {
+  background-color: #F44336 !important;
+}

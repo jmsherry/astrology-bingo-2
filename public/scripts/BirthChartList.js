@@ -1,5 +1,5 @@
-
 import BirthChart from './BirthChart.js';
+import { isElement } from './utilities.js';
 
 class BirthChartList {
   list = [];
@@ -68,7 +68,7 @@ class BirthChartList {
   }
   render(mountNode, rendFn = () => {}) {
 
-    if(mountNode == null || !'innerHTML' in mountNode) {
+    if(!isElement(mountNode)) {
       throw new Error(`Mountnode must be a DOM element, received ${mountNode}`)
     }
     rendFn(mountNode, this.list);
