@@ -49,12 +49,9 @@ export function uuidv4() {
   });
 }
 
-export function printPageArea(areaID){
-  const printContent = document.getElementById(areaID);
-  var printWindow = window.open('', '', 'width=900,height=650');
-  printWindow.document.write(printContent.innerHTML);
-  printWindow.document.close();
-  printWindow.focus();
-  printWindow.print();
-  printWindow.close();
+
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive 
 }

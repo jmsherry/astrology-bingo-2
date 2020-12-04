@@ -1,4 +1,4 @@
-import { uuidv4, planets, printPageArea } from "./utilities.js";
+import { uuidv4, planets } from "./utilities.js";
 
 class BirthChart {
   constructor({
