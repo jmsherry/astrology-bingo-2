@@ -22,6 +22,18 @@ body {
   /* align-items: flex-start; */
 }
 
+.icons-list {
+  display: flex;
+}
+
+.icons-list .icon-item {
+  margin-inline-end: 10px;
+}
+
+.icons-list .icon-item:last-child {
+  margin-inline-end: 0;
+}
+
 .icons-list h3 {
   font-size: 1rem;
   margin-block-start: 0;

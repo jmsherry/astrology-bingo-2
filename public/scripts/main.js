@@ -4,7 +4,7 @@ import { planets } from "./utilities.js";
 console.log(planets);
 // Components
 const noContentDisplay = document.createElement('p');
-noContentDisplay.textContent = '"No players yet...';
+noContentDisplay.textContent = 'No players yet...';
 
 // Modals
 
@@ -51,13 +51,22 @@ const htmlRender = (mount, players) => {
     iconsDisplay.classList.add('icons-list');
     for(const planet of planets) {
       const iconListItem = document.createElement('li');
+      iconListItem.classList.add('icon-item');
       const planetTitle = document.createElement('h3');
       planetTitle.textContent = planet;
       iconListItem.append(planetTitle);
-      const {sign, icon} = player[planet];
+      const {sign, icon:path} = player[planet];
       const p = document.createElement('p');
       p.textContent = sign;
       iconListItem.append(p);
+      const icon = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg"
+      );
+      icon.setAttribute("viewBox", "0 0 250 250");
+      icon.setAttribute("width", "50");
+      icon.classList.add("sign", "icon", "chart");
+      icon.innerHTML = path;
       iconListItem.append(icon);
       iconsDisplay.append(iconListItem);
     }

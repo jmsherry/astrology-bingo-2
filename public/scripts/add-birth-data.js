@@ -139,7 +139,9 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     //handle bad responses
     if (!response.ok) throw response;
     const chartData = JSON.parse(await response.json());
-    chartData.Desc = descDict[chartData.Asc];
+    chartData.Ascendant = chartData.Asc;
+    chartData.Descendant = descDict[chartData.Ascendant];
+    delete chartData.Asc;
 
     chartData.name = `${firstname} ${lastname}`;
 
