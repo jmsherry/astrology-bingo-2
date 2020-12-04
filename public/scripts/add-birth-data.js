@@ -10,12 +10,13 @@ const birthChartList = new BirthChartList();
 // UI elements
 const geoMountLat = document.getElementById("location1");
 const geoMountLong = document.getElementById("location2");
+const timeMount = document.getElementById("utc-input");``
 
 const datePickerElems = document.querySelectorAll(".datepicker");
 const timePickerElems = document.querySelectorAll(".timepicker");
 
 const personalDataForm = document.getElementById("addDataForm");
-const locationForm = document.getElementById("location-form");
+const locationForm = document.getElementById("location-form");``
 
 const chartMountNode = document.getElementById("target");
 
