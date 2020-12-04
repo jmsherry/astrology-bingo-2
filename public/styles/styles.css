@@ -1,0 +1,65 @@
+body {
+  min-height: 100vh;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  padding-bottom: 290px;
+}
+
+.birthchart-section-container {
+  padding: 15px;
+}
+
+.list-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 15px;
+  list-style-type: none;
+}
+
+.list-group-item {
+  padding: 20px;
+  border: 1px black solid;
+  /* align-items: flex-start; */
+}
+
+.chart {
+  padding: 10px;
+}
+
+.bc-template {
+  width: 100%;
+  height: 800px;
+  display: block;
+  /* outline: solid 1px rgb(78, 75, 75); */
+}
+
+.sign.icon {
+  max-width: 40px;
+  padding: 5px 5px 0 5px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .sign.icon.chart {
+} */
+
+.chart-id {
+  padding: 10px;
+  font-size: 0.6rem;
+}
+
+.page-footer {
+  bottom: 0;
+  left: 0;
+  padding-top: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+}
+
+svg {
+  cursor: pointer;
+}

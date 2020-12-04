@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astrology Bingo</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+  <!-- 3rd party styles -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
+
+  <!-- our own styles  -->
+  <link rel="stylesheet" href="./styles/styles.css">
+
+
+  <!-- 3rd party scripts -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg=="
+    crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" defer></script> -->
+  <!-- <script defer src="https://www.gstatic.com/firebasejs/8.0.2/firebase.js"></script>
+  <script defer src="/__/firebase/8.0.2/firebase-database.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script> -->
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+  <!-- 
+    initialize the SDK after all desired features are loaded, set useEmulator to false to avoid connecting the SDK to running emulators.
+                  -->
+  <!-- <script defer src="/__/firebase/init.js?useEmulator=true"></script> -->
+
+  <!-- our own scripts  -->
+  <script src="./scripts/main.js" type="module"></script>
+
+
+
+</head>
+
+<body>
+  <header class="page-header">
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo center">Astrology Bingo</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+
+
+    <section id="birthchart-section">
+      <h1>Birth charts in Play</h1>
+      <div class="birthchart-list-container" id="birthchart-list-container">
+        
+      </div>
+    </section>
+    <!-- <section id="show-birthchart-section">
+
+    </section> -->
+
+  </main>
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l4 offset-6 s12">
+          <h3 class="white-text">Links</h3>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="./index.html">Birth charts in play</a></li>
+            <li><a class="grey-text text-lighten-3" href="./add-birth-data.html">Add birth chart</a></li>
+            <li><a class="grey-text text-lighten-3" href="./generator.html">Random call generator</a></li>
+            <li><a class="grey-text text-lighten-3" href="./birth-chart-experiment.html">Experiment</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <p><small>2020 Copyright Text</small></p>
+      </div>
+    </div>
+  </footer>
+
+
+ <!-- Modal Structure -->
+ <div id="birthchart-modal" class="modal">
+  <div class="modal-content">
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+  </div>
+</div>
+
+
+</body>
+
+</html>
