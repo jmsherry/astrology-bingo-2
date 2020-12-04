@@ -1,6 +1,10 @@
 // import BirthChart from './BirthChart.js';
 import BirthChartList from "./BirthChartList.js";
 import { planets } from "./utilities.js";
+console.log(planets);
+// Components
+const noContentDisplay = document.createElement('p');
+noContentDisplay.textContent = '"No players yet...';
 
 // Modals
 
@@ -16,9 +20,11 @@ console.log("birthChartList", birthChartList);
 
 const listNode = document.getElementById("birthchart-list-container");
 console.log("listNode", listNode);
-birthChartList.render(listNode, (mount, players) => {
+
+const htmlRender = (mount, players) => {
   if (!players.length) {
-    listNode.innerHTML = "<p>No players yet...</p>";
+    listNode.innerHTML = '';
+    listNode.append(noContentDisplay.cloneNode(true));
     return;
   }
   console.log("players", players);
@@ -53,6 +59,7 @@ birthChartList.render(listNode, (mount, players) => {
       p.textContent = sign;
       iconListItem.append(p);
       iconListItem.append(icon);
+      iconsDisplay.append(iconListItem);
     }
     li.append(iconsDisplay);
 
@@ -70,7 +77,7 @@ birthChartList.render(listNode, (mount, players) => {
     delbtn.textContent = "Delete";
     delbtn.addEventListener("click", (e) => {
       birthChartList.deleteBirthChart(id)
-      li.remove();
+      birthChartList.render(listNode, htmlRender);
     });
     li.append(delbtn);
 
@@ -78,4 +85,5 @@ birthChartList.render(listNode, (mount, players) => {
     list.append(li);
   }
   mount.append(list);
-});
+}
+birthChartList.render(listNode, htmlRender);
