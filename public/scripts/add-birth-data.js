@@ -104,13 +104,14 @@ function renderChart(chart, mount = chartMountNode) {
 function createBirthChartURL({ date: dob, time: tob, location1, location2 }) {
   const year = Number(dob.slice(0, 4));
   console.log("year", year);
-  const month = Number(dob.slice(4, 6)) - 1;
+  const month = Number(dob.slice(4, 6));
   console.log("month", month);
+  const jsMonth = month - 1;
   const date = Number(dob.slice(6, 8));
   console.log("date", date);
   const [hours, minutes] = tob.split(":");
   console.log("hours", hours, "minutes", minutes);
-  const d = new Date(year, month, date, Number(hours), Number(minutes));
+  const d = new Date(year, jsMonth, date, Number(hours), Number(minutes));
   const timestamp = d.getTime();
 
   // const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${location1}&location2=${location2}&action=`;
