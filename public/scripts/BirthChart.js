@@ -1,11 +1,11 @@
-import { uuidv4, planets, printPageArea } from "./utilities.js";
+import { uuidv4, planets } from "./utilities.js";
 
 class BirthChart {
   constructor({
     name,
     Sun,
     Moon,
-    Asc:Ascendant,
+    Ascendant,
     Mercury,
     Venus,
     Mars,
@@ -14,77 +14,88 @@ class BirthChart {
     Uranus,
     Neptune,
     Pluto,
-    Desc: Descendant,
-    _id,
+    Descendant,
+    _id = uuidv4(),
   }) {
+    console.log('chart', arguments[0]);
     if (typeof name !== "string" || !name.length) {
       throw new Error(`No name provided. Instead received ${name}`);
     }
     this.name = name;
 
-    this.Sun = {
+    this.Sun = typeof Sun === 'string' ? {
       sign: Sun,
       icon: BirthChart.getIconSVG(Sun),
       location: { x: 500, y: -250 },
-    };
-    this.Moon = {
+    } : Sun;
+
+    this.Moon = typeof Moon === 'string' ? {
       sign: Moon,
       icon: BirthChart.getIconSVG(Moon),
       location: { x: 380, y: -270 },
-    };
-    this.Ascendant = {
+    } : Moon;
+
+    this.Ascendant = typeof Ascendant === 'string' ?  {
       sign: Ascendant,
       icon: BirthChart.getIconSVG(Ascendant),
       location: { x: 180, y: -100 },
-    };
-    this.Mercury = {
+    } : Ascendant;
+
+    this.Mercury = typeof Mercury === 'string' ?   {
       sign: Mercury,
       icon: BirthChart.getIconSVG(Mercury),
       location: { x: 650, y: -220 },
-    };
-    this.Venus = {
+    } : Mercury;
+
+    this.Venus = typeof Venus === 'string' ?   {
       sign: Venus,
       icon: BirthChart.getIconSVG(Venus),
       location: { x: 670, y: -90 },
-    };
-    this.Mars = {
+    } : Venus;
+
+    this.Mars = typeof Mars === 'string' ?   {
       sign: Mars,
       icon: BirthChart.getIconSVG(Mars),
       location: { x: 680, y: 50 },
-    };
-    this.Jupiter = {
+    } : Mars;
+
+    this.Jupiter = typeof Jupiter === 'string' ?  {
       sign: Jupiter,
       icon: BirthChart.getIconSVG(Jupiter),
       location: { x: 610, y: 170 },
-    };
-    this.Saturn = {
+    }: Jupiter;
+
+    this.Saturn = typeof Saturn === 'string' ?   {
       sign: Saturn,
       icon: BirthChart.getIconSVG(Saturn),
       location: { x: 490, y: 220 },
-    };
-    this.Uranus = {
+    } : Saturn;
+
+    this.Uranus = typeof Uranus === 'string' ? {
       sign: Uranus,
       icon: BirthChart.getIconSVG(Uranus),
       location: { x: 370, y: 230 },
-    };
-    this.Neptune = {
+    }: Uranus;
+
+    this.Neptune = typeof Neptune === 'string' ? {
       sign: Neptune,
       icon: BirthChart.getIconSVG(Neptune),
       location: { x: 240, y: 160 },
-    };
-    this.Pluto = {
+    }: Neptune;
+
+    this.Pluto = typeof Pluto === 'string' ? {
       sign: Pluto,
       icon: BirthChart.getIconSVG(Pluto),
       location: { x: 180, y: 50 },
-    };
-    this.Descendant = {
+    }: Pluto;
+
+    this.Descendant = typeof Descendant === 'string' ? {
       sign: Descendant,
       icon: BirthChart.getIconSVG(Descendant),
       location: { x: 230, y: -220 },
-    };
+    }: Descendant;
 
-    this._id = uuidv4();
-    // this._id = _id;
+    this._id = _id;
   }
 
   static getIconSVG(sign) {
