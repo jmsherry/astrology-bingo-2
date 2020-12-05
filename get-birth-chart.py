@@ -5,11 +5,18 @@ from flatlib.chart import Chart
 from flatlib import const
 
 import hug
-import urllib.parse
+# import urllib.parse
+import json
+
+class App(dict):
+    def __str__(self):
+        return json.dumps(self)
 
 from hug.middleware import CORSMiddleware # I can't remember why I needed this but I did, you may or may not need it
 api = hug.API(__name__)
 api.http.add_middleware(CORSMiddleware(api))
+# api.http.set_input_format('text/plain', hug.input_format.json)
+api.http.output_format = hug.output_format.json
 
 @hug.get(examples='date=20150313&time=1700&location1=38.3234232&location2=-8.5498327&utc=8')  
 @hug.local()
@@ -36,5 +43,8 @@ def runAstroScript(dateString, timeString, location1, location2, utc):
     for obj in chart.objects:
         chart_dict.update({obj.id: obj.sign})
     chart_dict.update({asc.id: asc.sign})
-    return ('{0}'.format(chart_dict))   
-    # return ('{0}{1}{2}'.format(date, pos.lat, pos.lon))   
+    print(chart_dict)
+    dblQuotes = App(chart_dict) # ensures double quotes
+    return json.dumps(dblQuotes)
+    # return ('{0}'.format(chart_dict))
+    # return ('{0}{1}{2}'.format(date, pos.lat, pos.lon))

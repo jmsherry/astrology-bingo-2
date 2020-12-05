@@ -228,7 +228,14 @@ console.log('planets', planets);
     chartImg.append(...symbolsToPopulate);
     imgfrag.append(chartImg);
 
-    mountNode.innerHTML = `<h2>${chart.name}'s BirthChart</h2>`;
+    const controls = document.createElement('div');
+    controls.classList.add('controls');
+    controls.id = 'controls';
+
+    const heading = document.createElement('h2');
+    heading.classList.add('chart-heading');
+    heading.textContent = `${chart.name}'s BirthChart`;
+    controls.append(heading);
 
     const printButton = document.createElement('button');
     printButton.textContent = 'print chart';
@@ -236,9 +243,11 @@ console.log('planets', planets);
     printButton.addEventListener('click', () => {
       window.print();
     });
-    mountNode.append(printButton);
+    controls.append(printButton);
+    mountNode.innerHTML = "";
+    mountNode.append(controls);
     mountNode.append(imgfrag);
-    chart.img = chartImg;
+    chart.img = imgfrag;
   }
 
   bcReport() {

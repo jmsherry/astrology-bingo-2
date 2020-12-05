@@ -184,7 +184,9 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     const response = await fetch(fetchURL); // because of weird python formatting
     //handle bad responses
     if (!response.ok) throw response;
-    const chartData = JSON.parse(await response.json());
+    let chartData = await response.json();
+    chartData = JSON.parse(chartData); // twice because stupid python encoding
+    console.log('chartData', chartData);
     chartData.Ascendant = chartData.Asc;
     chartData.Descendant = descDict[chartData.Ascendant];
     delete chartData.Asc;
@@ -220,9 +222,8 @@ function renderUTC(report, mount = timeMount) {
 async function getUTC(currentURL, handler = renderUTC) {
   try {
     const response = await fetch(currentURL);
-    //handle bad responses
 
-    if (!response.status >= 200 && response.status < 300) throw response;
+    if (!response.ok) throw response;
 
     const data = await response.json();
     handler(data);
