@@ -195,10 +195,12 @@ function loadState() {
 }
 
 function clearState(callback) {
-  for (const item in alreadyCalled) {
+  for (const item of alreadyCalled) {
+    console.log('before', item)
     delete item.callPosition;
+    console.log('after', item);
   }
-  potentialCallList = [potentialCallList, ...alreadyCalled];
+  potentialCallList = [...potentialCallList, ...alreadyCalled];
   alreadyCalled = [];
   localStorage.setItem("potentials", JSON.stringify(potentialCallList));
   localStorage.setItem("called", JSON.stringify(alreadyCalled));
