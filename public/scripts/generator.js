@@ -15,23 +15,31 @@ const lastCalledClass = "lastCalled";
 let potentialCallList = [];
 let alreadyCalled = [];
 
-  
+
 const socket = connectToWebSocket();
 
 const gridArea = document.getElementById("grid-section");
+const controls = document.getElementById('controls');
+const phraseDisplay = document.getElementById('phrase');
 
-function addControls(area = gridArea) {
+function addControls() {
   const button = document.createElement("button");
   button.classList.add("btn", "danger");
   button.textContent = "Reset game";
   button.addEventListener("click", (e) => {
-    clearState(clearCalled);
+    clearState(resetUI);
     socket.send('reset');
   });
-  const controls = document.createElement("div");
-  controls.classList.add("controls");
   controls.append(button);
-  area.before(controls);
+}
+
+function clearPhrase() {
+  phraseDisplay.innerHTML = "";
+}
+
+function resetUI(){
+  clearCalled();
+  clearPhrase();
 }
 
 function renderGrid(mountNode = gridArea) {
@@ -171,6 +179,11 @@ function markCalled(called = alreadyCalled, grid = gridArea) {
       item.classList.add(lastCalledClass);
     }
   }
+  const phrase = document.createElement('p');
+  const { planet, sign} = called[called.length - 1];
+  phrase.textContent = catchPhraseDict[planet][sign];
+  phraseDisplay.innerHTML='';
+  phraseDisplay.append(phrase);
 }
 
 function clearCalled(grid = gridArea) {

@@ -55,3 +55,7 @@ td:hover {
   transform: scale(2);
   background-color:  rgb(244, 124, 33);
 }
+
+.phrase {
+  font-size: 2rem;
+}
