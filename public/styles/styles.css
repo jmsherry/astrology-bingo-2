@@ -29,11 +29,14 @@ body {
 
 .icons-list {
   display: flex;
+  margin-block-end: 15px;
 }
 
 .icons-list .icon-item {
   margin-inline-end: 10px;
-  padding: 5px;
+  padding: 15px;
+  background-color: black;
+    color: goldenrod;
 }
 
 .icons-list .icon-item:last-child {
@@ -53,6 +56,7 @@ body {
 
 .icon-item .sign.icon{
   margin: 0;
+  fill: currentColor;
 }
 
 .chart {

@@ -14,10 +14,20 @@ function setup() {
   }
 }
 
+function getText(planet, sign) {
+  let text = '';
+    if (planet === 'Ascendant' || planet === 'Descendant') {
+      text = `${sign} ${planet}`;
+    } else {
+      text = `${planet} in ${sign}`;
+    }
+    return text;
+}
+
 function showPick({ sign, planet }) {
   display.innerHTML = "";
   const heading = document.createElement("h2");
-  heading.textContent = `${planet} in ${sign}`;
+  heading.textContent = getText(planet, sign);
   display.append(heading);
 }
 
@@ -29,7 +39,7 @@ function updateCalledList() {
     }
     const { sign, planet } = item;
     const li = document.createElement("li");
-    li.textContent = `${planet} in ${sign}`;
+    li.textContent = getText(planet, sign);
     calledList.append(li);
   }
 }
