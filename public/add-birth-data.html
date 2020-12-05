@@ -53,23 +53,23 @@
       <h1>Add Birth data</h1>
     </header>
     <section id="location-section">
-      
+
       <div class="container">
         <div class="row">
           <div class="col s12">
             <header>
-            <h2>Where were you born?</h2>
-          </header>
+              <h2>Where were you born?</h2>
+            </header>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="col s12">
             <form method="POST" id="location-form">
               <div class="input-field  s6">
                 <input placeholder="Placename" id="placename-input" type="text" class="validate" name="placename">
-                <label for="location2">UTC Offset/Timezone (e.g. UK 0, France +1)</label>
-                <input placeholder="UTC offset" id="utc-input" type="text" class="validate" name="utcoffset">
+                <!-- <label for="location2">UTC Offset/Timezone (e.g. UK 0, France +1)</label>
+                <input placeholder="UTC offset" id="utc-input" type="text" class="validate" name="utcoffset"> -->
                 <label for="location2">Placename</label>
                 <button class="btn waves-effect waves-light add-data" id="placename-btn" type="submit" name="">Find
                   lat/long
@@ -111,6 +111,12 @@
                 <div class="input-field col s6">
                   <input placeholder="Location2" id="location2" type="text" class="validate" name="location2">
                   <label for="location2">Longitude</label>
+                </div>
+                <div class="input-field col s6">
+                  <input placeholder="UTC offset" id="utcoffset" type="text" class="validate" name="utcoffset">
+                  <label for="location2">UTC Offset</label>
+                  <a class="waves-effect waves-teal btn-flat find-utc" id="find-utc">Find UTC offset
+                  </a>
                 </div>
                 <div class="input-field col s6">
                   <button class="btn waves-effect waves-light add-data" id="add-data" type="submit" name="action">Submit
