@@ -10,13 +10,14 @@ const birthChartList = new BirthChartList();
 // UI elements
 const geoMountLat = document.getElementById("location1");
 const geoMountLong = document.getElementById("location2");
-const timeMount = document.getElementById("utc-input");``
+const timeMount = document.getElementById("utcoffset");
 
 const datePickerElems = document.querySelectorAll(".datepicker");
 const timePickerElems = document.querySelectorAll(".timepicker");
 
 const personalDataForm = document.getElementById("addDataForm");
-const locationForm = document.getElementById("location-form");``
+const locationForm = document.getElementById("location-form");
+const utcButton = document.getElementById("find-utc");
 
 const chartMountNode = document.getElementById("target");
 
@@ -76,6 +77,44 @@ async function getGeo({ placename }) {
 }
 
 /****************** SECOND FORM *************************/
+utcButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  const timeInput = document.getElementById("tob");
+  const inputtedTime = timeInput.value;
+  console.log("inputtedTime", inputtedTime);
+  const timeToGo = inputtedTime.replace(":", "");
+  timeInput.value = timeToGo;
+
+  const dateInput = document.getElementById("dob");
+  const inputtedDate = dateInput.value;
+  console.log("inputtedDate", inputtedDate);
+
+  const loc1Input = document.getElementById("location1");
+  const inputtedloc1 = loc1Input.value;
+
+  const loc2Inpu = document.getElementById("location2");
+  const inputtedloc2 = loc2Inpu.value;
+
+  const year = inputtedDate.slice(0, 4);
+  console.log("year", year);
+
+  const month = inputtedDate.slice(4, 6);
+  console.log("month", month);
+
+  const day = inputtedDate.slice(6, 8);
+  console.log("day", day);
+
+  const dateTime = `${year}-${month}-${day} ${inputtedTime}:00`;
+  console.log("dateTime", dateTime);
+
+  const timestamp = Date.parse(dateTime) / 1000;
+  console.log("timestamp", timestamp);
+
+  const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${inputtedloc1},${inputtedloc2}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
+  console.log("fetchURLUTC", fetchURLUTC);
+  getUTC(fetchURLUTC, renderUTC);
+});
+
 personalDataForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -99,10 +138,16 @@ function renderChart(chart, mount = chartMountNode) {
     mount.scrollIntoView({
       behavior: "smooth",
     });
-  }, 250)
+  }, 250);
 }
 
-function createBirthChartURL({ date: dob, time: tob, location1, location2 }) {
+function createBirthChartURL({
+  date: dob,
+  time: tob,
+  location1,
+  location2,
+  utcoffset,
+}) {
   const year = Number(dob.slice(0, 4));
   console.log("year", year);
   const month = Number(dob.slice(4, 6));
@@ -129,7 +174,7 @@ function createBirthChartURL({ date: dob, time: tob, location1, location2 }) {
   // const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${location1},${location2}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
   // console.log("fetchURLUTC", fetchURLUTC);
 
-  const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${location1}&location2=${location2}&action=`;
+  const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${location1}&location2=${location2}&utc=${utcoffset}&action=`;
   console.log("fetchURL", fetchURL);
   return fetchURL;
 }
@@ -149,6 +194,38 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     console.log("chartData", chartData);
     const newBC = birthChartList.addBirthChart(chartData);
     renderFn(newBC);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// function getUTCURL(lat, long, TIME_API_KEY, timestamp) {
+//   const TIME_API_URL = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${long}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
+//   console.log(TIME_API_URL);
+//   return TIME_API_URL;
+// }
+
+function renderUTC(report, mount = timeMount) {
+  if (!report) {
+    timeMount.innerHTML = "No utc report";
+    return;
+  }
+  const offset = (report.rawOffset += report.dstOffset);
+  console.log("offset", offset);
+  const offsetUTC = Math.floor(offset / 60 / 60);
+  console.log("offsetUTC", offsetUTC);
+  timeMount.value = offsetUTC;
+}
+
+async function getUTC(currentURL, handler = renderUTC) {
+  try {
+    const response = await fetch(currentURL);
+    //handle bad responses
+
+    if (!response.status >= 200 && response.status < 300) throw response;
+
+    const data = await response.json();
+    handler(data);
   } catch (err) {
     console.log(err);
   }
