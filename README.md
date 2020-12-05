@@ -9,3 +9,15 @@ yarn start:hug
 ```
 
 this will start a server running on port `8000`
+
+## How to start the web [socket] server
+
+```javascript
+yarn start
+```
+
+or
+
+```javascript
+yarn start:dev
+```

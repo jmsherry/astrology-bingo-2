@@ -4,31 +4,37 @@ import {
   getRandomPlanet,
   getRandomSign,
   isElement,
+  catchPhraseDict,
+  connectToWebSocket
 } from "./utilities.js";
 
-const calledClass = 'called';
-const hoveringClass = 'hover';
-const lastCalledClass = 'lastCalled';
+const calledClass = "called";
+const hoveringClass = "hover";
+const lastCalledClass = "lastCalled";
 
 let potentialCallList = [];
 let alreadyCalled = [];
 
+  
+const socket = connectToWebSocket();
+
 const gridArea = document.getElementById("grid-section");
 
-function addControls(area=gridArea) {
+function addControls(area = gridArea) {
   const button = document.createElement("button");
-  button.classList.add('btn', 'danger');
-  button.textContent = 'Reset game';
-  button.addEventListener('click', (e) => {
+  button.classList.add("btn", "danger");
+  button.textContent = "Reset game";
+  button.addEventListener("click", (e) => {
     clearState(clearCalled);
+    socket.send('reset');
   });
-  const controls = document.createElement('div');
-  controls.classList.add('controls');
+  const controls = document.createElement("div");
+  controls.classList.add("controls");
   controls.append(button);
   area.before(controls);
 }
 
-function renderGrid(mountNode=gridArea) {
+function renderGrid(mountNode = gridArea) {
   if (!isElement(mountNode)) {
     throw new Error(
       `You must provide a DOM node to insert the grid in. Received ${mountNode}`
@@ -94,7 +100,7 @@ function renderGrid(mountNode=gridArea) {
   mountNode.append(table);
 }
 
-function setUpHoverGuides(grid=gridArea, hoverClass = hoveringClass) {
+function setUpHoverGuides(grid = gridArea, hoverClass = hoveringClass) {
   if (!isElement(grid)) {
     throw new Error(
       `You must provide a DOM node to insert the grid in. Received ${mountNode}`
@@ -102,15 +108,15 @@ function setUpHoverGuides(grid=gridArea, hoverClass = hoveringClass) {
   }
 
   grid.addEventListener("mouseover", (e) => {
+    const oldEls = document.querySelectorAll(`.${hoverClass}`);
+    for (const el of oldEls) {
+      el.classList.remove(hoverClass);
+    }
     if (e.target?.matches("td:not(#call-cell)")) {
       const {
         dataset: { planet, sign },
       } = e.target;
       console.log("p", planet, "s", sign);
-      const oldEls = document.querySelectorAll(`.${hoverClass}`);
-      for (const el of oldEls) {
-        el.classList.remove(hoverClass);
-      }
 
       const planetCells = document.querySelectorAll(`.${planet}`);
       for (const cell of planetCells) {
@@ -144,28 +150,30 @@ function pick() {
   // Mark the board
   markCalled();
 
+  // Send to other page
+  socket.send(JSON.stringify(pickedItem));
+
   // Save in case you change page
   localStorage.setItem("potentials", JSON.stringify(potentialCallList));
   localStorage.setItem("called", JSON.stringify(alreadyCalled));
 }
 
-
 function markCalled(called = alreadyCalled, grid = gridArea) {
   const lastPick = grid.querySelector(`.${lastCalledClass}`);
-  if(lastPick) {
+  if (lastPick) {
     lastPick.classList.remove(lastCalledClass);
   }
-  for(const [i, {planet, sign, callPosition}] of called.entries()) {
+  for (const [i, { planet, sign, callPosition }] of called.entries()) {
     const item = grid.querySelector(`.${planet}.${sign}`);
     item.textContent = callPosition;
     item.classList.add(calledClass);
-    if(i === called.length - 1) {
+    if (i === called.length - 1) {
       item.classList.add(lastCalledClass);
     }
   }
 }
 
-function clearCalled (grid = gridArea) {
+function clearCalled(grid = gridArea) {
   const markedSquares = grid.querySelectorAll(`.${calledClass}`);
   for (const square of markedSquares) {
     square.classList.remove(calledClass, lastCalledClass);
@@ -176,7 +184,7 @@ function clearCalled (grid = gridArea) {
 // Re-populate the arrays from localStorage
 function loadState() {
   const potentialsRecord = localStorage.getItem("potentials");
-  console.log('pppp', potentialsRecord);
+  console.log("pppp", potentialsRecord);
   if (potentialsRecord) {
     potentialCallList = JSON.parse(potentialsRecord);
   }
@@ -186,15 +194,15 @@ function loadState() {
   }
 }
 
-function clearState(callback){
-  for(const item in alreadyCalled) {
+function clearState(callback) {
+  for (const item in alreadyCalled) {
     delete item.callPosition;
   }
   potentialCallList = [potentialCallList, ...alreadyCalled];
   alreadyCalled = [];
   localStorage.setItem("potentials", JSON.stringify(potentialCallList));
   localStorage.setItem("called", JSON.stringify(alreadyCalled));
-  if(callback && typeof callback === 'function') {
+  if (callback && typeof callback === "function") {
     callback();
   }
 }

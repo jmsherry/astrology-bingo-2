@@ -29,6 +29,7 @@ thead td.hover {
 thead th:hover,
 thead th.hover {
   background-color: rgb(73, 40, 126);
+  color: #fff;
 }
 
 tbody th:hover,
