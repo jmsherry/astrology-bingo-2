@@ -1,7 +1,7 @@
 // import BirthChart from './BirthChart.js';
 import BirthChartList from "./BirthChartList.js";
 import { planets } from "./utilities.js";
-console.log(planets);
+
 // Components
 const noContentDisplay = document.createElement('p');
 noContentDisplay.textContent = 'No players yet...';
@@ -38,13 +38,14 @@ const htmlRender = (mount, players) => {
     li.classList.add("list-group-item");
     const title = document.createElement("h2");
     title.textContent = name;
+    title.classList.add('owner');
     li.append(title);
 
     // Progress Bar
-    const progress = document.createElement("progress");
-    progress.setAttribute("max", planets.length);
-    progress.setAttribute("value", value);
-    li.append(progress);
+    // const progress = document.createElement("progress");
+    // progress.setAttribute("max", planets.length);
+    // progress.setAttribute("value", value);
+    // li.append(progress);
 
     // Icons display
     const iconsDisplay = document.createElement('ul');
@@ -54,10 +55,12 @@ const htmlRender = (mount, players) => {
       iconListItem.classList.add('icon-item');
       const planetTitle = document.createElement('h3');
       planetTitle.textContent = planet;
+      planetTitle.classList.add('planet-name');
       iconListItem.append(planetTitle);
       const {sign, icon:path} = player[planet];
       const p = document.createElement('p');
       p.textContent = sign;
+      p.classList.add('sign-name')
       iconListItem.append(p);
       const icon = document.createElementNS(
         "http://www.w3.org/2000/svg",
@@ -69,21 +72,23 @@ const htmlRender = (mount, players) => {
       icon.innerHTML = path;
       iconListItem.append(icon);
       iconsDisplay.append(iconListItem);
+
     }
     li.append(iconsDisplay);
 
     // View Chart Button
-    const viewChartBtn = document.createElement("button");
-    viewChartBtn.textContent = "View Chart";
-    viewChartBtn.addEventListener("click", (e) => {
-      modalContentArea.innerHTML = img;
-      modalInstance.open();
-    });
-    li.append(viewChartBtn);
+    // const viewChartBtn = document.createElement("button");
+    // viewChartBtn.textContent = "View Chart";
+    // viewChartBtn.addEventListener("click", (e) => {
+    //   modalContentArea.innerHTML = img;
+    //   modalInstance.open();
+    // });
+    // li.append(viewChartBtn);
 
     // Delete Button
     const delbtn = document.createElement("button");
     delbtn.textContent = "Delete";
+    delbtn.classList.add('waves-effect', 'waves-light', 'btn', 'red');
     delbtn.addEventListener("click", (e) => {
       birthChartList.deleteBirthChart(id)
       birthChartList.render(listNode, htmlRender);

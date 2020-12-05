@@ -9,6 +9,11 @@ body {
   padding: 15px;
 }
 
+.owner {
+  margin-block-start: 0;
+  margin-block-end: 12px;
+}
+
 .list-group {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -34,10 +39,19 @@ body {
   margin-inline-end: 0;
 }
 
-.icons-list h3 {
+.icon-item .planet-name {
   font-size: 1rem;
   margin-block-start: 0;
+  margin-block-end: 5px;
   font-weight: bold;
+}
+
+.icon-item .sign-name {
+  margin: 0;
+}
+
+.icon-item .sign.icon{
+  margin: 0;
 }
 
 .chart {
@@ -78,8 +92,8 @@ body {
   z-index: 1;
 }
 
-svg {
-  cursor: pointer;
+svg, path {
+  cursor: default;
 }
 
 .controls {
@@ -103,4 +117,8 @@ svg {
 
 .btn-danger {
   background-color: #F44336 !important;
+}
+
+.called .sign.icon path {
+  fill: #1218bd;
 }

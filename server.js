@@ -16,7 +16,7 @@ const wss = new WebSocket.Server({ server, port: 3001 });
 // Each wss (web socket server) has a number of..
 // ws is that particular web socket
 // req is the request object
-wss.on("connection", function connection(ws) {
+wss.on("connection", function connection(ws, req) {
   // console.log('connection', ws);
   // const location = url.parse(req.url, true);
   // You might use location.query.access_token to authenticate or share sessions
@@ -27,7 +27,7 @@ wss.on("connection", function connection(ws) {
     console.log(util.inspect(message, false, 7, true));
 
     for(const client of wss.clients) {
-      if (client.readyState === WebSocket.OPEN) {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
         client.send(message);
       }
     }

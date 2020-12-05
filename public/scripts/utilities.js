@@ -296,5 +296,10 @@ export function connectToWebSocket(
 
   // Listen for messages
   socket.addEventListener("message", onMessageHandler);
+
+  socket.addEventListener("error", (err) => {
+    console.error(err);
+  });
+
   return socket;
 }
