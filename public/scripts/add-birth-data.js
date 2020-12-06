@@ -26,7 +26,7 @@ const chartMountNode = document.getElementById("target");
 const datePickerOptions = {
   format: "yyyymmdd",
   autoClose: true,
-  yearRange: [1900, 2020],
+  yearRange: [1930, 2020],
 
   // onOpenEnd: function(){....}
 };
