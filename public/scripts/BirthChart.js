@@ -1,5 +1,4 @@
 import { uuidv4, planets } from "./utilities.js";
-// import print from 'print-js'
 
 class BirthChart {
   constructor({
@@ -27,10 +26,11 @@ class BirthChart {
     this.Sun = typeof Sun === 'string' ? {
       sign: Sun,
       icon: BirthChart.getIconSVG(Sun),
+      location: { x: 500, y: -250 },
       location: { x: 500, y: -300 },
       word: BirthChart.getSignWordSVG(Sun),
-      wordLocation: { x: 447, y: 30 },
-      viewBox: "-100 60 500 500",
+      wordLocation: { x: 470, y: -40 },
+      viewBox: "-150 60 600 600",
     } : Sun;
 
     this.Moon = typeof Moon === 'string' ? {
@@ -38,8 +38,8 @@ class BirthChart {
       icon: BirthChart.getIconSVG(Moon),
       location: { x: 380, y: -270 },
       word: BirthChart.getSignWordSVG(Moon),
-      wordLocation: { x: 315, y: 25 },
-      viewBox: "-400 60 500 500",
+      wordLocation: { x: 320, y: -200 },
+      viewBox: "-100 60 600 600",
     } : Moon;
 
     this.Ascendant = typeof Ascendant === 'string' ?  {
@@ -47,8 +47,8 @@ class BirthChart {
       icon: BirthChart.getIconSVG(Ascendant),
       location: { x: 180, y: -100 },
       word: BirthChart.getSignWordSVG(Ascendant),
-      wordLocation: { x: 280, y: 62 },
-      viewBox: "-500 70 600 600",
+      wordLocation: { x: 170, y: 30 },
+      viewBox: "-50 60 600 600",
     } : Ascendant;
 
     this.Mercury = typeof Mercury === 'string' ?   {
@@ -56,8 +56,8 @@ class BirthChart {
       icon: BirthChart.getIconSVG(Mercury),
       location: { x: 650, y: -220 },
       word: BirthChart.getSignWordSVG(Mercury),
-      wordLocation: { x: 470, y: 50 },
-      viewBox: "-100 60 500 500",
+      wordLocation: { x: 540, y: 0 },
+      viewBox: "-100 60 600 600",
     } : Mercury;
 
     this.Venus = typeof Venus === 'string' ?   {
@@ -65,8 +65,8 @@ class BirthChart {
       icon: BirthChart.getIconSVG(Venus),
       location: { x: 670, y: -90 },
       word: BirthChart.getSignWordSVG(Venus),
-      wordLocation: { x: 480, y: 73 },
-      viewBox: "-100 60 500 500",
+      wordLocation: { x: 580, y: 65 },
+      viewBox: "-100 60 600 600",
     } : Venus;
 
     this.Mars = typeof Mars === 'string' ?   {
@@ -74,9 +74,9 @@ class BirthChart {
       icon: BirthChart.getIconSVG(Mars),
       location: { x: 680, y: 50 },
        word: BirthChart.getSignWordSVG(Mars),
-      wordLocation: { x: 475, y: 100 },
+      wordLocation: { x: 580, y: 130 },
 
-      viewBox: "-100 60 500 500",
+      viewBox: "-100 60 600 600",
     } : Mars;
 
     this.Jupiter = typeof Jupiter === 'string' ?  {
@@ -84,8 +84,8 @@ class BirthChart {
       icon: BirthChart.getIconSVG(Jupiter),
       location: { x: 610, y: 170 },
       word: BirthChart.getSignWordSVG(Jupiter),
-      wordLocation: { x: 445, y: 110 },
-      viewBox: "-100 60 500 500",
+      wordLocation: { x: 510, y: 190 },
+      viewBox: "-100 60 600 600",
     }: Jupiter;
 
     this.Saturn = typeof Saturn === 'string' ?   {
@@ -93,8 +93,8 @@ class BirthChart {
       icon: BirthChart.getIconSVG(Saturn),
       location: { x: 490, y: 220 },
       word: BirthChart.getSignWordSVG(Saturn),
-      wordLocation: { x: 432, y: 140 },
-      viewBox: "-100 60 500 500",
+      wordLocation: { x: 450, y: 230 },
+      viewBox: "-100 60 600 600",
     } : Saturn;
 
     this.Uranus = typeof Uranus === 'string' ? {
@@ -102,8 +102,8 @@ class BirthChart {
       icon: BirthChart.getIconSVG(Uranus),
       location: { x: 370, y: 230 },
        word: BirthChart.getSignWordSVG(Uranus),
-      wordLocation: { x: 300, y: 140 },
-      viewBox: "-400 60 500 500",
+      wordLocation: { x: 355, y: 380 },
+      viewBox: "-150 60 600 600",
     }: Uranus;
 
     this.Neptune = typeof Neptune === 'string' ? {
@@ -111,8 +111,8 @@ class BirthChart {
       icon: BirthChart.getIconSVG(Neptune),
       location: { x: 240, y: 160 },
       word: BirthChart.getSignWordSVG(Neptune),
-      wordLocation: { x: 305, y: 110 },
-      viewBox: "-350 70 500 500",
+      wordLocation: { x: 260, y: 280 },
+      viewBox: "-100 60 600 600",
     }: Neptune;
 
     this.Pluto = typeof Pluto === 'string' ? {
@@ -120,8 +120,8 @@ class BirthChart {
       icon: BirthChart.getIconSVG(Pluto),
       location: { x: 180, y: 50 },
       word: BirthChart.getSignWordSVG(Pluto),
-      wordLocation: { x: 265, y: 88 },
-      viewBox: "-400 60 500 500",
+      wordLocation: { x: 180, y: 180 },
+      viewBox: "-100 60 600 600",
     }: Pluto;
 
     this.Descendant = typeof Descendant === 'string' ? {
@@ -129,8 +129,8 @@ class BirthChart {
       icon: BirthChart.getIconSVG(Descendant),
       location: { x: 230, y: -220 },
       word: BirthChart.getSignWordSVG(Descendant),
-      wordLocation: { x: 287, y: 35 },
-      viewBox: "-400 60 500 500",
+      wordLocation: { x: 210, y: -110 },
+      viewBox: "-100 60 600 600",
     }: Descendant;
 
     this._id = _id;
@@ -201,40 +201,64 @@ class BirthChart {
   static getSignWordSVG(sign) {
     switch (sign) {
       case "Aries":
-        return `<text transform="translate(95.54 82.85) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">A<tspan x="0" y="64.26">R</tspan><tspan x="0" y="128.51">I</tspan><tspan x="0" y="192.75">E</tspan><tspan x="0" y="257.03">S</tspan></text>`;
+        return `<text transform="rotate(88.854 -12.926 30.334)" font-size="252.05" font-family="WolpePegasus-Regular">
+    ARI
+  </text>`;
         break;
       case "Taurus":
-        return `<text transform="translate(87.54 82.85) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">T<tspan x="0" y="64.26">A</tspan><tspan x="0" y="128.51">U</tspan><tspan x="0" y="192.75">R</tspan><tspan x="0" y="257.03">U</tspan><tspan x="0" y="321.28">S</tspan></text>`;
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="252.05" font-family="WolpePegasus-Regular">
+    TAU
+  </text>`;
         break;
       case "Gemini":
-        return `<text transform="translate(87.54 82.85) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">G<tspan x="0" y="64.26">E</tspan><tspan x="0" y="128.51">M</tspan><tspan x="0" y="192.75">I</tspan><tspan x="0" y="257.03">N</tspan><tspan x="0" y="321.28">I</tspan></text>`;
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="252.05" font-family="WolpePegasus-Regular">
+    GEM
+  </text>`;
         break;
       case "Cancer":
-        return `<text transform="translate(87.54 82.85) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">C<tspan x="0" y="64.26">A</tspan><tspan x="0" y="128.51">N</tspan><tspan x="0" y="192.75">C</tspan><tspan x="0" y="257.03">E</tspan><tspan x="0" y="321.28">R</tspan></text>`;
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="252.05" font-family="WolpePegasus-Regular">
+    CAN
+  </text>`;
         break;
       case "Leo":
-        return `<text transform="translate(87.54 82.85) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">L<tspan x="0" y="64.26">E</tspan><tspan x="0" y="128.51">O</tspan></text>`;
+        return `<text transform="rotate(88.854 2.112 15.074)" font-size="252.05" font-family="WolpePegasus-Regular">
+    LEO
+  </text>`;
         break;
       case "Virgo":
-        return `<text transform="translate(87.54 82.85) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">V<tspan x="0" y="64.26">I</tspan><tspan x="0" y="128.51">R</tspan><tspan x="0" y="192.75">G</tspan><tspan x="0" y="257.03">O</tspan></text>`;
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="252.05" font-family="WolpePegasus-Regular">
+    VIR
+  </text>`;
         break;
       case "Libra":
-        return `<text transform="translate(87.54 82.85) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">L<tspan x="0" y="64.26">I</tspan><tspan x="0" y="128.51">B</tspan><tspan x="0" y="192.75">R</tspan><tspan x="0" y="257.03">A</tspan></text>`;
+        return `<text transform="rotate(88.854 -11.61 29.074)" letter-spacing="25" font-size="252.05" font-family="WolpePegasus-Regular">
+    LIB
+  </text>`;
         break;
       case "Scorpio":
-        return `<text transform="translate(87.54 82.85) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">S<tspan x="0" y="64.26">C</tspan><tspan x="0" y="128.51">O</tspan><tspan x="0" y="192.75">R</tspan><tspan x="0" y="257.03">P</tspan><tspan x="0" y="321.28">I</tspan><tspan x="0" y="385.53">O</tspan></text>`;
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="252.05" font-family="WolpePegasus-Regular">
+    SCO
+  </text>`;
         break;
       case "Sagittarius":
-        return `<text transform="translate(80.29 83.2) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">S<tspan x="0" y="57.48">A</tspan><tspan x="0" y="114.91">G</tspan><tspan x="0" y="172.38">I</tspan><tspan x="0" y="229.84">T</tspan><tspan x="0" y="287.3">T</tspan><tspan x="0" y="344.77">A</tspan><tspan x="0" y="402.22">R</tspan><tspan x="0" y="459.69">I</tspan><tspan x="0" y="517.16">U</tspan><tspan x="0" y="574.61">S</tspan></text>`;
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="252.05" font-family="WolpePegasus-Regular">
+    SAG
+  </text>`;
         break;
       case "Capricorn":
-        return `<text transform="translate(87.54 82.85) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">C<tspan x="0" y="64.26">A</tspan><tspan x="0" y="128.51">P</tspan><tspan x="0" y="192.75">R</tspan><tspan x="0" y="257.03">I</tspan><tspan x="0" y="321.28">C</tspan><tspan x="0" y="385.53">O</tspan><tspan x="0" y="449.77">R</tspan><tspan x="0" y="514.04">N</tspan></text>`;
+        return `<text transform="rotate(88.854 .623 10.473)" font-size="252.05" font-family="WolpePegasus-Regular">
+    CAP
+  </text>`;
         break;
       case "Aquarius":
-        return `<text transform="translate(87.54 82.85) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">A<tspan x="0" y="64.26">Q</tspan><tspan x="0" y="128.51">U</tspan><tspan x="0" y="192.75">A</tspan><tspan x="0" y="257.03">R</tspan><tspan x="0" y="321.28">I</tspan><tspan x="0" y="385.53">U</tspan><tspan x="0" y="449.77">S</tspan></text>`;
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="252.05" font-family="WolpePegasus-Regular">
+    AQU
+  </text>`;
         break;
       case "Pisces":
-        return `<text transform="translate(87.54 82.85) scale(1.24 1)" style="font-size:74.2055892944336px;font-family:Courier">P<tspan x="0" y="64.26">I</tspan><tspan x="0" y="128.51">S</tspan><tspan x="0" y="192.75">C</tspan><tspan x="0" y="257.03">E</tspan><tspan x="0" y="321.28">S</tspan></text>`;
+        return `<text transform="rotate(88.854 -14.881 32.32)" letter-spacing="25" font-size="252.05" font-family="WolpePegasus-Regular">
+    PIS
+  </text>`;
         break;
       default:
         console.log("default");
@@ -260,7 +284,8 @@ console.log('planets', planets);
           "http://www.w3.org/2000/svg",
           "svg"
         );
-        const currentWord = document.createElementNS(
+
+         const currentWord = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "svg",
       );
@@ -271,7 +296,9 @@ console.log('planets', planets);
         currentSymbol.innerHTML = currentSign.icon;
         currentSymbol.location = currentSign.location;
 
-        currentWord.setAttribute("viewBox", `${currentSign.viewBox}`);
+         currentWord.setAttribute("viewBox", `${currentSign.viewBox}`);
+
+        
       currentWord.setAttribute("width", "175");
       currentWord.classList.add("sign", "word", "chart", `${sign.toLowerCase()}`);
       currentWord.innerHTML = currentSign.word;
@@ -283,7 +310,6 @@ console.log('planets', planets);
       const degrees = currentSign.wordRotation;
       toRotate.setAttribute("transform", `${degrees}`);
       console.log("toRotate", toRotate);
-
         gsap.to(
           currentSymbol,
           // duration: 6,
@@ -294,7 +320,6 @@ console.log('planets', planets);
             },
           }
         );
-
          gsap.to(currentWord, {
         attr: {
           x: `${currentWord.location.x}`,
@@ -302,9 +327,9 @@ console.log('planets', planets);
         },
       });
 
-
-        symbolsToPopulate.push(currentSymbol, currentWord);
-    }
+symbolsToPopulate.push(currentSymbol, currentWord);
+        // symbolsToPopulate.push( currentWord);
+    } 
     console.log("symbolsToPopulate", symbolsToPopulate);
 
     ///BINGO CARD USING AN IMG
@@ -357,7 +382,8 @@ console.log('planets', planets);
     printButton.textContent = 'print chart';
     printButton.classList.add('btn', 'waves-effect', 'waves-light', 'add-data');
     printButton.addEventListener('click', () => {
-      printJS({
+      // window.print();
+       printJS({
       printable: "chart",
       type: "html",
       css: "./styles/styles.css",
