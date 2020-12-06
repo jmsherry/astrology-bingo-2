@@ -17,121 +17,156 @@ class BirthChart {
     Descendant,
     _id = uuidv4(),
   }) {
-    console.log('chart', arguments[0]);
+    console.log("chart", arguments[0]);
     if (typeof name !== "string" || !name.length) {
       throw new Error(`No name provided. Instead received ${name}`);
     }
     this.name = name;
 
-    this.Sun = typeof Sun === 'string' ? {
-      sign: Sun,
-      icon: BirthChart.getIconSVG(Sun),
-      location: { x: 500, y: -250 },
-      location: { x: 500, y: -300 },
-      word: BirthChart.getSignWordSVG(Sun),
-      wordLocation: { x: 470, y: -40 },
-      viewBox: "-150 60 600 600",
-    } : Sun;
+    this.Sun =
+      typeof Sun === "string"
+        ? {
+            sign: Sun,
+            icon: BirthChart.getIconSVG(Sun),
+            location: { x: 455, y: -120 },
+            word: BirthChart.getSignWordSVG(Sun),
+            wordLocation: { x: 470, y: -60 },
+            viewBox: "-150 60 600 600",
+          }
+        : Sun;
 
-    this.Moon = typeof Moon === 'string' ? {
-      sign: Moon,
-      icon: BirthChart.getIconSVG(Moon),
-      location: { x: 380, y: -270 },
-      word: BirthChart.getSignWordSVG(Moon),
-      wordLocation: { x: 320, y: -200 },
-      viewBox: "-100 60 600 600",
-    } : Moon;
+    this.Moon =
+      typeof Moon === "string"
+        ? {
+            sign: Moon,
+            icon: BirthChart.getIconSVG(Moon),
+            location: { x: 390, y: -120 },
+            word: BirthChart.getSignWordSVG(Moon),
+            wordLocation: { x: 300, y: -195 },
+            viewBox: "-100 60 600 600",
+          }
+        : Moon;
 
-    this.Ascendant = typeof Ascendant === 'string' ?  {
-      sign: Ascendant,
-      icon: BirthChart.getIconSVG(Ascendant),
-      location: { x: 180, y: -100 },
-      word: BirthChart.getSignWordSVG(Ascendant),
-      wordLocation: { x: 170, y: 30 },
-      viewBox: "-50 60 600 600",
-    } : Ascendant;
+    this.Ascendant =
+      typeof Ascendant === "string"
+        ? {
+            sign: Ascendant,
+            icon: BirthChart.getIconSVG(Ascendant),
+            location: { x: 300, y: -40 },
+            word: BirthChart.getSignWordSVG(Ascendant),
+            wordLocation: { x: 110, y: 40 },
+            viewBox: "-50 60 600 600",
+          }
+        : Ascendant;
 
-    this.Mercury = typeof Mercury === 'string' ?   {
-      sign: Mercury,
-      icon: BirthChart.getIconSVG(Mercury),
-      location: { x: 650, y: -220 },
-      word: BirthChart.getSignWordSVG(Mercury),
-      wordLocation: { x: 540, y: 0 },
-      viewBox: "-100 60 600 600",
-    } : Mercury;
+    this.Mercury =
+      typeof Mercury === "string"
+        ? {
+            sign: Mercury,
+            icon: BirthChart.getIconSVG(Mercury),
+            location: { x: 520, y: -90 },
+            word: BirthChart.getSignWordSVG(Mercury),
+            wordLocation: { x: 540, y: 0 },
+            viewBox: "-100 60 600 600",
+          }
+        : Mercury;
 
-    this.Venus = typeof Venus === 'string' ?   {
-      sign: Venus,
-      icon: BirthChart.getIconSVG(Venus),
-      location: { x: 670, y: -90 },
-      word: BirthChart.getSignWordSVG(Venus),
-      wordLocation: { x: 580, y: 65 },
-      viewBox: "-100 60 600 600",
-    } : Venus;
+    this.Venus =
+      typeof Venus === "string"
+        ? {
+            sign: Venus,
+            icon: BirthChart.getIconSVG(Venus),
+            location: { x: 540, y: -30 },
+            word: BirthChart.getSignWordSVG(Venus),
+            wordLocation: { x: 590, y: 87 },
+            viewBox: "-100 60 600 600",
+          }
+        : Venus;
 
-    this.Mars = typeof Mars === 'string' ?   {
-      sign: Mars,
-      icon: BirthChart.getIconSVG(Mars),
-      location: { x: 680, y: 50 },
-       word: BirthChart.getSignWordSVG(Mars),
-      wordLocation: { x: 580, y: 130 },
+    this.Mars =
+      typeof Mars === "string"
+        ? {
+            sign: Mars,
+            icon: BirthChart.getIconSVG(Mars),
+            location: { x: 545, y: 30 },
+            word: BirthChart.getSignWordSVG(Mars),
+            wordLocation: { x: 575, y: 160 },
 
-      viewBox: "-100 60 600 600",
-    } : Mars;
+            viewBox: "-100 60 600 600",
+          }
+        : Mars;
 
-    this.Jupiter = typeof Jupiter === 'string' ?  {
-      sign: Jupiter,
-      icon: BirthChart.getIconSVG(Jupiter),
-      location: { x: 610, y: 170 },
-      word: BirthChart.getSignWordSVG(Jupiter),
-      wordLocation: { x: 510, y: 190 },
-      viewBox: "-100 60 600 600",
-    }: Jupiter;
+    this.Jupiter =
+      typeof Jupiter === "string"
+        ? {
+            sign: Jupiter,
+            icon: BirthChart.getIconSVG(Jupiter),
+            location: { x: 510, y: 90 },
+            word: BirthChart.getSignWordSVG(Jupiter),
+            wordLocation: { x: 515, y: 225 },
+            viewBox: "-100 60 600 600",
+          }
+        : Jupiter;
 
-    this.Saturn = typeof Saturn === 'string' ?   {
-      sign: Saturn,
-      icon: BirthChart.getIconSVG(Saturn),
-      location: { x: 490, y: 220 },
-      word: BirthChart.getSignWordSVG(Saturn),
-      wordLocation: { x: 450, y: 230 },
-      viewBox: "-100 60 600 600",
-    } : Saturn;
+    this.Saturn =
+      typeof Saturn === "string"
+        ? {
+            sign: Saturn,
+            icon: BirthChart.getIconSVG(Saturn),
+            location: { x: 450, y: 125 },
+            word: BirthChart.getSignWordSVG(Saturn),
+            wordLocation: { x: 435, y: 255 },
+            viewBox: "-100 60 600 600",
+          }
+        : Saturn;
 
-    this.Uranus = typeof Uranus === 'string' ? {
-      sign: Uranus,
-      icon: BirthChart.getIconSVG(Uranus),
-      location: { x: 370, y: 230 },
-       word: BirthChart.getSignWordSVG(Uranus),
-      wordLocation: { x: 355, y: 380 },
-      viewBox: "-150 60 600 600",
-    }: Uranus;
+    this.Uranus =
+      typeof Uranus === "string"
+        ? {
+            sign: Uranus,
+            icon: BirthChart.getIconSVG(Uranus),
+            location: { x: 390, y: 110 },
+            word: BirthChart.getSignWordSVG(Uranus),
+            wordLocation: { x: 330, y: 400 },
+            viewBox: "-150 60 600 600",
+          }
+        : Uranus;
 
-    this.Neptune = typeof Neptune === 'string' ? {
-      sign: Neptune,
-      icon: BirthChart.getIconSVG(Neptune),
-      location: { x: 240, y: 160 },
-      word: BirthChart.getSignWordSVG(Neptune),
-      wordLocation: { x: 260, y: 280 },
-      viewBox: "-100 60 600 600",
-    }: Neptune;
+    this.Neptune =
+      typeof Neptune === "string"
+        ? {
+            sign: Neptune,
+            icon: BirthChart.getIconSVG(Neptune),
+            location: { x: 320, y: 85 },
+            word: BirthChart.getSignWordSVG(Neptune),
+            wordLocation: { x: 200, y: 330 },
+            viewBox: "-100 60 600 600",
+          }
+        : Neptune;
 
-    this.Pluto = typeof Pluto === 'string' ? {
-      sign: Pluto,
-      icon: BirthChart.getIconSVG(Pluto),
-      location: { x: 180, y: 50 },
-      word: BirthChart.getSignWordSVG(Pluto),
-      wordLocation: { x: 180, y: 180 },
-      viewBox: "-100 60 600 600",
-    }: Pluto;
+    this.Pluto =
+      typeof Pluto === "string"
+        ? {
+            sign: Pluto,
+            icon: BirthChart.getIconSVG(Pluto),
+            location: { x: 285, y: 25 },
+            word: BirthChart.getSignWordSVG(Pluto),
+            wordLocation: { x: 120, y: 210 },
+            viewBox: "-100 60 600 600",
+          }
+        : Pluto;
 
-    this.Descendant = typeof Descendant === 'string' ? {
-      sign: Descendant,
-      icon: BirthChart.getIconSVG(Descendant),
-      location: { x: 230, y: -220 },
-      word: BirthChart.getSignWordSVG(Descendant),
-      wordLocation: { x: 210, y: -110 },
-      viewBox: "-100 60 600 600",
-    }: Descendant;
+    this.Descendant =
+      typeof Descendant === "string"
+        ? {
+            sign: Descendant,
+            icon: BirthChart.getIconSVG(Descendant),
+            location: { x: 330, y: -88 },
+            word: BirthChart.getSignWordSVG(Descendant),
+            wordLocation: { x: 160, y: -100 },
+            viewBox: "-100 60 600 600",
+          }
+        : Descendant;
 
     this._id = _id;
   }
@@ -271,65 +306,68 @@ class BirthChart {
     const imgfrag = document.createDocumentFragment();
     console.log("chart to be rendered", chart);
     const symbolsToPopulate = [];
-console.log('planets', planets);
+    console.log("planets", planets);
     for (const [sign, value] of Object.entries(chart)) {
-        
-        console.log(sign, value)
-        if(!planets.includes(sign)) {
-          console.log(`skipping ${sign}`);
-          continue;
-        }
-        const currentSign = value;
-        const currentSymbol = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "svg"
-        );
+      console.log(sign, value);
+      if (!planets.includes(sign)) {
+        console.log(`skipping ${sign}`);
+        continue;
+      }
+      const currentSign = value;
+      const currentSymbol = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg",
+      );
 
-         const currentWord = document.createElementNS(
+      const currentWord = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "svg",
       );
       console.log("currentWord", currentWord);
-        currentSymbol.setAttribute("viewBox", "0 0 250 250");
-        currentSymbol.setAttribute("width", "50");
-        currentSymbol.classList.add("sign", "icon", "chart");
-        currentSymbol.innerHTML = currentSign.icon;
-        currentSymbol.location = currentSign.location;
+      currentSymbol.setAttribute("viewBox", "0 0 250 250");
+      currentSymbol.setAttribute("width", "50");
+      currentSymbol.classList.add("sign", "icon", "chart");
+      currentSymbol.innerHTML = currentSign.icon;
+      currentSymbol.location = currentSign.location;
 
-         currentWord.setAttribute("viewBox", `${currentSign.viewBox}`);
+      currentWord.setAttribute("viewBox", `${currentSign.viewBox}`);
 
-        
       currentWord.setAttribute("width", "175");
-      currentWord.classList.add("sign", "word", "chart", `${sign.toLowerCase()}`);
+      currentWord.classList.add(
+        "sign",
+        "word",
+        "chart",
+        `${sign.toLowerCase()}`,
+      );
       currentWord.innerHTML = currentSign.word;
       currentWord.location = currentSign.wordLocation;
       const toRotate = currentWord.firstChild;
-      console.log('sign', sign)
-      console.log('signLC', sign.toLowerCase())
+      console.log("sign", sign);
+      console.log("signLC", sign.toLowerCase());
       toRotate.classList.add("inner-word", `${sign.toLowerCase()}`);
       const degrees = currentSign.wordRotation;
       toRotate.setAttribute("transform", `${degrees}`);
       console.log("toRotate", toRotate);
-        gsap.to(
-          currentSymbol,
-          // duration: 6,
-          {
-            attr: {
-              x: `${currentSymbol.location.x}`,
-              y: `${currentSymbol.location.y}`,
-            },
-          }
-        );
-         gsap.to(currentWord, {
+      gsap.to(
+        currentSymbol,
+        // duration: 6,
+        {
+          attr: {
+            x: `${currentSymbol.location.x}`,
+            y: `${currentSymbol.location.y}`,
+          },
+        },
+      );
+      gsap.to(currentWord, {
         attr: {
           x: `${currentWord.location.x}`,
           y: `${currentWord.location.y}`,
         },
       });
 
-symbolsToPopulate.push(currentSymbol, currentWord);
-        // symbolsToPopulate.push( currentWord);
-    } 
+      symbolsToPopulate.push(currentSymbol, currentWord);
+      // symbolsToPopulate.push( currentWord);
+    }
     console.log("symbolsToPopulate", symbolsToPopulate);
 
     ///BINGO CARD USING AN IMG
@@ -343,51 +381,38 @@ symbolsToPopulate.push(currentSymbol, currentWord);
 
     const chartImg = document.createElementNS(
       "http://www.w3.org/2000/svg",
-      "svg"
+      "svg",
     );
     console.log("chartImg", chartImg);
-    chartImg.id = 'chart';
+    chartImg.id = "chart";
     chartImg.classList.add("bc-template", "materialboxed");
     chartImg.setAttribute("viewBox", "0 0 900 900");
-    chartImg.innerHTML = `<defs>
-      <clipPath id="a" transform="translate(-51.96 -77.75)">
-        <path fill="none" d="M11.03 77.75h977.94V923.2H11.03z"/>
-      </clipPath>
-    </defs>
-    <g clip-path="url(#a)">
-      <ellipse cx="459.42" cy="421.72" rx="385.43" ry="385.85" fill="none" stroke="#2b2b2a" stroke-width="1.66"/>
-    </g>
-    <path d="M700.64 154.01c0-2.45 0-5.43.15-7.24-.75 3-1.74 7-3.28 12.46h-4.17c-1.22-5.09-2.22-9.36-3-12.49.09 1.8.27 4.79.27 7.44v5h-4.49v-15.43h7.2c1 3.49 2 7.29 2.42 9.9.6-2.74 1.59-6.36 2.62-9.9h7.18v15.5h-4.9zm21.76-.94h-8.27v2.58h9.25l-.58 3.58h-13.63v-15.48h13.67v3.58h-8.71v2.16h8.27zm8.34.47v5.71h-4.94v-15.5h9.36c3.84 0 5.85 1.88 5.85 4.45a3.7 3.7 0 01-2.67 3.7c.84.36 2.26 1.1 2.26 3.73v.84a11.76 11.76 0 00.21 2.76h-5a9.38 9.38 0 01-.32-3.2v-.53c0-1.43-.46-2-2.41-2zm0-3.22h3.07c1.37 0 2.14-.5 2.14-1.62s-.7-1.61-2.14-1.61h-3.07zm29 3.66c-.71 3.26-3.33 5.6-8.3 5.6-5.73 0-8.61-3.66-8.61-8.1 0-4.23 2.83-8.08 8.82-8.08 5.25 0 7.72 2.74 8.13 5.54h-5.04c-.22-.86-.86-2.12-3.07-2.12s-3.5 1.84-3.5 4.55c0 2.47.91 4.75 3.52 4.75a2.82 2.82 0 003.08-2.14zm7.35-10.23v9c0 2.46 1.19 3.28 2.84 3.28s2.66-.9 2.66-3.28v-9h5v9c0 4.5-2.5 6.85-7.81 6.85-5.12 0-7.75-2.22-7.75-6.85v-9zm18.95 9.79v5.71h-4.93v-15.5h9.36c3.84 0 5.85 1.88 5.85 4.45a3.71 3.71 0 01-2.67 3.7c.84.36 2.26 1.1 2.26 3.73v.84a11.76 11.76 0 00.21 2.76h-5a9.38 9.38 0 01-.32-3.2v-.53c0-1.43-.46-2-2.41-2zm0-3.22h3.08c1.37 0 2.14-.5 2.14-1.62s-.7-1.61-2.14-1.61h-3.08zm17.31 8.93v-5.37a.93.93 0 00-.23-.6l-6.22-9.51h5.9c1.25 2.23 2.55 4.57 3.3 6.21.74-1.59 2.1-3.88 3.36-6.21h5.4l-6.35 9.66a1 1 0 00-.11.54v5.28z" fill="#2b2b2a"/>
-    <g clip-path="url(#a)">
-      <path fill="none" stroke="#2b2b2a" stroke-width="1.66" d="M460.66 0v845.45"/>
-    </g>
-    <path fill="none" stroke="#2b2b2a" stroke-width="1.66" d="M35.73 422.56h844.99M79.37 196.15l743.64 433.68M262.6 787.4L677.64 38.64M255.57 41.09l398.86 750.16M81.86 628.14l749.92-407.17"/>
-    <path d="M533.77 46c.33 1 1.13 1.79 3.14 1.79 1.79 0 2.34-.54 2.34-1.31s-.49-1.3-3.39-1.8c-5.72-1-6.54-3-6.54-5 0-3.06 2.88-4.85 7.11-4.85 5.14 0 7.21 2.38 7.41 4.67h-4.89c-.17-.69-.61-1.48-2.53-1.48-1.36 0-2 .44-2 1.17s.65 1 3 1.48c5.85 1 7 2.89 7 5.21 0 3-2.48 5.1-7.74 5.1s-7.5-2.2-8-5zm18.11-10.82v9c0 2.46 1.18 3.28 2.84 3.28s2.65-.91 2.65-3.28v-9h5v9c0 4.5-2.5 6.85-7.82 6.85-5.12 0-7.74-2.22-7.74-6.85v-9zm14 15.48V35.18h5.86c3.43 5.54 4.59 7.55 5.58 9.55h.09c-.14-1.46-.14-4.26-.14-6.82v-2.73h4.53v15.48h-5.53c-1.21-2.15-5-8.74-5.93-10.63h-.08c.15 1.77.16 3.83.16 6.86v3.77zM784.44 332.74l-6-15.48h5.46l2.28 6.95c.83 2.54 1.17 3.89 1.43 5a52.44 52.44 0 011.59-5.22l2.11-6.71h5.4l-6.14 15.48zm27.1-6.16h-8.27v2.59h9.25l-.58 3.57h-13.63v-15.49h13.67v3.58h-8.71v2.16h8.27zm7.92 6.16h-4.54v-15.49h5.86c3.43 5.55 4.59 7.56 5.59 9.55h.08c-.14-1.46-.13-4.25-.13-6.81v-2.74h4.53v15.48h-5.54c-1.21-2.15-5-8.74-5.93-10.62h-.08c.15 1.77.16 3.82.16 6.86v3.76zm19.85-15.49v9c0 2.46 1.18 3.28 2.84 3.28s2.65-.9 2.65-3.28v-9h5v9c0 4.49-2.5 6.84-7.81 6.84-5.13 0-7.75-2.22-7.75-6.85v-9zm17.43 10.82c.32 1 1.12 1.8 3.13 1.8 1.79 0 2.35-.54 2.35-1.31s-.5-1.31-3.4-1.81c-5.72-1-6.54-2.95-6.54-5 0-3.06 2.88-4.84 7.11-4.84 5.14 0 7.21 2.37 7.41 4.66h-4.89c-.17-.69-.61-1.48-2.53-1.48-1.36 0-2 .45-2 1.17s.65 1.05 3 1.49c5.85 1 7 2.88 7 5.21 0 2.95-2.48 5.1-7.74 5.1s-7.5-2.2-8-5zM811.51 522.53c0-2.45 0-5.43.16-7.24-.74 3-1.73 7-3.28 12.46h-4.13c-1.22-5.09-2.22-9.36-3-12.49.1 1.8.27 4.79.27 7.44v5h-4.49v-15.45h7.2c1 3.49 2 7.29 2.42 9.9.59-2.74 1.58-6.36 2.62-9.9h7.18v15.5h-4.91zm12.63 2.33l-1 2.89h-5l5.83-15.5h6.56l6.23 15.48h-5.4l-1.05-2.89zm5-3.58c-1-2.78-1.59-4.54-2-5.84h-.1c-.34 1.28-1 3.48-1.84 5.84zm14.23.77v5.7h-4.94v-15.5h9.36c3.85 0 5.86 1.88 5.86 4.45a3.71 3.71 0 01-2.67 3.7c.83.36 2.25 1.1 2.25 3.73v.83a11.79 11.79 0 00.22 2.77h-5a9.72 9.72 0 01-.31-3.2V524c0-1.44-.46-2-2.41-2zm0-3.21h3.08c1.37 0 2.13-.5 2.13-1.62s-.7-1.61-2.13-1.61h-3.08zm11.94 4.25h5c.33 1 1.12 1.79 3.14 1.79 1.79 0 2.34-.53 2.34-1.3s-.49-1.31-3.4-1.81c-5.71-1-6.53-2.95-6.53-5 0-3.06 2.88-4.85 7.11-4.85 5.14 0 7.21 2.38 7.41 4.67h-4.89c-.18-.69-.61-1.48-2.53-1.48-1.37 0-2 .44-2 1.17s.65 1.05 3 1.49c5.84 1 7 2.88 7 5.21 0 3-2.48 5.1-7.74 5.1s-7.5-2.2-8-5zM688.04 700.76c0 4.31-1.5 6.21-6.14 6.21a16.78 16.78 0 01-2.65-.18v-3.54a13 13 0 001.53.09c1.54 0 2.22-.48 2.22-2.25v-9.92h5zm8.26-9.58v9c0 2.46 1.18 3.27 2.84 3.27s2.65-.9 2.65-3.27v-9h5v9c0 4.49-2.51 6.85-7.82 6.85-5.12 0-7.75-2.23-7.75-6.86v-9zm22.66 0c3.72 0 6.31 1.85 6.31 5s-2.44 5.18-6.29 5.18h-3.74v5.25h-5v-15.43zm-3.69 6.82h2.91c1.35 0 2.14-.55 2.14-1.74 0-1-.6-1.7-2.14-1.7h-2.94zm17.31-6.82v15.47h-5v-15.47zm7.24 3.56h-5.11v-3.56h15.22v3.56h-5.08v11.91h-5zm25.53 5.76h-8.31v2.58h9.24l-.57 3.57h-13.62v-15.47h13.67v3.58h-8.72v2.15h8.27zm8.33.46v5.69h-4.93v-15.47h9.29c3.85 0 5.86 1.88 5.86 4.44a3.73 3.73 0 01-2.67 3.71c.83.35 2.26 1.1 2.26 3.72v.84a11.68 11.68 0 00.21 2.76h-5a9.72 9.72 0 01-.31-3.2v-.52c0-1.44-.46-2-2.41-2zm0-3.22h3.08c1.37 0 2.14-.5 2.14-1.61s-.71-1.62-2.14-1.62h-3.08zM490.09 785.68h5c.33 1 1.12 1.8 3.14 1.8 1.79 0 2.34-.54 2.34-1.31s-.5-1.31-3.4-1.81c-5.71-1-6.54-3-6.54-5 0-3.06 2.88-4.85 7.11-4.85 5.15 0 7.22 2.38 7.42 4.67h-4.89c-.18-.69-.62-1.48-2.53-1.48-1.37 0-2 .45-2 1.17s.64 1 3 1.49c5.84 1 7 2.88 7 5.21 0 2.95-2.49 5.1-7.74 5.1s-7.5-2.2-8-5zm22.82 1.77l-1 2.89h-5l5.86-15.48h6.55l6.24 15.48h-5.4l-1.12-2.89zm5-3.58c-1-2.78-1.6-4.54-2-5.84h-.07c-.34 1.28-1 3.48-1.85 5.84zm11-5.44h-5.1v-3.57h15.23v3.57h-5.08v11.91h-5zm17.22-3.57v9c0 2.46 1.18 3.28 2.84 3.28s2.65-.9 2.65-3.28v-9h5v9c0 4.49-2.5 6.84-7.82 6.84-5.12 0-7.75-2.22-7.75-6.85v-9zm18.91 9.79v5.69h-4.94v-15.48h9.36c3.85 0 5.86 1.88 5.86 4.45a3.71 3.71 0 01-2.67 3.7c.83.36 2.25 1.1 2.25 3.73v.84a11.71 11.71 0 00.22 2.76h-5a9.72 9.72 0 01-.31-3.2v-.52c0-1.44-.46-2-2.41-2zm0-3.22h3.08c1.37 0 2.13-.5 2.13-1.62s-.7-1.61-2.13-1.61h-3.08zm13 8.91v-15.48h5.86c3.43 5.55 4.59 7.56 5.59 9.55h.08c-.14-1.46-.13-4.25-.13-6.81v-2.74h4.6v15.48h-5.54c-1.21-2.15-5-8.74-5.93-10.62h-.08c.15 1.77.16 3.82.16 6.86v3.76zM305.04 788.48v9c0 2.46 1.18 3.28 2.84 3.28s2.65-.9 2.65-3.28v-9h5v9c0 4.5-2.5 6.85-7.82 6.85-5.12 0-7.75-2.22-7.75-6.85v-9zm18.89 9.77v5.7h-4.89v-15.47h9.36c3.85 0 5.85 1.88 5.85 4.45a3.7 3.7 0 01-2.67 3.7c.84.36 2.26 1.1 2.26 3.73v.83a11.28 11.28 0 00.22 2.77h-5a9.38 9.38 0 01-.32-3.2v-.51c0-1.44-.46-2-2.4-2zm0-3.21h3.11c1.37 0 2.13-.5 2.13-1.62s-.7-1.61-2.13-1.61h-3.08zm17.66 6l-1 2.89h-5l5.85-15.48H348l6.24 15.48h-5.41l-1-2.89zm5-3.58c-1-2.78-1.59-4.54-2-5.84h-.08c-.33 1.28-1 3.48-1.84 5.84zm13.82 6.47h-4.54v-15.45h5.86c3.43 5.54 4.59 7.56 5.58 9.55h.09c-.14-1.46-.13-4.26-.13-6.82v-2.73h4.52v15.48h-5.53c-1.21-2.15-5-8.74-5.93-10.62h-.08c.15 1.76.16 3.82.16 6.85v3.77zm19.85-15.48v9c0 2.46 1.18 3.28 2.84 3.28s2.65-.9 2.65-3.28v-9h5v9c0 4.5-2.5 6.85-7.82 6.85-5.12 0-7.75-2.22-7.75-6.85v-9zm12.39 10.82h5c.33 1 1.12 1.79 3.14 1.79 1.79 0 2.34-.53 2.34-1.3s-.5-1.31-3.4-1.81c-5.71-1-6.54-3-6.54-5 0-3.06 2.88-4.85 7.11-4.85 5.15 0 7.22 2.38 7.42 4.67h-4.89c-.18-.69-.62-1.48-2.53-1.48-1.37 0-2 .44-2 1.17s.64 1 3.05 1.49c5.84 1 7 2.88 7 5.21 0 2.95-2.49 5.1-7.74 5.1s-7.5-2.2-8-5zM150.37 689.18h-4.53v-15.47h5.86c3.43 5.54 4.58 7.55 5.58 9.54h.08c-.13-1.45-.13-4.25-.13-6.81v-2.73h4.53v15.47h-5.54c-1.2-2.15-5-8.73-5.93-10.62h-.07c.15 1.77.15 3.82.15 6.86v3.76zm28.25-6.15h-8.27v2.58h9.25l-.58 3.57H165.4v-15.47h13.64v3.54h-8.71v2.16h8.27zm12.09-9.32c3.72 0 6.31 1.85 6.31 5s-2.44 5.18-6.29 5.18h-3.69v5.25h-5v-15.43zm-3.67 6.82h2.91c1.35 0 2.14-.55 2.14-1.73 0-1-.6-1.7-2.14-1.7h-2.91zm16.52-3.28h-5.1v-3.56h15.21v3.56h-5.08v11.91h-5zm17.22-3.56v9c0 2.46 1.18 3.27 2.84 3.27s2.65-.9 2.65-3.27v-9h5v9c0 4.5-2.5 6.85-7.81 6.85-5.13 0-7.75-2.23-7.75-6.85v-9zm18.5 15.47h-4.54v-15.45h5.86c3.44 5.54 4.59 7.54 5.58 9.54h.09c-.14-1.45-.14-4.25-.14-6.81v-2.73h4.53v15.47h-5.53c-1.21-2.15-5-8.73-5.93-10.62h-.08c.15 1.77.16 3.82.16 6.86v3.76zm28.24-6.15h-8.26v2.58h9.24l-.58 3.57H254.3v-15.45h13.66v3.54h-8.7v2.16h8.26zM29.8 494.3c3.72 0 6.31 1.85 6.31 5s-2.44 5.18-6.29 5.18h-3.71v5.25h-5V494.3zm-3.69 6.82h2.93c1.36 0 2.14-.55 2.14-1.73 0-1-.6-1.7-2.14-1.7h-2.93zm12.28-6.82h5v11.89h8.31l-.59 3.58H38.39zm19.94 0v9c0 2.46 1.19 3.27 2.84 3.27s2.66-.9 2.66-3.27v-9h5v9c0 4.5-2.5 6.85-7.81 6.85-5.12 0-7.75-2.23-7.75-6.85v-9zm17.71 3.56h-5.1v-3.56h15.21v3.56h-5.08v11.91h-5zm28.85 4.14c0 4.37-2.89 8.13-9 8.13-5.58 0-8.67-3.57-8.67-8.11 0-4.26 3-8.08 8.9-8.08 5.64 0 8.8 3.67 8.8 8.06zm-12.34 0c0 2.69 1.08 4.68 3.61 4.68s3.43-2.28 3.43-4.59c0-2.69-1-4.66-3.57-4.66s-3.44 1.99-3.44 4.52zM6.04 312.39l-1 2.86h-5l5.86-15.47h6.55l6.2 15.47h-5.4l-1.06-2.88zm5-3.58c-1-2.79-1.6-4.55-2-5.85h-.07c-.34 1.29-1 3.48-1.85 5.85zm8.28 1.81h5c.33 1 1.12 1.79 3.14 1.79 1.79 0 2.34-.54 2.34-1.31s-.49-1.3-3.4-1.81c-5.71-1-6.53-3-6.53-5 0-3.06 2.88-4.84 7.11-4.84 5.14 0 7.21 2.38 7.41 4.67h-4.87c-.18-.69-.61-1.49-2.53-1.49-1.37 0-2 .45-2 1.17s.65 1.05 3 1.49c5.85 1.05 7 2.88 7 5.21 0 2.95-2.48 5.1-7.74 5.1s-7.5-2.2-8-5zm34.53-.6c-.71 3.26-3.33 5.61-8.3 5.61-5.74 0-8.62-3.67-8.62-8.1 0-4.24 2.84-8.09 8.83-8.09 5.25 0 7.72 2.74 8.12 5.55h-5.07a2.77 2.77 0 00-3.07-2.13c-2.35 0-3.5 1.84-3.5 4.56 0 2.46.91 4.74 3.51 4.74a2.82 2.82 0 003.09-2.14zm15.49-.9h-8.3v2.58h9.24l-.58 3.57H56.1V299.8h13.67v3.58h-8.73v2.15h8.27zm7.92 6.15h-4.54V299.8h5.86c3.43 5.54 4.59 7.55 5.58 9.54h.09c-.14-1.45-.14-4.25-.14-6.81v-2.73h4.53v15.45h-5.53c-1.21-2.15-5-8.74-5.93-10.62h-.08c.15 1.77.16 3.82.16 6.86v3.76zm22.86-15.47c5.58 0 8.41 3.41 8.41 7.49 0 4.78-3.5 8-8.46 8h-7.79V299.8zm-2.81 12h2.17c2.5 0 3.74-1.5 3.74-4.39 0-2.37-1-4.11-3.73-4.14h-2.18zm17.78.6l-1 2.88h-5l5.85-15.47h6.56l6.2 15.44h-5.4l-1-2.88zm5-3.58c-1-2.79-1.59-4.55-2-5.85h-.05c-.33 1.29-1 3.48-1.84 5.85zm13.81 6.43h-4.54V299.8h5.86c3.43 5.54 4.59 7.55 5.58 9.54h.09c-.14-1.45-.14-4.25-.14-6.81v-2.73h4.53v15.45h-5.53c-1.21-2.15-5-8.74-5.93-10.62h-.08c.15 1.77.16 3.82.16 6.86v3.76zm18.62-11.91h-5.1v-3.56h15.21v3.56h-5.08v11.91h-5zM109.32 120.34c5.59 0 8.42 3.42 8.42 7.49 0 4.78-3.5 8-8.46 8h-7.8v-15.49zm-2.8 12h2.17c2.5 0 3.74-1.5 3.74-4.39 0-2.37-1-4.11-3.73-4.14h-2.18zm27.18-2.68h-8.27v2.59h9.24l-.57 3.58h-13.63v-15.49h13.67v3.58h-8.71v2.16h8.27zm2.41 1.5h5c.33 1 1.12 1.79 3.14 1.79 1.79 0 2.34-.53 2.34-1.3s-.5-1.31-3.4-1.81c-5.71-1-6.54-3-6.54-5 0-3.06 2.89-4.85 7.11-4.85 5.15 0 7.22 2.38 7.42 4.67h-4.89c-.18-.69-.62-1.48-2.53-1.48-1.37 0-2 .44-2 1.17s.64 1 3 1.49c5.84 1 7 2.88 7 5.21 0 2.95-2.49 5.1-7.74 5.1s-7.5-2.2-8-5zm34.52-.59c-.7 3.26-3.32 5.6-8.29 5.6-5.74 0-8.62-3.66-8.62-8.1 0-4.23 2.84-8.08 8.83-8.08 5.24 0 7.72 2.74 8.12 5.54h-5.07c-.22-.86-.86-2.12-3.07-2.12s-3.49 1.84-3.49 4.55c0 2.47.92 4.75 3.52 4.75a2.82 2.82 0 003.09-2.14zm15.49-.91h-8.26v2.59h9.24l-.58 3.58H172.9v-15.49h13.66v3.58h-8.7v2.16h8.26zm7.92 6.16h-4.53v-15.48h5.86c3.43 5.54 4.58 7.56 5.58 9.55h.09c-.13-1.46-.13-4.26-.13-6.82v-2.73h4.53v15.48h-5.54c-1.2-2.15-5-8.74-5.93-10.62h-.07c.15 1.76.15 3.82.15 6.85v3.77zm22.87-15.48c5.58 0 8.41 3.42 8.41 7.49 0 4.78-3.5 8-8.46 8h-7.82v-15.49zm-2.81 12h2.17c2.5 0 3.74-1.5 3.74-4.39 0-2.37-1-4.11-3.73-4.14h-2.18zm17.78.59l-1 2.89h-5l5.85-15.48h6.56l6.23 15.48h-5.4l-1.08-2.89zm5-3.58c-1-2.78-1.59-4.54-2-5.84h-.08c-.34 1.28-1 3.48-1.84 5.84zm9.28 6.47v-15.48h5.88c3.43 5.54 4.58 7.56 5.58 9.55h.08c-.13-1.46-.13-4.26-.13-6.82v-2.73h4.47v15.48h-5.5c-1.2-2.15-5-8.74-5.93-10.62h-.07c.15 1.76.15 3.82.15 6.85v3.77zm23.16-11.91h-5.11v-3.57h15.22v3.57h-5.08v11.91h-5zM342.52 45.44c0-2.46 0-5.43.15-7.25-.75 3-1.74 7-3.28 12.47h-4.14c-1.21-5.09-2.22-9.37-3-12.5.09 1.81.27 4.8.27 7.45v5h-4.5V35.18h7.21c1 3.49 2 7.29 2.41 9.9.6-2.74 1.59-6.36 2.62-9.9h7.18v15.48h-4.9zm25.28-2.56c0 4.37-2.89 8.13-9 8.13-5.58 0-8.67-3.56-8.67-8.11 0-4.26 3-8.07 8.9-8.07 5.61 0 8.77 3.66 8.77 8.05zm-12.34 0c0 2.69 1.07 4.69 3.61 4.69s3.43-2.28 3.43-4.6c0-2.69-.95-4.66-3.57-4.66s-3.47 1.99-3.47 4.52zm32 0c0 4.37-2.88 8.13-9 8.13-5.58 0-8.67-3.56-8.67-8.11 0-4.26 3-8.07 8.9-8.07 5.58 0 8.73 3.66 8.73 8.05zm-12.33 0c0 2.69 1.07 4.69 3.6 4.69s3.43-2.28 3.43-4.6c0-2.69-.95-4.66-3.56-4.66s-3.51 1.99-3.51 4.52zm19.62 7.83h-4.54V35.18h5.83c3.43 5.54 4.59 7.55 5.58 9.55h.09c-.14-1.46-.14-4.26-.14-6.82v-2.73h4.53v15.48h-5.53c-1.21-2.15-5-8.74-5.93-10.63h-.08c.15 1.77.16 3.83.16 6.86v3.77z" fill="#2b2b2a"/>
+    chartImg.innerHTML = `<defs><clipPath id="clip-path" transform="translate(-58.96 -52.44)"><rect width="999.74" height="999.74" fill="none"/></clipPath></defs><g clip-path="url(#clip-path)"><circle cx="440.58" cy="441.22" r="402.55" fill="none" stroke="#000" stroke-width="1.91"/><circle cx="499.95" cy="496.22" r="334.24" transform="translate(-263.41 446.42) rotate(-45)" fill="none" stroke="#1d1d1b" stroke-width="6"/></g><text transform="matrix(0.13, 0.99, -0.99, 0.13, 62.12, 480.65)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">P</text><text transform="matrix(0.16, 0.99, -0.99, 0.16, 64.33, 497.48)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">l</text><text transform="matrix(0.19, 0.98, -0.98, 0.19, 65.45, 504.67)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">u</text><text transform="translate(68.31 519.51) rotate(77.08)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">t</text><text transform="matrix(0.25, 0.97, -0.97, 0.25, 70.28, 528.27)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">o</text><text transform="matrix(0.27, 0.96, -0.96, 0.27, 73.95, 542.32)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(75.63 548.24) rotate(72.87)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.32, 0.95, -0.95, 0.32, 77.38, 554.15)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(80.58 563.66) rotate(70.78)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(80.55 570.39) rotate(63.86)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(116.99 640.51) rotate(57.69)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(120.32 646.03) rotate(55.64)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">N</text><text transform="matrix(0.6, 0.8, -0.8, 0.6, 132.35, 663.52)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">e</text><text transform="matrix(0.63, 0.78, -0.78, 0.63, 140.06, 673.83)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">p</text><text transform="matrix(0.65, 0.76, -0.76, 0.65, 149.8, 685.71)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">t</text><text transform="translate(155.83 692.78) rotate(47.44)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">u</text><text transform="translate(166.09 703.87) rotate(45.38)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">n</text><text transform="translate(176.79 714.66) rotate(42.64)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">e</text><text transform="matrix(0.75, 0.66, -0.66, 0.75, 186.26, 723.38)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.8, 0.6, -0.6, 0.8, 190.32, 728.14)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.85, 0.53, -0.53, 0.85, 235.59, 760.93)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.85, 0.52, -0.52, 0.85, 240.81, 764.2)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(246.06 767.41) rotate(30.12)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.87, 0.49, -0.49, 0.87, 251.39, 770.5)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(256.75 773.51) rotate(28.71)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(262.16 776.45) rotate(27.3)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.89, 0.45, -0.45, 0.89, 267.63, 779.28)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.91, 0.41, -0.41, 0.91, 273.07, 782.15)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">U</text><text transform="translate(291.63 790.48) rotate(22.32)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">r</text><text transform="matrix(0.94, 0.34, -0.34, 0.94, 301.67, 794.62)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">a</text><text transform="translate(313.94 799.19) rotate(18.02)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">n</text><text transform="matrix(0.96, 0.27, -0.27, 0.96, 328.17, 803.86)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">u</text><text transform="translate(342.71 807.99) rotate(13.69)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">s</text><text transform="translate(352.87 811.04) rotate(10.06)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(394.61 820.16) rotate(0.64)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(479.75 818.65) rotate(-6.54)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(485.87 818.01) rotate(-7.96)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">S</text><text transform="matrix(0.98, -0.18, 0.18, 0.98, 500.34, 815.98)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">a</text><text transform="translate(513.22 813.64) rotate(-11.51)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">t</text><text transform="translate(522.33 811.81) rotate(-13.62)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">u</text><text transform="matrix(0.96, -0.27, 0.27, 0.96, 537.01, 808.22)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">r</text><text transform="translate(547.88 805.23) rotate(-17.83)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">n</text><text transform="matrix(0.95, -0.32, 0.32, 0.95, 562.33, 800.54)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(562.8 800.38) rotate(-19.22)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(568.61 798.34) rotate(-19.91)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(574.39 796.22) rotate(-21.3)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(580.12 793.99) rotate(-22)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(585.84 791.7) rotate(-23.38)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.91, -0.41, 0.41, 0.91, 591.49, 789.27)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(597.11 786.76) rotate(-24.76)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(602.71 784.19) rotate(-26.14)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(608.24 781.49) rotate(-26.82)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(613.73 778.71) rotate(-27.51)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.88, -0.48, 0.48, 0.88, 619.19, 775.88)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(624.59 772.92) rotate(-29.57)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(629.94 769.87) rotate(-30.26)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.85, -0.52, 0.52, 0.85, 635.26, 766.78)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(640.51 763.56) rotate(-32.31)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.84, -0.54, 0.54, 0.84, 645.7, 760.26)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(650.87 756.91) rotate(-34.36)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(655.95 753.44) rotate(-35.04)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.81, -0.58, 0.58, 0.81, 660.98, 749.9)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.8, -0.6, 0.6, 0.8, 665.98, 746.3)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">J</text><text transform="matrix(0.78, -0.63, 0.63, 0.78, 673.69, 740.54)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">u</text><text transform="translate(685.41 731) rotate(-41.19)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">p</text><text transform="matrix(0.73, -0.69, 0.69, 0.73, 696.93, 720.84)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">i</text><text transform="translate(702.55 715.63) rotate(-44.62)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">t</text><text transform="translate(708.99 709.36) rotate(-45.99)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">e</text><text transform="matrix(0.67, -0.74, 0.74, 0.67, 717.95, 700.12)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">r</text><text transform="matrix(0.6, -0.8, 0.8, 0.6, 726.32, 692.39)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.53, -0.85, 0.85, 0.53, 760.29, 645.63)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(763.56 640.42) rotate(-58.47)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(766.78 635.17) rotate(-59.88)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.49, -0.87, 0.87, 0.49, 769.88, 629.85)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(772.89 624.49) rotate(-61.29)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.46, -0.89, 0.89, 0.46, 775.85, 619.09)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(778.68 613.62) rotate(-63.41)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.44, -0.9, 0.9, 0.44, 781.43, 608.12)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.41, -0.91, 0.91, 0.41, 784.12, 602.58)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(786.68 596.98) rotate(-66.25)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(789.31 591.41) rotate(-68.39)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">M</text><text transform="translate(798.48 567.6) rotate(-71.26)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">a</text><text transform="matrix(0.29, -0.96, 0.96, 0.29, 802.65, 555.19)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">r</text><text transform="matrix(0.26, -0.97, 0.97, 0.26, 805.85, 544.38)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">s</text><text transform="translate(809.22 534.29) rotate(-79.21)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(819.78 486.7) rotate(-89.36)" font-size="27.98" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(63.04 276.24) rotate(-65.43)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">R</text><text transform="translate(69.45 262.31) rotate(-63.37)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">o</text><text transform="translate(74.83 251.59) rotate(-62)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">u</text><text transform="matrix(0.5, -0.87, 0.87, 0.5, 81.04, 240.02)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">n</text><text transform="matrix(0.53, -0.85, 0.85, 0.53, 87.82, 228.31)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">d</text><text transform="matrix(0.55, -0.83, 0.83, 0.55, 94.69, 217.38)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(97.65 212.88) rotate(-55.84)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">3</text><text transform="translate(104.73 202.59) rotate(-54.48)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.66, -0.75, 0.75, 0.66, 103.47, 200.99)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(159.65 136.47) rotate(-36.58)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(228.14 85.17) rotate(-24.57)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(305.84 49.49) rotate(-13.04)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(1, -0.03, 0.03, 1, 389.17, 30.37)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.98, 0.19, -0.19, 0.98, 474.66, 28.41)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.92, 0.38, -0.38, 0.92, 558.66, 44.38)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(636.44 79.07) rotate(28.69)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(641.16 81.68) rotate(29.37)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.87, 0.5, -0.5, 0.87, 645.84, 84.34)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.85, 0.52, -0.52, 0.85, 650.5, 87.05)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(655.1 89.84) rotate(32.11)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.84, 0.54, -0.54, 0.84, 659.68, 92.69)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(664.21 95.59) rotate(33.48)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(668.71 98.56) rotate(34.16)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.82, 0.57, -0.57, 0.82, 673.16, 101.58)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.81, 0.58, -0.58, 0.81, 677.58, 104.66)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.81, 0.59, -0.59, 0.81, 681.96, 107.8)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(686.3 111) rotate(36.89)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.79, 0.61, -0.61, 0.79, 690.59, 114.25)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.79, 0.62, -0.62, 0.79, 694.85, 117.56)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(699.07 120.89) rotate(39.63)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(703.23 124.31) rotate(40.31)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.75, 0.66, -0.66, 0.75, 707.35, 127.79)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(711.43 131.31) rotate(41.68)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.74, 0.67, -0.67, 0.74, 715.46, 134.89)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(719.43 138.52) rotate(43.05)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(723.37 142.2) rotate(43.74)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(727.25 145.93) rotate(44.43)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.71, 0.71, -0.71, 0.71, 731.09, 149.72)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(734.87 153.55) rotate(45.8)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(738.61 157.43) rotate(46.49)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(742.32 161.34) rotate(47.87)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.66, 0.75, -0.75, 0.66, 745.95, 165.31)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(749.53 169.34) rotate(49.25)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(753.05 173.41) rotate(49.95)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(756.52 177.53) rotate(50.64)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.62, 0.78, -0.78, 0.62, 759.94, 181.7)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(763.31 185.9) rotate(52.03)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(766.62 190.15) rotate(52.73)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(769.87 194.45) rotate(53.42)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(773.07 198.78) rotate(54.12)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(776.2 203.16) rotate(54.82)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(779.29 207.58) rotate(55.52)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.54, 0.84, -0.84, 0.54, 782.41, 211.97)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">R</text><text transform="translate(790.62 224.92) rotate(59.04)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">o</text><text transform="translate(796.8 235.21) rotate(61.16)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">u</text><text transform="translate(803.12 246.72) rotate(62.58)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">n</text><text transform="matrix(0.43, 0.9, -0.9, 0.43, 809.31, 258.74)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">d</text><text transform="translate(814.8 270.43) rotate(66.14)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(817.06 275.32) rotate(67.58)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">1</text><text transform="translate(822.65 286.58) rotate(71.89)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(841.53 340.46) rotate(82.04)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(853.39 425.13) rotate(93.57)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(847.82 510.45) rotate(105.58)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(824.59 592.72) rotate(117.32)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(-0.64, 0.77, -0.77, -0.64, 785.32, 668.73)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(730.98 734.79) rotate(141.34)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(-0.89, 0.45, -0.45, -0.89, 664.3, 788.38)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(587.88 826.69) rotate(164.79)" font-size="27.77" fill="#1d1d1b" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(393.43 869.78) rotate(6.2)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(399.05 870.39) rotate(4.82)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(1, 0.06, -0.06, 1, 404.67, 870.98)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">R</text><text transform="translate(420.73 871.93) rotate(2.05)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">o</text><text transform="matrix(1, 0, 0, 1, 433.32, 872.37)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">u</text><text transform="translate(447.11 872.42) rotate(-2.12)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">n</text><text transform="translate(461.29 871.9) rotate(-3.52)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">d</text><text transform="translate(474.81 871.01) rotate(-4.92)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(480.45 870.58) rotate(-6.33)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic">2</text><text transform="translate(493.77 870.65) rotate(-12)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.93, -0.38, 0.38, 0.93, 562.78, 856.73)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(641.85 824.35) rotate(-32.94)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.71, -0.7, 0.7, 0.71, 713.33, 777.52)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="matrix(0.55, -0.83, 0.83, 0.55, 774.46, 717.68)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(822.03 646.63) rotate(-67.37)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(854.76 567.7) rotate(-78.31)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><text transform="translate(872.02 483.94) rotate(-90.03)" font-size="29.15" font-family="WolpePegasus-Italic, Wolpe Pegasus" font-style="italic"> </text><g clip-path="url(#clip-path)"><circle cx="440.58" cy="440.58" r="440.1" fill="none" stroke="#000" stroke-width="0.96"/></g><text transform="translate(76.32 423.2) rotate(-84.89)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">A</text><text transform="translate(78.15 404.47) rotate(-82.74)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">s</text><text transform="matrix(0.16, -0.99, 0.99, 0.16, 79.45, 394.38)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">c</text><text transform="translate(81.27 383.46) rotate(-79.13)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">e</text><text transform="translate(83.63 371.32) rotate(-76.96)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">n</text><text transform="translate(86.98 357.11) rotate(-74.79)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">d</text><text transform="translate(90.97 342.81) rotate(-72.61)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">a</text><text transform="translate(94.76 330.81) rotate(-70.44)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">n</text><text transform="matrix(0.37, -0.93, 0.93, 0.37, 99.69, 317.07)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">t</text><text transform="translate(102.27 308.44) rotate(-63.92)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.52, -0.86, 0.86, 0.52, 126.26, 261.82)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.53, -0.85, 0.85, 0.53, 129.32, 256.75)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.56, -0.83, 0.83, 0.56, 132.48, 251.43)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">D</text><text transform="translate(143.4 235.28) rotate(-53.2)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">e</text><text transform="matrix(0.62, -0.79, 0.79, 0.62, 150.93, 225.19)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">c</text><text transform="matrix(0.65, -0.76, 0.76, 0.65, 157.77, 216.48)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">e</text><text transform="matrix(0.67, -0.74, 0.74, 0.67, 165.74, 207.02)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">n</text><text transform="matrix(0.7, -0.71, 0.71, 0.7, 175.59, 196.24)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">d</text><text transform="matrix(0.73, -0.69, 0.69, 0.73, 186.04, 185.7)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">a</text><text transform="translate(195.2 177.08) rotate(-41.31)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">n</text><text transform="translate(206.23 167.5) rotate(-39.24)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">t</text><text transform="matrix(0.79, -0.61, 0.61, 0.79, 213.14, 161.86)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(217.61 157.95) rotate(-35.12)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(243.43 140.19) rotate(-32.38)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(248.42 137.01) rotate(-31.01)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.86, -0.5, 0.5, 0.86, 253.48, 133.95)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.87, -0.49, 0.49, 0.87, 258.59, 130.97)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.88, -0.47, 0.47, 0.88, 263.73, 128.04)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(268.93 125.22) rotate(-27.59)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(274.18 122.49) rotate(-26.91)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(279.45 119.81) rotate(-25.54)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.91, -0.42, 0.42, 0.91, 284.78, 117.25)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(290.16 114.77) rotate(-24.18)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(295.47 112.16) rotate(-21.44)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">M</text><text transform="translate(318.07 103.41) rotate(-18.7)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">o</text><text transform="translate(331.5 98.91) rotate(-16.64)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">o</text><text transform="translate(344.88 94.9) rotate(-13.88)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">n</text><text transform="matrix(0.99, -0.17, 0.17, 0.99, 358.95, 90.86)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(1, 0.01, -0.01, 1, 402.68, 81.52)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(487.77 85.15) rotate(7.98)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(493.62 85.97) rotate(8.7)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(499.48 86.85) rotate(10.14)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">S</text><text transform="translate(513.07 89.34) rotate(12.31)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">u</text><text transform="translate(527.26 92.42) rotate(15.21)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">n</text><text transform="matrix(0.95, 0.31, -0.31, 0.95, 541.42, 96.05)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.89, 0.46, -0.46, 0.89, 571.34, 103.5)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(645.75 144.93) rotate(34.67)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(650.62 148.29) rotate(35.38)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(655.43 151.73) rotate(36.09)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.78, 0.63, -0.63, 0.78, 660.33, 155.06)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">M</text><text transform="translate(679.1 170.38) rotate(41.73)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">e</text><text transform="translate(688.35 178.59) rotate(43.83)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">r</text><text transform="translate(695.9 185.79) rotate(45.22)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">c</text><text transform="matrix(0.68, 0.73, -0.73, 0.68, 703.74, 193.62)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">u</text><text transform="matrix(0.65, 0.76, -0.76, 0.65, 713.59, 204.29)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">r</text><text transform="translate(720.91 212.83) rotate(50.76)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">y</text><text transform="matrix(0.56, 0.83, -0.83, 0.56, 729.23, 221.53)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(759.83 269.46) rotate(61.04)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(762.69 274.64) rotate(62.41)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(765.44 279.88) rotate(63.09)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(768.1 285.16) rotate(63.77)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.42, 0.91, -0.91, 0.42, 770.7, 290.47)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="matrix(0.41, 0.91, -0.91, 0.41, 773.19, 295.84)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(775.71 301.19) rotate(67.88)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">V</text><text transform="translate(781.74 315.99) rotate(69.93)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">e</text><text transform="translate(786.02 327.6) rotate(71.99)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">n</text><text transform="matrix(0.27, 0.96, -0.96, 0.27, 790.45, 341.28)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">u</text><text transform="translate(794.39 355.25) rotate(76.12)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700">s</text><text transform="translate(798.42 364.86) rotate(82.37)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><text transform="translate(808.47 432.04) rotate(94.39)" font-size="26.89" font-family="WolpePegasus-Bold, Wolpe Pegasus" font-weight="700"> </text><line x1="440.73" y1="1.61" x2="440.73" y2="440.57" fill="none" stroke="#1d1d1b" stroke-width="6"/><line x1="442.71" y1="442.38" x2="442.71" y2="846.03" fill="none" stroke="#000" stroke-width="0.33"/><line x1="440.71" y1="442.38" x2="440.71" y2="846.03" fill="none" stroke="#000" stroke-width="0.33"/><line x1="438.76" y1="442.38" x2="438.76" y2="846.03" fill="none" stroke="#000" stroke-width="0.33"/><line x1="842" y1="446.06" x2="39.99" y2="446.06" fill="none" stroke="#000" stroke-width="0.33"/><line x1="842" y1="444.06" x2="39.99" y2="444.06" fill="none" stroke="#000" stroke-width="0.33"/><line x1="842" y1="442.11" x2="39.99" y2="442.11" fill="none" stroke="#000" stroke-width="0.33"/><line x1="663.26" y1="105.1" x2="223.8" y2="781.81" fill="none" stroke="#000" stroke-width="0.33"/><line x1="661.59" y1="104.01" x2="222.13" y2="780.73" fill="none" stroke="#000" stroke-width="0.33"/><line x1="659.96" y1="102.95" x2="220.49" y2="779.67" fill="none" stroke="#000" stroke-width="0.33"/><line x1="438.49" y1="445.14" x2="87.2" y2="246.39" fill="none" stroke="#000" stroke-width="0.33"/><line x1="439.47" y1="443.4" x2="88.18" y2="244.65" fill="none" stroke="#000" stroke-width="0.33"/><line x1="440.43" y1="441.7" x2="89.14" y2="242.95" fill="none" stroke="#000" stroke-width="0.33"/><line x1="790.69" y1="641.75" x2="726.7" y2="605.55" fill="none" stroke="#1d1d1b" stroke-width="2.23"/><line x1="642.06" y1="789.82" x2="234.63" y2="98.14" fill="none" stroke="#000" stroke-width="0.33"/><line x1="643.78" y1="788.8" x2="236.35" y2="97.12" fill="none" stroke="#000" stroke-width="0.33"/><line x1="645.46" y1="787.82" x2="238.03" y2="96.13" fill="none" stroke="#000" stroke-width="0.33"/><line x1="51.78" y1="646.62" x2="442.42" y2="443.26" fill="none" stroke="#1d1d1b" stroke-width="6"/><g clip-path="url(#clip-path)"><path d="M631.63,164.7a16.59,16.59,0,1,0-16.57-16.87,16.57,16.57,0,0,0,16.57,16.87m0-36.38a19.92,19.92,0,1,1-19.95,19.93,19.92,19.92,0,0,1,19.95-19.93" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M631.65,143.69a4.43,4.43,0,1,1-4.44,4.43,4.44,4.44,0,0,1,4.44-4.43" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M435.43,113.62c7,3.63,10.78,8.89,11.11,16-.08,7.09-3.68,12.48-10.49,16.32,6.07.3,13.19-2.21,17.12-8.18a14.36,14.36,0,0,0-1.47-18c-4.14-4.5-9.61-6.45-16.27-6.14m2.31,34.61a25.26,25.26,0,0,1-6.58-.68,1.23,1.23,0,0,1-1.05-1.08,1.16,1.16,0,0,1,.94-1.16,20,20,0,0,0,5.57-2.58,16.4,16.4,0,0,0,6.55-8.42,13.65,13.65,0,0,0,.64-5.84,15.05,15.05,0,0,0-5-9.66,18.79,18.79,0,0,0-8.13-4.35c-.6-.16-1-.43-1.13-1a1.07,1.07,0,0,1,.77-1.19c.8-.23,1.61-.44,2.43-.6a22.52,22.52,0,0,1,4.1-.4,23.06,23.06,0,0,1,13.36,3.94,18,18,0,0,1,7.54,10.31,15.42,15.42,0,0,1,.5,5.23,16.94,16.94,0,0,1-4.71,10.58,21.4,21.4,0,0,1-9.94,6,23.76,23.76,0,0,1-5.86.93" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M807.5,296a7.91,7.91,0,1,0-7.9-8.29,7.89,7.89,0,0,0,7.9,8.29m1.25,8.32v1.88a.94.94,0,0,1-.94.94h-.71a.82.82,0,0,1-.82-.82v-2a.05.05,0,0,0-.06-.06h-2a.88.88,0,0,1-.87-.88v-.6a1,1,0,0,1,1-1h1.82s.07,0,.07-.06v-3.22s0-.05-.06-.06a10.44,10.44,0,0,1-8.81-7.94h0c-1-5.17.94-9,5.34-11.7a.06.06,0,0,0,0-.1,8.94,8.94,0,0,1-4-5.83.81.81,0,0,1,.72-1l.61-.06a1,1,0,0,1,1.16.76,6.33,6.33,0,0,0,2.17,3.52,6.49,6.49,0,0,0,10.44-3.43,1.12,1.12,0,0,1,1.2-.84l.31,0a1,1,0,0,1,.93,1.24,9,9,0,0,1-4,5.61.06.06,0,0,0,0,.1c4.41,2.76,6.29,6.64,5.22,11.84h0a10.46,10.46,0,0,1-8.76,7.76.06.06,0,0,0-.05.06v3.2s0,.07.06.07h1.68a1.11,1.11,0,0,1,1.11,1.11v.24a1.13,1.13,0,0,1-1.13,1.13h-1.68a.06.06,0,0,0-.06.06" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M878.73,446A10.65,10.65,0,1,0,868,456.61,10.63,10.63,0,0,0,878.73,446m-17.07,22.6v-3a.36.36,0,0,1,.37-.36h4a.37.37,0,0,0,.37-.37v-4a1.15,1.15,0,0,0-.93-1.13,14,14,0,1,1,5.06,0,.9.9,0,0,0-.73.9v4.17a.36.36,0,0,0,.36.36h4a.37.37,0,0,1,.37.37v3l-1,0h-3.36c-.25,0-.34.07-.34.33,0,1.45,0,2.54,0,4v.72c0,.45-3.36.41-3.36,0v-.85c0-1.45,0-2.39,0-3.83,0-.3-.1-.36-.37-.36" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M861.76,561.94a10.89,10.89,0,0,0,10.93-11.09,10.93,10.93,0,1,0-10.93,11.09m16.13-29.49h-5.18v-3.39h11v11h-3.38V535c-2.41,2.41-4.82,4.81-7.24,7.24.19.27.43.6.66.94A13.78,13.78,0,0,1,876,549.5a14.11,14.11,0,0,1-3.45,10.94,13.69,13.69,0,0,1-8.2,4.68,14,14,0,0,1-11.93-3.21,13.64,13.64,0,0,1-4.72-8,14,14,0,0,1,2.73-11.69,13.75,13.75,0,0,1,8.21-5.19,14.11,14.11,0,0,1,11.71,2.52c.16.12.26.2.44,0l6.89-6.9.19-.21" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M783.48,725.23l0-.86a1,1,0,0,1,1-1H785a9.11,9.11,0,0,0,5.33-1.93,13.6,13.6,0,0,0,4.71-7,12,12,0,0,0,.53-4.72,5.92,5.92,0,0,0-1.67-3.78,4.89,4.89,0,0,0-3.5-1.37,5.74,5.74,0,0,0-5.19,4,4.13,4.13,0,0,0,.15,2.46,1.74,1.74,0,0,0,.33.54,1.61,1.61,0,0,1,.46,1.18l0,.83a.81.81,0,0,1-1.08.76h0c-1.82-.72-2.55-2.43-2.66-4.51a6.83,6.83,0,0,1,1.46-4.55A8.38,8.38,0,0,1,789,702a7.48,7.48,0,0,1,6.31,1.53,8.1,8.1,0,0,1,2.89,5.12,12.38,12.38,0,0,1,.15,3.27,16.69,16.69,0,0,1-1.57,5.71,16.44,16.44,0,0,1-3.29,4.75c-.33.33-.68.64-1,1a.12.12,0,0,0,.07.21l8.59.15a.12.12,0,0,0,.12-.12l.34-19.49a1.47,1.47,0,0,1,1.5-1.44,1.28,1.28,0,0,1,1.26,1.3l-.35,19.7a.12.12,0,0,0,.12.12l2.69.05a.77.77,0,0,1,.76.79,2,2,0,0,1-2,1.93l-1.49,0a.13.13,0,0,0-.13.12l-.08,5a1.2,1.2,0,0,1-1.21,1.16h-.46a1.09,1.09,0,0,1-1.07-1.11l.08-5.12a.12.12,0,0,0-.12-.12l-16.66-.29a.93.93,0,0,1-.92-.95" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M638.12,847.25l-2.27,0a.33.33,0,0,1-.35-.33l-.34-19.36a.34.34,0,0,0-.34-.33l-2.31,0a.34.34,0,0,1-.35-.33l0-2a.32.32,0,0,1,.33-.34l2.3,0a.35.35,0,0,0,.33-.35l0-2.19a.35.35,0,0,1,.33-.35l2,0a.34.34,0,0,1,.34.33l0,2.17a.33.33,0,0,0,.35.33l4.25-.07a.34.34,0,0,1,.35.33l0,2a.35.35,0,0,1-.34.35l-4.23.07a.33.33,0,0,0-.33.35l.06,3.47a.33.33,0,0,0,.55.25A10,10,0,0,1,640.6,830a8.89,8.89,0,0,1,2.9-.85,6.16,6.16,0,0,1,4.31.91,7.22,7.22,0,0,1,2.65,3.46,10.57,10.57,0,0,1,.72,4.51,14.57,14.57,0,0,1-3.87,9.27,7.71,7.71,0,0,0-1.84,2.92,3.27,3.27,0,0,0-.17,1.55,1.5,1.5,0,0,0,1.24,1.06.61.61,0,0,0,.35-.11c.35-.28.68-.58,1-.88a3.33,3.33,0,0,0,.36-.39l1.18,1.15a1,1,0,0,1,0,1.44,4.57,4.57,0,0,1-2.32,1.39,3.51,3.51,0,0,1-2.77-.71,3.84,3.84,0,0,1-1.72-3.64,8.45,8.45,0,0,1,2.21-5,16.72,16.72,0,0,0,2.12-2.76,13.12,13.12,0,0,0,1.51-4.68,8.11,8.11,0,0,0-.93-5.09,3.29,3.29,0,0,0-2.57-1.82,6.32,6.32,0,0,0-2.79.37,7.63,7.63,0,0,0-3.93,3.41,2.35,2.35,0,0,0-.32,1.32c.08,3.38.13,6.77.19,10.15,0,.08,0,.16,0,.25" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M442.07,874.33a3.09,3.09,0,1,0-3.13-3,3.05,3.05,0,0,0,3.13,3m-1.83-17-3.08.06a.14.14,0,0,0-.14.12,10,10,0,0,1-5.06,7.26,9.44,9.44,0,0,1-4,1.24.61.61,0,0,1-.67-.6l0-1.86a.62.62,0,0,1,.54-.62,7,7,0,0,0,6.26-7.44,7,7,0,0,0-6.44-6.43.68.68,0,0,1-.62-.66l0-1.83a.56.56,0,0,1,.6-.58,9.75,9.75,0,0,1,6,2.3,10,10,0,0,1,3.48,5.88.15.15,0,0,0,.15.12l2.94-.05a.15.15,0,0,0,.14-.16l-.12-6.77a.8.8,0,0,1,.78-.8l1.57,0a.73.73,0,0,1,.74.71l.11,6.83a.16.16,0,0,0,.16.15l2.94-.05a.14.14,0,0,0,.14-.12,10,10,0,0,1,4.47-6.92,9.49,9.49,0,0,1,3.42-1.42,1.59,1.59,0,0,1,1.9,1.53,1.48,1.48,0,0,1-1.21,1.48A6.85,6.85,0,0,0,450.5,852a6.57,6.57,0,0,0-1,4.28,7,7,0,0,0,5.71,6.18,1.6,1.6,0,0,1,1.35,1.54v.18a1.34,1.34,0,0,1-1.5,1.36,9.85,9.85,0,0,1-5.05-2.22,10,10,0,0,1-3.47-5.88.15.15,0,0,0-.15-.12l-3.09.05c0,.09,0,.17,0,.25,0,2.48.09,5,.12,7.44,0,.2.07.26.25.32a5.93,5.93,0,0,1,4.42,4.94,6.13,6.13,0,0,1-4.8,7,6.19,6.19,0,0,1-7.38-4.92,6.46,6.46,0,0,1,4.52-7.08" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M274.66,796.51c-1-.12-2-.2-2.9-.37a8,8,0,0,1-4-1.85,8.76,8.76,0,0,1-2.58-4.34,21.42,21.42,0,0,1-.75-6.22c0-1.69.15-3.38.23-5.06,0-.29,0-.58.07-.94l-1.45,1.21a.55.55,0,0,1-.81-.11l-.91-1.23a.65.65,0,0,1,.1-.87L266,773.1a.74.74,0,0,1,1.08.15l3.38,4.75a.6.6,0,0,1-.1.8l-1.21,1a.56.56,0,0,1-.82-.12l-1-1.38c-.06.73-.14,1.38-.16,2,0,1.52-.11,3-.08,4.56a15.18,15.18,0,0,0,.87,5,5,5,0,0,0,3.79,3.37,26.35,26.35,0,0,0,2.67.36h.16l-.22-12.32s0,0,0,0l-1.11,1.13a.77.77,0,0,1-1.1,0l-.89-.88a.69.69,0,0,1,0-.92l3.82-4.38a.62.62,0,0,1,.92,0l4,4.2a.59.59,0,0,1,0,.82l-1,1.11a.53.53,0,0,1-.79,0l-1-1.09-.1,0,.21,12.29,1.3-.14a8.77,8.77,0,0,0,2.5-.69,5.24,5.24,0,0,0,2.81-3.55,13.21,13.21,0,0,0,.53-3.59c0-1.42,0-2.83-.08-4.24a30.8,30.8,0,0,0-.37-3.12l-1,1.46a.55.55,0,0,1-.8.13l-1.24-1a.6.6,0,0,1-.12-.8l3.41-5A.51.51,0,0,1,285,773l4.65,3.73a.57.57,0,0,1,.11.78l-1,1.35a.49.49,0,0,1-.73.11l-1.42-1.12c.09.8.1.85.26,2.54a40.64,40.64,0,0,1,.2,4.13,19.87,19.87,0,0,1-.69,5.64,7.92,7.92,0,0,1-5.68,5.76,15.06,15.06,0,0,1-3.19.52h-.2c0,1.33.05,2.64.07,4l4.27-.07a.61.61,0,0,1,.6.61l0,1.59a.56.56,0,0,1-.53.59l-4.32.07v.39c0,1.56.05,2.94.09,4.5a.51.51,0,0,1-.45.49c-.69,0-1.05,0-1.73,0a.52.52,0,0,1-.47-.5c0-1.57-.05-2.94-.08-4.51,0-.1,0-.2,0-.33l-4.15.07a.77.77,0,0,1-.75-.77l0-1.25a.74.74,0,0,1,.7-.77l4.16-.07Z" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M160.09,638.14h-5.44c-1,0-1,0-1,1v6.53h-2.85c-.46,0-.46,0-.46-.44v-7H144a1,1,0,0,1-.95-1v-1.36a.94.94,0,0,1,.95-1h6.37c.07,0,0-.29,0-.39,0-2.13,0-4.21,0-6.35,0-.27-.07-.34-.36-.38a15.24,15.24,0,0,1-12.9-12.29,8.36,8.36,0,0,1-.25-2.24c0-.68.31-.6.32-.68l2.1,0a.83.83,0,0,1,.84.77,11.9,11.9,0,0,0,4.88,8.92,11.44,11.44,0,0,0,7.9,2.3,12,12,0,0,0,11-11.11,1,1,0,0,1,1-.89h1.34a1,1,0,0,1,.95,1,15,15,0,0,1-3.84,9.18,14.85,14.85,0,0,1-8.86,4.91.94.94,0,0,0-.77.93v5.26c0,1.06,0,1,.95,1h5.42a1,1,0,0,1,.95,1v1.38a1,1,0,0,1-.95,1" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M152.12,618.8a6.32,6.32,0,1,0-6.25-6.32,6.29,6.29,0,0,0,6.25,6.32m-9.54-6.3a9.55,9.55,0,1,1,19.09,0,9.55,9.55,0,1,1-19.09,0" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M161.91,354.48V329.31a.57.57,0,0,0-1-.42l-9.81,10.24a.54.54,0,0,1-.76,0l-.72-.64a.62.62,0,0,1,0-.87l12.89-13.6a.55.55,0,0,1,.81,0l12.92,13.62a.62.62,0,0,1,0,.87l-.68.61a.55.55,0,0,1-.77,0L165,328.86a.57.57,0,0,0-1,.42v25.19a.58.58,0,0,1-.57.6h-1a.58.58,0,0,1-.57-.59" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/><path d="M286.52,176.56v25.16a.56.56,0,0,0,1,.42l9.81-10.24a.55.55,0,0,1,.77,0l.71.64a.6.6,0,0,1,0,.86L285.92,207a.55.55,0,0,1-.8,0L272.2,193.36a.6.6,0,0,1,0-.86l.68-.61a.55.55,0,0,1,.77,0l9.78,10.26a.57.57,0,0,0,1-.42v-25.2A.59.59,0,0,1,285,176h1a.57.57,0,0,1,.56.59" transform="translate(-58.96 -52.44)" fill="#1d1d1b"/></g><line x1="821.14" y1="659.31" x2="438.78" y2="442.98" fill="none" stroke="#1d1d1b" stroke-width="6"/><line x1="441.03" y1="442.46" x2="797.4" y2="256.95" fill="none" stroke="#000" stroke-width="0.33"/><line x1="441.95" y1="444.23" x2="798.32" y2="258.72" fill="none" stroke="#000" stroke-width="0.33"/><line x1="442.85" y1="445.96" x2="799.22" y2="260.45" fill="none" stroke="#000" stroke-width="0.33"/>
   `;
 
-    console.log('symbolsToPopulate', symbolsToPopulate);
+    console.log("symbolsToPopulate", symbolsToPopulate);
     chartImg.append(...symbolsToPopulate);
     imgfrag.append(chartImg);
 
-    const controls = document.createElement('div');
-    controls.classList.add('controls');
-    controls.id = 'controls';
+    const controls = document.createElement("div");
+    controls.classList.add("controls");
+    controls.id = "controls";
 
-    const heading = document.createElement('h2');
-    heading.classList.add('chart-heading');
+    const heading = document.createElement("h2");
+    heading.classList.add("chart-heading");
     heading.textContent = `${chart.name}'s BirthChart`;
     controls.append(heading);
 
-    const printButton = document.createElement('button');
-    printButton.textContent = 'print chart';
-    printButton.classList.add('btn', 'waves-effect', 'waves-light', 'add-data');
-    printButton.addEventListener('click', () => {
+    const printButton = document.createElement("button");
+    printButton.textContent = "print chart";
+    printButton.classList.add("btn", "waves-effect", "waves-light", "add-data");
+    printButton.addEventListener("click", () => {
       // window.print();
-       printJS({
-      printable: "chart",
-      type: "html",
-      css: "./styles/styles.css",
-    });
+      printJS({
+        printable: "chart",
+        type: "html",
+        css: "./styles/styles.css",
+      });
     });
     controls.append(printButton);
     mountNode.innerHTML = "";

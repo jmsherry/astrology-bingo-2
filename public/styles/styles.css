@@ -1,7 +1,8 @@
 body {
   min-height: 100vh;
   text-align: center;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Wolpe Pegasus", Courier, monospace;
+  /* "Courier New", */
   padding-bottom: 290px;
 }
 
@@ -97,6 +98,7 @@ body {
   left: 0;
   padding-top: 0;
   width: 100%;
+  height: 10%;
   position: fixed;
   z-index: 1;
 }
@@ -136,7 +138,6 @@ path {
 .called .sign.icon path {
   fill: #1218bd;
 }
-
 
 .inner-word.sun {
   transform: rotate(-69deg);
