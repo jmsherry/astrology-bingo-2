@@ -5,7 +5,7 @@ import {
   getRandomSign,
   isElement,
   catchPhraseDict,
-  connectToWebSocket
+  connectToWebSocket,
 } from "./utilities.js";
 
 const calledClass = "called";
@@ -15,12 +15,11 @@ const lastCalledClass = "lastCalled";
 let potentialCallList = [];
 let alreadyCalled = [];
 
-
 const socket = connectToWebSocket();
 
 const gridArea = document.getElementById("grid-section");
-const controls = document.getElementById('controls');
-const phraseDisplay = document.getElementById('phrase');
+const controls = document.getElementById("controls");
+const phraseDisplay = document.getElementById("phrase");
 
 function addControls() {
   const button = document.createElement("button");
@@ -28,7 +27,7 @@ function addControls() {
   button.textContent = "Reset game";
   button.addEventListener("click", (e) => {
     clearState(resetUI);
-    socket.send('reset');
+    socket.send("reset");
   });
   controls.append(button);
 }
@@ -37,7 +36,7 @@ function clearPhrase() {
   phraseDisplay.innerHTML = "";
 }
 
-function resetUI(){
+function resetUI() {
   clearCalled();
   clearPhrase();
 }
@@ -45,7 +44,7 @@ function resetUI(){
 function renderGrid(mountNode = gridArea) {
   if (!isElement(mountNode)) {
     throw new Error(
-      `You must provide a DOM node to insert the grid in. Received ${mountNode}`
+      `You must provide a DOM node to insert the grid in. Received ${mountNode}`,
     );
   }
 
@@ -56,7 +55,8 @@ function renderGrid(mountNode = gridArea) {
   const thead = document.createElement("thead");
   const tr = document.createElement("tr");
   const td = document.createElement("td");
-  td.id = "call-cell";
+  const upperControls = document.getElementById("upperControls");
+  td.id = "blank-cell";
 
   // Put the call button in
   const callButton = document.createElement("button");
@@ -65,7 +65,7 @@ function renderGrid(mountNode = gridArea) {
   callButton.classList.add("btn", "new-call");
 
   callButton.addEventListener("click", pick);
-  td.append(callButton);
+  upperControls.append(callButton);
   tr.append(td);
 
   // Now insert one <th> per planet
@@ -111,7 +111,7 @@ function renderGrid(mountNode = gridArea) {
 function setUpHoverGuides(grid = gridArea, hoverClass = hoveringClass) {
   if (!isElement(grid)) {
     throw new Error(
-      `You must provide a DOM node to insert the grid in. Received ${mountNode}`
+      `You must provide a DOM node to insert the grid in. Received ${mountNode}`,
     );
   }
 
@@ -120,7 +120,7 @@ function setUpHoverGuides(grid = gridArea, hoverClass = hoveringClass) {
     for (const el of oldEls) {
       el.classList.remove(hoverClass);
     }
-    if (e.target?.matches("td:not(#call-cell)")) {
+    if (e.target?.matches("td:not(#blank-cell)")) {
       const {
         dataset: { planet, sign },
       } = e.target;
@@ -147,7 +147,7 @@ function pick() {
 
   // Find the object
   const pickedItemIndex = potentialCallList.findIndex(
-    ({ sign, planet }) => sign === signPicked && planet === planetPicked
+    ({ sign, planet }) => sign === signPicked && planet === planetPicked,
   );
 
   // move from 'potentialCallList' to 'alreadyCalled'
@@ -179,10 +179,10 @@ function markCalled(called = alreadyCalled, grid = gridArea) {
       item.classList.add(lastCalledClass);
     }
   }
-  const phrase = document.createElement('p');
-  const { planet, sign} = called[called.length - 1];
+  const phrase = document.createElement("p");
+  const { planet, sign } = called[called.length - 1];
   phrase.textContent = catchPhraseDict[planet][sign];
-  phraseDisplay.innerHTML='';
+  phraseDisplay.innerHTML = "";
   phraseDisplay.append(phrase);
 }
 
@@ -209,9 +209,9 @@ function loadState() {
 
 function clearState(callback) {
   for (const item of alreadyCalled) {
-    console.log('before', item)
+    console.log("before", item);
     delete item.callPosition;
-    console.log('after', item);
+    console.log("after", item);
   }
   potentialCallList = [...potentialCallList, ...alreadyCalled];
   alreadyCalled = [];

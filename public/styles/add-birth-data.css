@@ -5,8 +5,14 @@
 } */
 
 @media print {
-  form, button, header, footer, .main-header, #location-section, #main-data-section{
-    display: none!important;
+  form,
+  button,
+  header,
+  footer,
+  .main-header,
+  #location-section,
+  #main-data-section {
+    display: none !important;
   }
   body {
     min-height: auto;
@@ -14,4 +20,6 @@
   }
 }
 
-
+.circle-container {
+  outline: solid 1px black;
+}
