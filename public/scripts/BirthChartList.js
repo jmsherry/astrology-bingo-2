@@ -31,7 +31,10 @@ class BirthChartList {
 
   addBirthChart(data) {
     if (!data) throw new Error("No data provided to addBirthChart method");
-    const newBirthChart = new BirthChart(data);
+    let newBirthChart = data;
+    if(!(newBirthChart instanceof BirthChart)) {
+      newBirthChart = new BirthChart(data);
+    }
     this.list.push(newBirthChart);
     this.save();
     return newBirthChart;
