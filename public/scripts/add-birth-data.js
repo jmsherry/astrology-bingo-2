@@ -185,7 +185,7 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     //handle bad responses
     if (!response.ok) throw response;
     let chartData = await response.json();
-    chartData = JSON.parse(chartData); // twice because stupid python encoding
+    chartData = JSON.parse(chartData); // twice because stupid python
     console.log('chartData', chartData);
     chartData.Ascendant = chartData.Asc;
     chartData.Descendant = descDict[chartData.Ascendant];
