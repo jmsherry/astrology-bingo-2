@@ -22,9 +22,9 @@ const listNode = document.getElementById("birthchart-list-container");
 console.log("listNode", listNode);
 
 const htmlRender = (mount, players) => {
+  mount.innerHTML = '';
   if (!players.length) {
-    listNode.innerHTML = '';
-    listNode.append(noContentDisplay.cloneNode(true));
+    mount.append(noContentDisplay.cloneNode(true));
     return;
   }
   console.log("players", players);
