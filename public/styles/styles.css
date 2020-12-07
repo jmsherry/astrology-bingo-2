@@ -11,37 +11,40 @@ body {
 }
 
 .owner {
-  margin-block-start: 0;
-  margin-block-end: 12px;
+  margin: 0;
+  font-size: 2.56rem;
 }
 
 .list-group {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 15px;
   list-style-type: none;
 }
 
 .list-group-item {
-  padding: 20px;
+  padding: 7px 15px 15px;
   border: 1px black solid;
-  /* align-items: flex-start; */
 }
 
 .icons-list {
   display: flex;
-  margin-block-end: 15px;
   flex-wrap: wrap;
-  width: 50%;
-  margin: auto;
+  justify-content: space-evenly;
 }
 
 .icons-list .icon-item {
-  margin-inline-end: 10px;
-  padding: 15px;
+  /* margin-inline-end: 5px; */
+  padding: 5px;
   background-color: black;
-  color: goldenrod;
+  color: #fff;
   margin-block-end: 10px;
+  display: flex;
+}
+
+.icons-list .icon-item.called {
+  /* background-color: black; */
+  color: goldenrod;
 }
 
 .icons-list .icon-item:last-child {
@@ -62,10 +65,16 @@ body {
 .icon-item .sign.icon {
   margin: 0;
   fill: currentColor;
+  max-width: 18px;
+  padding: 0px;
 }
 
 .chart {
   padding: 10px;
+}
+
+.cip-controls .delete-chart {
+  margin-inline-end: 15px;
 }
 
 .bc-template {
@@ -73,11 +82,6 @@ body {
   height: 800px;
   display: block;
   /* outline: solid 1px rgb(78, 75, 75); */
-}
-
-.sign.icon {
-  max-width: 40px;
-  padding: 5px 5px 0 5px;
 }
 
 .row {
