@@ -407,15 +407,16 @@ class BirthChart {
     controls.append(heading);
 
     const birthday = document.createElement("ul");
+    birthday.classList.add("birthday");
     const date = document.createElement("li");
-    date.textContent = `Birthday:${chart.birthday}`;
+    date.textContent = `Birthday: ${chart.birthday}`;
     const time = document.createElement("li");
-    time.textContent = `Time:${chart.time}`;
+    time.textContent = `Time: ${chart.time}`;
     const location = document.createElement("li");
-    location.textContent = `Lat:${chart.latitude}, Long:${chart.longitude}`;
+    location.textContent = `Lat: ${chart.latitude}, Long: ${chart.longitude}`;
     console.log(date, time);
     birthday.append(date, time, location);
-    heading.append(birthday);
+    // heading.append(birthday);
 
     const printButton = document.createElement("button");
     printButton.textContent = "print chart";
@@ -451,6 +452,7 @@ class BirthChart {
     mountNode.innerHTML = "";
     mountNode.append(controls);
     mountNode.append(imgfrag);
+    mountNode.append(birthday);
     chart.img = imgfrag;
   }
 

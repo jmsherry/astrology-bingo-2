@@ -15,13 +15,13 @@ function setup() {
 }
 
 function getText(planet, sign) {
-  let text = '';
-    if (planet === 'Ascendant' || planet === 'Descendant') {
-      text = `${sign} ${planet}`;
-    } else {
-      text = `${planet} in ${sign}`;
-    }
-    return text;
+  let text = "";
+  if (planet === "Ascendant" || planet === "Descendant") {
+    text = `${sign} ${planet}`;
+  } else {
+    text = `${planet} in ${sign}`;
+  }
+  return text;
 }
 
 function showPick({ sign, planet }) {
@@ -32,7 +32,7 @@ function showPick({ sign, planet }) {
 }
 
 function updateCalledList() {
-  calledList.innerHTML = '';
+  calledList.innerHTML = "";
   for (const [i, item] of called.entries()) {
     if (i === called.length - 1) {
       continue;
@@ -50,7 +50,7 @@ function resetUI() {
 }
 
 function updateUI() {
-  showPick(called[called.length-1]);
+  showPick(called[called.length - 1]);
   updateCalledList();
 }
 
