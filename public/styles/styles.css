@@ -186,3 +186,18 @@ path {
 .inner-word.saturn {
   transform: rotate(80deg);
 }
+
+.transparent {
+  fill: none !important;
+  stroke: transparent !important;
+}
+
+g.transparent > circle {
+  fill: none !important;
+  stroke: transparent !important;
+}
+
+g.transparent > path {
+  fill: none !important;
+  stroke: transparent !important;
+}
