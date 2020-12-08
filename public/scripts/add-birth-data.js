@@ -1,4 +1,4 @@
-import { makeCall, descDict } from "./utilities.js";
+import { makeCall } from "./utilities.js";
 import { GEO_API_KEY, TIME_API_KEY } from "./config.js";
 import BirthChart from "./BirthChart.js";
 import BirthChartList from "./BirthChartList.js";
@@ -8,6 +8,10 @@ const birthChartList = new BirthChartList();
 // Utility
 
 // UI elements
+const timeInput = document.getElementById("tob");
+const dateInput = document.getElementById("dob");
+const loc1Input = document.getElementById("location1");
+const loc2Input = document.getElementById("location2");
 const geoMountLat = document.getElementById("location1");
 const geoMountLong = document.getElementById("location2");
 const timeMount = document.getElementById("utcoffset");
@@ -62,7 +66,8 @@ async function getGeo({ placename }) {
 
   // Show a list or warn no match and reset
   if (!results.length) {
-    throw new Error(`${placename} Not found`);
+    alert(`${placename} Not found`);
+    return;
   }
 
   const {
@@ -80,21 +85,16 @@ async function getGeo({ placename }) {
 /****************** SECOND FORM *************************/
 utcButton.addEventListener("click", function (e) {
   e.preventDefault();
-  const timeInput = document.getElementById("tob");
+  
   const inputtedTime = timeInput.value;
   console.log("inputtedTime", inputtedTime);
   const timeToGo = inputtedTime.replace(":", "");
   timeInput.value = timeToGo;
 
-  const dateInput = document.getElementById("dob");
   const inputtedDate = dateInput.value;
   console.log("inputtedDate", inputtedDate);
-
-  const loc1Input = document.getElementById("location1");
   const inputtedloc1 = loc1Input.value;
-
-  const loc2Inpu = document.getElementById("location2");
-  const inputtedloc2 = loc2Inpu.value;
+  const inputtedloc2 = loc2Input.value;
 
   const year = inputtedDate.slice(0, 4);
   console.log("year", year);
@@ -133,7 +133,7 @@ function renderChart(chart, mount = chartMountNode) {
   if (!chart) {
     mount.innerHTML = "<p>No chart</p>"; // can't see how that would happen
   } else {
-    BirthChart.renderChart(chart, mount);
+    BirthChart.renderChart(chart, mount); // NEED TO ADD PLAYER TO GAME, not statically generate
   }
   setTimeout(() => {
     mount.scrollIntoView({
@@ -161,7 +161,6 @@ function createBirthChartURL({
   const d = new Date(year, jsMonth, date, Number(hours), Number(minutes));
   const timestamp = d.getTime();
 
-  // const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${location1}&location2=${location2}&action=`;
 
   const params = new URLSearchParams();
   params.append("location", `${location1},${location2}`);
@@ -170,10 +169,6 @@ function createBirthChartURL({
 
   console.log("params", params);
 
-  // const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?${params.toString()}`;
-
-  // const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${location1},${location2}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
-  // console.log("fetchURLUTC", fetchURLUTC);
 
   const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${location1}&location2=${location2}&utc=${utcoffset}&action=`;
   console.log("fetchURL", fetchURL);
@@ -189,10 +184,10 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     chartData = JSON.parse(chartData); // twice because stupid python
     console.log("chartData", chartData);
     chartData.Ascendant = chartData.Asc;
-    chartData.Descendant = descDict[chartData.Ascendant];
+    chartData.Descendant = BirthChart.descDict[chartData.Ascendant];
     delete chartData.Asc;
 
-    chartData.name = `${firstname} ${lastname}`;
+    chartData.ownerName = `${firstname} ${lastname}`;
 
     console.log("chartData", chartData);
     const newBC = birthChartList.addBirthChart(chartData);
@@ -210,7 +205,7 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
 
 function renderUTC(report, mount = timeMount) {
   if (!report) {
-    timeMount.innerHTML = "No utc report";
+    timeMount.innerHTML = "No UTC report";
     return;
   }
   const offset = (report.rawOffset += report.dstOffset);

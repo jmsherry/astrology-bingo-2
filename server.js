@@ -27,7 +27,7 @@ wss.on("connection", function connection(ws, req) {
     console.log(util.inspect(message, false, 7, true));
 
     for(const client of wss.clients) {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
+      if (client.readyState === WebSocket.OPEN) {
         client.send(message);
       }
     }

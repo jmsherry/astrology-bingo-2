@@ -1,6 +1,8 @@
-// import BirthChart from './BirthChart.js';
-import BirthChartList from "./BirthChartList.js";
-import { planets } from "./utilities.js";
+import BirthChart from "./BirthChart.js";
+// import BirthChartList from "./BirthChartList.js";
+import AstrologyBingoGameController from "./AstrologyBingoGameController.js";
+
+const { planets } = BirthChart;
 
 // Components
 const noContentDisplay = document.createElement("p");
@@ -15,8 +17,8 @@ const modalInstance = M.Modal.init(modalElem, options);
 
 // Create application instance
 
-const birthChartList = new BirthChartList();
-console.log("birthChartList", birthChartList);
+const game = new AstrologyBingoGameController();
+console.log("game", game);
 
 const listNode = document.getElementById("birthchart-list-container");
 console.log("listNode", listNode);
@@ -73,7 +75,13 @@ const htmlRender = (mount, players) => {
     // Delete Button
     const delbtn = document.createElement("button");
     delbtn.textContent = "Delete";
-    delbtn.classList.add("waves-effect", "waves-light", "btn", "red", 'delete-chart');
+    delbtn.classList.add(
+      "waves-effect",
+      "waves-light",
+      "btn",
+      "red",
+      "delete-chart"
+    );
     delbtn.addEventListener("click", (e) => {
       birthChartList.deleteBirthChart(id);
       birthChartList.render(listNode, htmlRender);
@@ -90,7 +98,7 @@ const htmlRender = (mount, players) => {
       "view-chart"
     );
     viewChartBtn.addEventListener("click", (e) => {
-      console.log('player', player);
+      console.log("player", player);
       // modalContentArea.innerHTML = player.img;
       // modalInstance.open();
     });
@@ -101,4 +109,4 @@ const htmlRender = (mount, players) => {
   }
   mount.append(list);
 };
-birthChartList.render(listNode, htmlRender);
+game.render(listNode, htmlRender);
