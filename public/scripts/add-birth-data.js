@@ -27,6 +27,7 @@ const datePickerOptions = {
   format: "yyyymmdd",
   autoClose: true,
   yearRange: [1930, 2020],
+  // defaultDate: "19800101",
 
   // onOpenEnd: function(){....}
 };
@@ -186,7 +187,7 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     if (!response.ok) throw response;
     let chartData = await response.json();
     chartData = JSON.parse(chartData); // twice because stupid python
-    console.log('chartData', chartData);
+    console.log("chartData", chartData);
     chartData.Ascendant = chartData.Asc;
     chartData.Descendant = descDict[chartData.Ascendant];
     delete chartData.Asc;

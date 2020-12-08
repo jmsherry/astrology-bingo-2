@@ -19,7 +19,7 @@
 
   <!-- our own styles  -->
   <link rel="stylesheet" href="/styles/styles.css">
-  <link rel="stylesheet" href="/styles/call-reporter.css">
+  <link rel="stylesheet" href="/styles/example-chart.css">
 
 
   <!-- 3rd party scripts -->
@@ -38,9 +38,10 @@
     initialize the SDK after all desired features are loaded, set useEmulator to false to avoid connecting the SDK to running emulators.
                   -->
   <!-- <script defer src="/__/firebase/init.js?useEmulator=true"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" defer></script>
 
   <!-- our own scripts  -->
-  <script src="./scripts/call-reporter.js" type="module"></script>
+  <script src="./scripts/example-chart.js" type="module"></script>
 
 
 
@@ -57,9 +58,10 @@
   <main>
 
 
+    <p> its clunky... its funky</p>
 
-
-    <section id="showExampleChart">
+    <section id="exampleContainer">
+      <div id="exampleMount"></div>
 
     </section>
 

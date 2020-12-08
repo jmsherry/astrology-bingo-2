@@ -113,7 +113,7 @@ path {
 }
 
 .controls {
-  padding: 15px;
+  padding: 7px;
 }
 
 .footer-nav {
@@ -202,6 +202,11 @@ g.transparent > circle {
 }
 
 g.transparent > path {
+  fill: none !important;
+  stroke: transparent !important;
+}
+
+g.transparent > line {
   fill: none !important;
   stroke: transparent !important;
 }
