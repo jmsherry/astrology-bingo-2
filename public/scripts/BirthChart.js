@@ -1,8 +1,8 @@
-import { uuidv4, planets } from "./utilities.js";
+import { uuidv4 , isElement} from "./utilities.js";
 
 class BirthChart {
   constructor({
-    name,
+    ownerName,
     Sun,
     Moon,
     Ascendant,
@@ -18,10 +18,10 @@ class BirthChart {
     _id = uuidv4(),
   }) {
     console.log("chart", arguments[0]);
-    if (typeof name !== "string" || !name.length) {
-      throw new Error(`No name provided. Instead received ${name}`);
+    if (typeof ownerName !== "string" || !ownerName.length) {
+      throw new Error(`No ownerName provided. Instead received ${ownerName}`);
     }
-    this.name = name;
+    this.ownerName = ownerName;
 
     this.Sun =
       typeof Sun === "string"
@@ -301,13 +301,29 @@ class BirthChart {
     }
   }
 
-  static renderChart(chart, mountNode) {
+
+
+  renderChart(mountNode, clearNode=true, recreate=false) {
+    if (!isElement(mountNode)) {
+      throw new Error(
+        `You must provide a DOM node to insert the chart in. Received ${mountNode}`
+      );
+    }
+
+    if(clearNode) {
+      mountNode.innerHTML='';
+    }
+
+    if(this.img && !recreate) {
+      mountNode.append(this.img);
+    }
+
     // Created a document fragment, so we append lis as few times as possible
     const imgfrag = document.createDocumentFragment();
-    console.log("chart to be rendered", chart);
+    console.log("chart to be rendered", this);
     const symbolsToPopulate = [];
     console.log("planets", planets);
-    for (const [sign, value] of Object.entries(chart)) {
+    for (const [sign, value] of Object.entries(this)) {
       console.log(sign, value);
       if (!planets.includes(sign)) {
         console.log(`skipping ${sign}`);
@@ -316,12 +332,12 @@ class BirthChart {
       const currentSign = value;
       const currentSymbol = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "svg",
+        "svg"
       );
 
       const currentWord = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "svg",
+        "svg"
       );
       console.log("currentWord", currentWord);
       currentSymbol.setAttribute("viewBox", "0 0 250 250");
@@ -337,7 +353,7 @@ class BirthChart {
         "sign",
         "word",
         "chart",
-        `${sign.toLowerCase()}`,
+        `${sign.toLowerCase()}`
       );
       currentWord.innerHTML = currentSign.word;
       currentWord.location = currentSign.wordLocation;
@@ -356,7 +372,7 @@ class BirthChart {
             x: `${currentSymbol.location.x}`,
             y: `${currentSymbol.location.y}`,
           },
-        },
+        }
       );
       gsap.to(currentWord, {
         attr: {
@@ -381,7 +397,7 @@ class BirthChart {
 
     const chartImg = document.createElementNS(
       "http://www.w3.org/2000/svg",
-      "svg",
+      "svg"
     );
     console.log("chartImg", chartImg);
     chartImg.id = "chart";
@@ -400,7 +416,7 @@ class BirthChart {
 
     const heading = document.createElement("h2");
     heading.classList.add("chart-heading");
-    heading.textContent = `${chart.name}'s BirthChart`;
+    heading.textContent = `${this.name}'s BirthChart`;
     controls.append(heading);
 
     const printButton = document.createElement("button");
@@ -415,15 +431,59 @@ class BirthChart {
       });
     });
     controls.append(printButton);
-    mountNode.innerHTML = "";
     mountNode.append(controls);
     mountNode.append(imgfrag);
-    chart.img = imgfrag;
+    this.img = imgfrag;
   }
 
   bcReport() {
     return `${this.Sun}  ${this.Moon} ${this.Ascendant} ${this.Mercury} ${this.Venus} ${this.Mars}  ${this.Jupiter}  ${this.Saturn}  ${this.Uranus}  ${this.Neptune}  ${this._id}`;
   }
+
+  static descDict = Object.freeze({
+    Aries: "Libra",
+    Taurus: "Scorpio",
+    Gemini: "Sagittarius",
+    Cancer: "Capricorn",
+    Leo: "Aquarius",
+    Virgo: "Pisces",
+    Libra: "Aries",
+    Scorpio: "Taurus",
+    Sagittarius: "Gemini",
+    Capricorn: "Cancer",
+    Aquarius: "Leo",
+    Pisces: "Virgo",
+  });
+
+  static signs = Object.freeze([
+    'Aries',
+    'Taurus',
+    'Gemini',
+    'Cancer',
+    'Leo',
+    'Virgo',
+    'Libra',
+    'Scorpio',
+    'Sagittarius',
+    'Capricorn',
+    'Aquarius',
+    'Pisces',
+  ]);
+
+  static planets = Object.freeze([
+    "Sun",
+    "Moon",
+    "Ascendant",
+    "Mercury",
+    "Venus",
+    "Mars",
+    "Jupiter",
+    "Saturn",
+    "Uranus",
+    "Neptune",
+    "Pluto",
+    "Descendant",
+  ]);
 }
 
 export default BirthChart;

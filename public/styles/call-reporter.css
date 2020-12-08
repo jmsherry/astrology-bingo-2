@@ -1,13 +1,7 @@
-.called-list {
-  min-height: calc(100vh + 354px);
-  border-inline-start: 5px solid #000;
-  margin: 0;
-  font-size: 2rem;
-  padding-inline-start: 0;
-  list-style-position: inside;
-  text-align: inline-start;
+.upper-controls {
+  min-height: 0;
 }
 
-.called-list li {
-  padding-inline-start: 5px;
+.call-table {
+  height: calc(100vh - 128px);
 }

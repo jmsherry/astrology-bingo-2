@@ -102,9 +102,13 @@ body {
   left: 0;
   padding-top: 0;
   width: 100%;
-  height: 10%;
+  /* height: 10%; */
   position: fixed;
   z-index: 1;
+}
+
+.page-footer .row:last-child {
+  margin-block-end: 0;
 }
 
 svg,

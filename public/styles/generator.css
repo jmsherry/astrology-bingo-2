@@ -1,3 +1,8 @@
+
+
+table {
+  table-layout: fixed;
+}
 td {
   border: 1px solid #000;
 }
@@ -20,11 +25,20 @@ thead td {
   border: 1px solid #000;
 }
 
+tfoot th,
+tfoot td {
+  text-align: center;
+}
+
+tfoot td:hover,
+tfoot td.hover,
 thead td:hover,
 thead td.hover {
   background-color: rgb(196, 182, 218);
 }
 
+tfoot th:hover,
+tfoot th.hover,
 thead th:hover,
 thead th.hover {
   background-color: rgb(73, 40, 126);

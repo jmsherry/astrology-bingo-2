@@ -1,9 +1,8 @@
-import BirthChart from './BirthChart.js';
-import { isElement } from './utilities.js';
+import BirthChart from "./BirthChart.js";
+import { isElement } from "./utilities.js";
 
 class BirthChartList {
   list = [];
-
   // / CONSTRUCTOR WHEN BIRTHCHARTDATA IS AN ARRAY
 
   constructor(birthChartData = []) {
@@ -13,9 +12,9 @@ class BirthChartList {
       );
     }
 
-    const savedRecords = JSON.parse(localStorage.getItem('players'));
+    const savedRecords = JSON.parse(localStorage.getItem("players"));
 
-    if(savedRecords) {
+    if (savedRecords) {
       for (const chart of savedRecords) {
         const newBirthChart = new BirthChart(chart);
         this.list.push(newBirthChart);
@@ -32,7 +31,7 @@ class BirthChartList {
   addBirthChart(data) {
     if (!data) throw new Error("No data provided to addBirthChart method");
     let newBirthChart = data;
-    if(!(newBirthChart instanceof BirthChart)) {
+    if (!(newBirthChart instanceof BirthChart)) {
       newBirthChart = new BirthChart(data);
     }
     this.list.push(newBirthChart);
@@ -70,14 +69,13 @@ class BirthChartList {
     console.log("trying to show birthChart", birthChart);
   }
   render(mountNode, rendFn = () => {}) {
-
-    if(!isElement(mountNode)) {
-      throw new Error(`Mountnode must be a DOM element, received ${mountNode}`)
+    if (!isElement(mountNode)) {
+      throw new Error(`Mountnode must be a DOM element, received ${mountNode}`);
     }
     rendFn(mountNode, this.list);
   }
-  save(){
-    localStorage.setItem('players', JSON.stringify(this.list));
+  save() {
+    localStorage.setItem("players", JSON.stringify(this.list));
   }
 }
 
