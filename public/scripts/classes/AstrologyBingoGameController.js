@@ -1,5 +1,5 @@
 import BirthChart from "./BirthChart.js";
-import Player from './Player.js';
+import Player from "./Player.js";
 import {
   connectToWebSocket,
   deepFreeze,
@@ -19,7 +19,6 @@ class AstrologyBingoGameController {
     players: "players",
   };
   constructor() {
-
     this._id = uuidv4();
 
     const potentialsData = localStorage.getItem(
@@ -63,7 +62,9 @@ class AstrologyBingoGameController {
     }
 
     if (players != null && Array.isArray(players)) {
-      this.players = players.map((player) => new Player({ chartData: player, _id: player._id}));
+      this.players = players.map(
+        (player) => new Player({ chartData: player, _id: player._id })
+      );
     } else {
       if (players != null && !Array.isArray(players)) {
         console.warn(
@@ -83,18 +84,31 @@ class AstrologyBingoGameController {
 
         switch (evt.type) {
           case "reset":
-            this.reset();
-            this.socket.send(JSON.stringify({ type: 'updated-state', appId: this._id}))
+            // this makes games in other tabs reset
+            if(evt.controllerId !== this._id) {
+              this.reset();
+            }
+            // this makes the grids re-render
+            this.socket.send(
+              JSON.stringify({ type: "updated-state", controllerId: this._id })
+            );
             break;
           case "picked":
-            console.log("call from game");
-            if (
-              evt.controllerId !== this._id
-            ) {
-              this.pullState();
+            if (evt.controllerId !== this._id) {
+              this.updateData();
             }
-            this.socket.send(JSON.stringify({ type: 'updated-state', appId: this._id}))
+            this.socket.send(
+              JSON.stringify({ type: "updated-state", controllerId: this._id })
+            );
             break;
+            case "player-added":
+              if (evt.controllerId !== this._id) {
+                this.updatePlayers();
+              }
+              this.socket.send(
+                JSON.stringify({ type: "updated-state", controllerId: this._id })
+              );
+              break;
           default:
             console.log(`received a ${evt.type}`);
         }
@@ -119,41 +133,37 @@ class AstrologyBingoGameController {
 
   addPlayer(data) {
     let p = data;
-    if(!(data instanceof Player)) {
+    if (!(data instanceof Player)) {
       p = new Player(data);
     }
     this.players.push(p);
     this.savePlayers();
-    this.socket.send(JSON.stringify({type: 'playerAdded'}));
+    this.socket.send(JSON.stringify({ type: "playerAdded" }));
   }
 
   removePlayer(player) {
-    if(!(player instanceof Player)) {
+    if (!(player instanceof Player)) {
       throw new Error(
         `AstrologyBingoGameController.removePlayer needs a Player object; instead received: ${player} (type: ${typeof player}, class: ${
           player?.__proto__?.constructor
         })`
       );
     }
-    const idx = this.players.findIndex(({_id}) => _id === player._id);
+    const idx = this.players.findIndex(({ _id }) => _id === player._id);
     this.players.splice(idx, 1);
     this.savePlayers();
-    this.socket.send(JSON.stringify({type: 'playerRemoved'}));
+    this.socket.send(JSON.stringify({ type: "playerRemoved" }));
   }
 
-  pullState() {
+  updatePicks() {
     const potentialsData = localStorage.getItem(
       AstrologyBingoGameController.storageLabels.potentialPicks
     );
     const calledData = localStorage.getItem(
       AstrologyBingoGameController.storageLabels.alreadyCalled
     );
-    const playerData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.players
-    );
     const potentials = JSON.parse(potentialsData);
     const called = JSON.parse(calledData);
-    const players = JSON.parse(playerData);
 
     if (potentials != null && Array.isArray(potentials)) {
       this.potentialCallList = potentials;
@@ -175,6 +185,13 @@ class AstrologyBingoGameController {
       }
     }
 
+  }
+
+  updatePlayers(){
+    const playerData = localStorage.getItem(
+      AstrologyBingoGameController.storageLabels.players
+    );
+    const players = JSON.parse(playerData);
     if (players != null && Array.isArray(players)) {
       this.players = players;
     } else {
@@ -186,12 +203,12 @@ class AstrologyBingoGameController {
     }
   }
 
-  reset(cb = () => {}) {
-    // if (typeof cb !== "function") {
-    //   throw new Error(
-    //     `Expected a callback function fot BingoGame.reset; instead received ${cb} (type: ${typeof cb})`
-    //   );
-    // }
+  updateData(){
+    updatePicks();
+    updatePlayers();
+  }
+
+  reset() {
     for (const item of this.alreadyCalled) {
       delete item.callPosition;
     }
@@ -199,24 +216,24 @@ class AstrologyBingoGameController {
     this.alreadyCalled = [];
     this.saveItems();
 
-    this.socket.send(JSON.stringify({ type: "reset", appId: this._id }));
-
-    // cb();
+    this.socket.send(JSON.stringify({ type: "reset", controllerId: this._id }));
   }
 
   // cb = () => {}
-  pick() {
+  pick(picked = {}) {
     // if (typeof cb !== "function") {
     //   throw new Error(
     //     `Expected a callback function for AstrologyBingoGameController.pick; instead received ${cb} (type: ${typeof cb})`
     //   );
     // }
-    const planetPicked = AstrologyBingoGameController.getRandomPlanet();
-    const signPicked = AstrologyBingoGameController.getRandomSign();
+    if (!picked.planet) {
+      picked.planet = AstrologyBingoGameController.getRandomPlanet();
+      picked.sign = AstrologyBingoGameController.getRandomSign();
+    }
 
     // Find the object
     const pickedItemIndex = this.potentialCallList.findIndex(
-      ({ sign, planet }) => sign === signPicked && planet === planetPicked
+      ({ sign, planet }) => sign === picked.sign && planet === picked.planet
     );
 
     // move from 'potentialCallList' to 'alreadyCalled'
@@ -224,10 +241,21 @@ class AstrologyBingoGameController {
     pickedItem.callPosition = this.alreadyCalled.length + 1;
     this.alreadyCalled.push(pickedItem);
 
-    this.saveItems();
+
+    for(const player of this.players) {
+      player.markCalled(pickedItem);
+    }
+
+    this.save();
 
     // Send to other page
-    this.socket.send(JSON.stringify({ type: "picked", item: pickedItem, controllerId: this._id }));
+    this.socket.send(
+      JSON.stringify({
+        type: "picked",
+        item: pickedItem,
+        controllerId: this._id,
+      })
+    );
 
     // cb(this);
   }
@@ -266,19 +294,19 @@ class AstrologyBingoGameController {
     return this.catchPhraseDict[planet][sign];
   }
 
-  saveItems(){
-        // Save in case you change page
-        localStorage.setItem(
-          AstrologyBingoGameController.storageLabels.potentialPicks,
-          JSON.stringify(this.potentialCallList)
-        );
-        localStorage.setItem(
-          AstrologyBingoGameController.storageLabels.alreadyCalled,
-          JSON.stringify(this.alreadyCalled)
-        );
+  saveItems() {
+    // Save in case you change page
+    localStorage.setItem(
+      AstrologyBingoGameController.storageLabels.potentialPicks,
+      JSON.stringify(this.potentialCallList)
+    );
+    localStorage.setItem(
+      AstrologyBingoGameController.storageLabels.alreadyCalled,
+      JSON.stringify(this.alreadyCalled)
+    );
   }
 
-  savePlayers(){
+  savePlayers() {
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.players,
       JSON.stringify(this.players)

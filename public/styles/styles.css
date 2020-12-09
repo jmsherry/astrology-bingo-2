@@ -20,6 +20,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 15px;
   list-style-type: none;
+  padding: 0;
 }
 
 .list-group-item {
@@ -133,6 +134,10 @@ path {
 }
 .footer-nav a:last-child {
   margin-inline-end: 0;
+}
+
+.birthchart-list-container {
+  padding: 0 15px;
 }
 
 /* .btn-danger {

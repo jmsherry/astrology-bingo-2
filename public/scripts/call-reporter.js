@@ -18,6 +18,11 @@ const grid = new BingoDisplayGrid({
     hoveringClass: "hover",
     lastCalledClass: "lastCalled",
   },
+  options: {
+    features: {
+      showPhrases: false,
+    },
+  },
 });
 
 grid.render();

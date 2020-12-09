@@ -32,8 +32,11 @@ class BingoDisplayGrid {
     const defaults = {
       showPickedTime: 5000,
       modalOpacity: 0.8,
+      features: {
+        showModal: true,
+      },
     };
-    this.options = { ...defaults, ...options };
+    this.settings = { ...defaults, ...options };
     this.modal = null;
 
     // Connection opened
@@ -49,7 +52,7 @@ class BingoDisplayGrid {
       console.log("evt", evt);
       switch (evt.type) {
         case "updated-state":
-          if (evt.appId === this.game._id) {
+          if (evt.controllerId === this.game._id) {
             this.render();
             // this.markCalled({ alreadyCalled: alreadyCalled });
           }
@@ -64,25 +67,27 @@ class BingoDisplayGrid {
       console.log("error from the grid", err);
     });
 
-    let modalElem = document.getElementById("pick-modal");
+    if (this.settings.features.showModal) {
+      let modalElem = document.getElementById("pick-modal");
 
-    if (!modalElem) {
-      modalElem = document.createElement("div");
-      modalElem.classList.add("modal", "pick-modal");
-      modalElem.id = "pick-modal";
-      modalElem.innerHTML = `
+      if (!modalElem) {
+        modalElem = document.createElement("div");
+        modalElem.classList.add("modal", "pick-modal");
+        modalElem.id = "pick-modal";
+        modalElem.innerHTML = `
             <div class="modal-footer">
               <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
             </div>
             <div class="modal-content"></div>
             `;
-      document.body.append(modalElem);
+        document.body.append(modalElem);
+      }
+      const modalOptions = {
+        opacity: this.settings.modalOpacity,
+      };
+      console.log("sdfsdfsdfsd", M.Modal.init(modalElem, modalOptions));
+      this.modal = M.Modal.init(modalElem, modalOptions);
     }
-    const modalOptions = {
-      opacity: this.options.modalOpacity,
-    };
-    console.log("sdfsdfsdfsd", M.Modal.init(modalElem, modalOptions));
-    this.modal = M.Modal.init(modalElem, modalOptions);
   }
 
   addControls() {
@@ -112,10 +117,11 @@ class BingoDisplayGrid {
       features: {
         controls: false,
         hoverguides: false,
+        clickable: false,
       },
     };
 
-    const settings = { ...defaults, ...this.options, ...overrides };
+    const settings = { ...defaults, ...this.settings, ...overrides };
 
     // So you can provide an override from outside the class
     if (typeof settings.renderFn === "function") {
@@ -130,6 +136,7 @@ class BingoDisplayGrid {
     const thead = document.createElement("thead");
     const tr = document.createElement("tr");
     const td = document.createElement("td");
+    td.classList.add("blank-cell");
 
     tr.append(td);
 
@@ -144,7 +151,6 @@ class BingoDisplayGrid {
     }
 
     tr.append(td.cloneNode());
-    
 
     thead.append(tr);
     table.append(thead);
@@ -207,7 +213,33 @@ class BingoDisplayGrid {
     if (settings.features.hoverguides) {
       this.setUpHoverGuides();
     }
+
+    if (settings.features.clickable) {
+      this.setUpClickable();
+    }
     this.markCalled({ alreadyCalled: this.game.alreadyCalled });
+  }
+
+  setUpClickable() {
+    this.gridArea.addEventListener("click", (e) => {
+      console.log("target", e?.target?.closest("td:not(.blank-cell)"));
+      const target = e?.target?.closest("td:not(.blank-cell)");
+      if (target) {
+        const { planet, sign } = target.dataset;
+        const pick = {
+          planet,
+          sign,
+        };
+        this.game.pick(pick);
+        this.game.socket.send(
+          JSON.stringify({
+            type: "forced-pick",
+            data: pick,
+            controllerId: this.game._id,
+          })
+        );
+      }
+    });
   }
 
   setUpHoverGuides(
@@ -225,8 +257,8 @@ class BingoDisplayGrid {
       for (const el of oldEls) {
         el.classList.remove(hoverClass);
       }
-      console.log('target', e?.target?.closest( "td:not(#blank-cell)"))
-      const target = e?.target?.closest( "td:not(#blank-cell)")
+      console.log("target", e?.target?.closest("td:not(.blank-cell)"));
+      const target = e?.target?.closest("td:not(.blank-cell)");
       if (target) {
         const {
           dataset: { planet, sign },
@@ -279,7 +311,6 @@ class BingoDisplayGrid {
       const HTML = `
         <p class="call-position">${callPosition} .</p>
         <h2 class="title">${text}</h2>
-        <p class="phrase">${AstrologyBingoGameController.catchPhraseDict[planet][sign]}</p>
       `;
 
       item.innerHTML = HTML;
@@ -290,13 +321,15 @@ class BingoDisplayGrid {
       setTimeout(() => {
         // item.classList.remove("open");
         this.modal.close();
-      }, this.options.showPickedTime);
+      }, this.settings.showPickedTime);
     }
-    // const phrase = document.createElement("p");
-    // const { planet, sign } = called[called.length - 1];
-    //   AstrologyBingoGameController.catchPhraseDict[planet][sign];
-    // this.phraseDisplay.innerHTML = "";
-    // this.phraseDisplay.append(phrase);
+    if (this.settings.features.showPhrases) {
+      const phrase = document.createElement("p");
+      const { planet, sign } = called[called.length - 1];
+      AstrologyBingoGameController.catchPhraseDict[planet][sign];
+      this.phraseDisplay.innerHTML = "";
+      this.phraseDisplay.append(phrase);
+    }
   }
 
   clearCalled(grid = this.gridArea) {

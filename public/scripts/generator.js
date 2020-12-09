@@ -23,6 +23,8 @@ const grid = new BingoDisplayGrid({
     features: {
       controls: true,
       hoverguides: true,
+      clickable: true,
+      showModal: false,
     },
   },
 });
