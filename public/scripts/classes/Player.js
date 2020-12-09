@@ -1,5 +1,7 @@
 import { uuidv4 } from '../utilities.js';
-import BirthChart, { planets } from './BirthChart.js'
+import BirthChart from './BirthChart.js';
+
+const { planets } = BirthChart;
 
 /****************************************************************
  * Constructor for a player

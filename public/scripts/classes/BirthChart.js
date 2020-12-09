@@ -207,8 +207,8 @@ class BirthChart {
     this._id = _id;
   }
 
-  markCalled({planet, sign}) {
-    const planet = this[planet];
+  markCalled({planet:p, sign}) {
+    const planet = this[p];
     if(planet.sign === sign){
       planet.called = true;
     }
@@ -356,7 +356,7 @@ class BirthChart {
       currentWord.innerHTML = sign.word;
       currentWord.location = sign.wordLocation;
       const toRotate = currentWord.firstChild;
-      toRotate.classList.add("inner-word", `${sign.sign.toLowerCase()}`);
+      toRotate.classList.add("inner-word", `${planet.toLowerCase()}`);
       const degrees = sign.wordRotation;
       const anchor = sign.textAnchor;
       // toRotate.setAttribute("transform", `${degrees}`); // no rotataion
