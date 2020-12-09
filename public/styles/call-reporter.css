@@ -27,3 +27,11 @@ td.called .title {
   color: black;
   font-size: 1.6rem;
 }
+
+.modal {
+  height: 60%;
+}
+
+.modal h2 {
+  font-size: 10rem;
+}

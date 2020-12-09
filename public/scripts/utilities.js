@@ -75,12 +75,11 @@ export function connectToWebSocket(
   errorHandler = function errorHandler(err) {
     console.log(err);
   },
-  closeHandler = function closeHandler() {
-    console.log('Socket closed', arguments);
-  }
+  closeHandler
 ) {
+  let i = 1;
   // Create WebSocket connection.
-  const socket = new WebSocket(socketURL);
+  let socket = new WebSocket(socketURL);
 
   // Connection opened
   socket.addEventListener("open", connectionHandler);
@@ -92,8 +91,21 @@ export function connectToWebSocket(
   socket.addEventListener("error", errorHandler);
 
   // Listen for close
-  socket.addEventListener('close', closeHandler);
+  socket.addEventListener("close", function closeHandler() {
+    // alert('socket closed');
+    console.log("Socket closed", arguments);
+    setTimeout(() => {
+      if (i < 20) {
+        socket = connectToWebSocket(
+          socketURL,
+          connectionHandler,
+          errorHandler,
+          closeHandler
+        );
+        i += 1;
+      }
+    }, i * 200);
+  });
 
   return socket;
 }
-

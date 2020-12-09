@@ -5,6 +5,10 @@ body {
   /* "Courier New", */
   padding-bottom: 64px;
 }
+/* 
+.cursor {
+  cursor: url("../assets/img/mouse-planet.png"), auto;
+} */
 
 .birthchart-section-container {
   padding: 15px;
@@ -13,6 +17,7 @@ body {
 .owner {
   margin: 0;
   font-size: 2.56rem;
+  padding-bottom: 5px;
 }
 
 .list-group {
@@ -20,11 +25,18 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 15px;
   list-style-type: none;
+  padding: 0;
 }
 
 .list-group-item {
   padding: 7px 15px 15px;
   border: 1px black solid;
+  border-radius: 15px;
+  background-color: lavender;
+}
+
+button {
+  font-family: "Wolpe Pegasus", Courier, monospace;
 }
 
 .icons-list {
@@ -36,10 +48,13 @@ body {
 .icons-list .icon-item {
   /* margin-inline-end: 5px; */
   padding: 5px;
-  background-color: black;
-  color: #fff;
+  background-color: #fff;
+  color: black;
   margin-block-end: 10px;
+  margin-inline-end: 5px;
   display: flex;
+  /* border-radius: 4px; */
+  outline: 1px solid black;
 }
 
 .icons-list .icon-item.called {
@@ -140,16 +155,20 @@ path {
   margin-inline-end: 0;
 }
 
+.birthchart-list-container {
+  padding: 0 15px;
+}
+
 /* .btn-danger {
   background-color: #F44336 !important;
 } */
 
 .called.icon-item {
-  background-color: #f4433641 !important;
+  background-color: rgb(244, 54, 238) !important;
 }
 
 .called .sign.icon path {
-  fill: #1218bd;
+  fill: #fcfcfc;
 }
 
 .inner-word.sun {

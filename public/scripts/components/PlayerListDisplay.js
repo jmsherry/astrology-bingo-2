@@ -9,7 +9,7 @@ const { planets } = BirthChart;
 //  ****************************************************************/
 
 class PlayerListDisplay {
-  constructor({ game, mountNode }) {
+  constructor({ game, domNodes: { mountNode, controls }, options = {} }) {
     if (!(game instanceof AstrologyBingoGameController)) {
       throw new Error(
         `PlayerList needs a an AstrologyBingoGameController; instead received: ${game} (type: ${typeof game}, class: ${
@@ -27,54 +27,111 @@ class PlayerListDisplay {
       );
     }
     this.mountNode = mountNode;
-    this.modal = null;
+    this.controls = controls;
+
+    const defaults = {
+      showPickedTime: 5000,
+      modalOpacity: 0.8,
+      showControls: true,
+      sorted: false,
+      showingResults: false,
+    };
+    this.options = { ...defaults, ...options };
+
+    // Connection opened
+    const { socket, alreadyCalled, reset } = this.game;
+    socket.addEventListener("open", () => {
+      console.log("open from the grid");
+    });
+
+    // Listen for messages
+    socket.addEventListener("message", (event) => {
+      console.log("message from the grid", event.data);
+      const evt = JSON.parse(event.data);
+      console.log("evt", evt);
+      switch (evt.type) {
+        case "updated-state":
+          if (evt.controllerId === this.game._id) {
+            this.render();
+          }
+          break;
+        default:
+          console.log(`received a ${event.data.type}`);
+      }
+    });
+
+    // Listen for errors
+    socket.addEventListener("error", (err) => {
+      console.log("error from the grid", err);
+    });
+
+    let modalElem = document.getElementById("pick-modal");
+
+    if (!modalElem) {
+      modalElem = document.createElement("div");
+      modalElem.classList.add("modal", "pick-modal");
+      modalElem.id = "pick-modal";
+      modalElem.innerHTML = `
+            <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+            <div class="modal-content"></div>
+            `;
+      document.body.append(modalElem);
+    }
+    const modalOptions = {
+      opacity: this.options.modalOpacity,
+    };
+    // console.log("sdfsdfsdfsd", M.Modal.init(modalElem, modalOptions));
+    this.modal = M.Modal.init(modalElem, modalOptions);
   }
 
-  render({ mountNode = null, renderFn, options = {} } = {}) {
+  render({ mountNode = null, renderFn, options = {}, data } = {}) {
     if (!mountNode) {
       mountNode = this.mountNode;
     }
+    mountNode.innerHTML = "";
     if (renderFn && typeof renderFn === "function") {
       mountNode.innerHTML = renderFn(this.game);
       return;
     }
 
-    const defaults = {
-      modals: true,
-    };
+    const localOptions = { ...this.options, ...options };
 
-    const { modals: showModals } = { ...defaults, ...options };
-
-    if (showModals) {
-      const modalElem = document.createElement("div");
-      modalElem.classList.add("modal");
-      modalElem.id = "chart-modal";
-
-      modalElem.innerHTML = `
-      <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-      </div>
-      <div class="modal-content">
-
-      </div>
-
-      `;
-      document.body.append(modalElem);
-      const options = {};
-      // console.log('sdfsdfsdfsd', M.Modal.init(modalElem, options));
-      this.modal = M.Modal.init(modalElem, options);
+    if (localOptions.showControls) {
+      if (!this.controls) {
+        const controls = document.createElement("div");
+        controls.id = "controls";
+        controls.classList.add("controls");
+        this.controls = controls;
+      }
+      if (!this.controls.querySelector("#showResults")) {
+        const showResults = document.createElement("button");
+        showResults.classList.add("waves-effect", "waves-light", "btn");
+        showResults.id = "showResults";
+        showResults.textContent = "Show Results";
+        showResults.addEventListener("click", () => {
+          this.options.showingResults = !this.options.showingResults;
+          showResults.textContent = this.options.showingResults
+            ? "Hide Results"
+            : "Show Results";
+          this.toggleResultVisibility();
+        });
+        this.controls.append(showResults);
+      }
+      mountNode.append(this.controls);
     }
 
     const {
       game: { players },
-      game,
+      // game,
     } = this;
     if (!players.length) {
       mountNode.innerHTML = "<p>No players yet...</p>";
     } else {
       const list = document.createElement("ol");
       list.classList.add("list-group");
-      for (const player of players) {
+      for (const player of data || players) {
         console.log(player);
         const { name, value = 7, img, _id: id } = player;
         const li = document.createElement("li");
@@ -90,17 +147,17 @@ class PlayerListDisplay {
         for (const planet of planets) {
           const iconListItem = document.createElement("li");
           iconListItem.classList.add("icon-item");
-          const { icon: path } = player[planet];
+          const { icon: path, called } = player[planet];
           const icon = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "svg",
           );
-          icon.setAttribute("viewBox", "0 0 250 250");
+          icon.setAttribute("viewBox", "0 0 300 300");
           icon.setAttribute("width", "50");
           icon.classList.add("sign", "icon", "chart");
-          // if() {
-          //   icon.classList.add('called'); // to mark as called
-          // }
+          if (called && this.options.showingResults) {
+            iconListItem.classList.add("called"); // to mark as called
+          }
           icon.innerHTML = path;
           iconListItem.append(icon);
           iconsDisplay.append(iconListItem);
@@ -151,13 +208,21 @@ class PlayerListDisplay {
         li.append(controls);
         list.append(li);
       }
-      mountNode.innerHTML = "";
+
       mountNode.append(list);
     }
   }
 
   toggleResultVisibility() {
-    console.log("TODO: toggleResultVisibility");
+    console.log("toggleResultVisibility");
+    let arg = undefined;
+    if (this.options.showingResults) {
+      const sorted = this.game.players.sort((p1, p2) => {
+        return p1.score - p2.score;
+      });
+      arg = { data: sorted };
+    }
+    this.render(arg);
   }
 }
 

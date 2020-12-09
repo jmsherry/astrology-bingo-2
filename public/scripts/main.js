@@ -11,6 +11,6 @@ console.log("game", game);
 const mountNode = document.getElementById("birthchart-list-container");
 console.log("mountNode", mountNode);
 
-const playerListDisplay = new PlayerListDisplay({ game, mountNode })
+const playerListDisplay = new PlayerListDisplay({ game, domNodes: {mountNode} })
 
 playerListDisplay.render();

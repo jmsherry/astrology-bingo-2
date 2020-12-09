@@ -73,14 +73,14 @@ td.called .call-position {
 }
 
 td.called .title {
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin: 0;
+  font-variant-caps: all-petite-caps;
 }
 
 td.hover:not(.called) {
   background-color: #efefef;
 }
-
 
 td.lastCalled,
 td.lastCalled:hover,
