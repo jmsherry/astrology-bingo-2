@@ -25,8 +25,11 @@ wss.on("connection", function connection(ws, req) {
   ws.on("message", function incoming(message) {
     console.log("received: %s", message);
     console.log(util.inspect(message, false, 7, true));
-
+// console.log('number of clients', wss.clients.length);
+// let i = 0;
     for(const client of wss.clients) {
+      // console.log(i++);
+      // console.log('client', client);
       if (client.readyState === WebSocket.OPEN) {
         client.send(message);
       }

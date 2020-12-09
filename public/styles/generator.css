@@ -17,6 +17,7 @@ td {
   padding: 5px;
 }
 
+tfoot,
 thead {
   background-color: rgb(196, 182, 218);
 }
