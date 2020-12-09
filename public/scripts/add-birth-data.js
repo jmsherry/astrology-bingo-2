@@ -2,8 +2,8 @@ import { makeCall } from "./utilities.js";
 import { GEO_API_KEY, TIME_API_KEY } from "./config.js";
 import BirthChart from "./classes/BirthChart.js";
 // import BirthChartList from "./BirthChartList.js";
-import BingoGameController from './classes/AstrologyBingoGameController.js';
-import Player from './classes/Player.js';
+import BingoGameController from "./classes/AstrologyBingoGameController.js";
+import Player from "./classes/Player.js";
 
 // const birthChartList = new BirthChartList();
 
@@ -75,22 +75,51 @@ async function getGeo({ placename }) {
     return;
   }
 
-  const {
-    geometry: {
-      location: { lat, lng },
-    },
-  } = results[0];
+  const choicesMount = document.getElementById("location-choices");
+  const select = document.createElement("select");
+  const holdingOption = document.createElement("option");
+  holdingOption.textContent = "Choose your location";
+  holdingOption.setAttribute("disabled", "disabled");
+  holdingOption.setAttribute("selected", "selected");
+  holdingOption.setAttribute("value", "");
+  select.append(holdingOption);
 
-  geoMountLat.value = lat;
-  geoMountLong.value = lng;
-  locationForm.reset();
-  locationForm.setAttribute("disabled", "disabled");
+  for (const [idx, val] of results.entries()) {
+    const opt = document.createElement("option");
+    opt.textContent = val.formatted_address;
+    opt.setAttribute("value", idx);
+    select.append(opt);
+  }
+
+  select.addEventListener("change", (e) => {
+    const {
+      geometry: {
+        location: { lat, lng },
+      },
+    } = results[e.target.value];
+
+    geoMountLat.value = lat;
+    geoMountLong.value = lng;
+    locationForm.reset();
+    locationForm.setAttribute("disabled", "disabled");
+  });
+
+  choicesMount.append(select);
+
+  const lbl = document.createElement("label");
+  lbl.textContent = "Choose your location";
+
+  choicesMount.append(lbl);
+
+  const elems = document.querySelectorAll("select");
+  const options = {};
+  const instances = M.FormSelect.init(elems, options);
 }
 
 /****************** SECOND FORM *************************/
 utcButton.addEventListener("click", function (e) {
   e.preventDefault();
-  
+
   const inputtedTime = timeInput.value;
   console.log("inputtedTime", inputtedTime);
   const timeToGo = inputtedTime.replace(":", "");
@@ -134,17 +163,21 @@ personalDataForm.addEventListener("submit", (e) => {
   personalDataForm.setAttribute("disabled", "disabled");
 });
 
-function reloadForms(){
-  const {forms} = document;
+function reloadForms() {
+  const { forms } = document;
   for (const form of forms) {
-    form.setAttribute("disabled", "")
+    form.setAttribute("disabled", "");
   }
   M.updateTextFields();
 }
 
 function renderChart(player, mount = chartMountNode) {
-  if(!(player instanceof Player)) {
-    throw new Error(`player supplied to renderChart must be an instance of Player; instead received ${player} (type: ${typeof player} of class ${player?.__proto__?.constructor})`); 
+  if (!(player instanceof Player)) {
+    throw new Error(
+      `player supplied to renderChart must be an instance of Player; instead received ${player} (type: ${typeof player} of class ${
+        player?.__proto__?.constructor
+      })`
+    );
   }
   player.renderChart({ mountNode: mount });
   setTimeout(() => {
@@ -175,14 +208,12 @@ function createBirthChartURL({
   const d = new Date(year, jsMonth, date, Number(hours), Number(minutes));
   const timestamp = d.getTime();
 
-
   const params = new URLSearchParams();
   params.append("location", `${location1},${location2}`);
   params.append("timestamp", timestamp);
   params.append("key", TIME_API_KEY);
 
   console.log("params", params);
-
 
   const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${location1}&location2=${location2}&utc=${utcoffset}&action=`;
   console.log("fetchURL", fetchURL);
@@ -204,7 +235,7 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     chartData.ownerName = `${firstname} ${lastname}`;
 
     console.log("chartData", chartData);
-    const player = new Player({chartData});
+    const player = new Player({ chartData });
     renderFn(player);
     bingoGameController.addPlayer(player);
   } catch (err) {
