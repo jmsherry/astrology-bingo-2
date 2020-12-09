@@ -1,8 +1,8 @@
 
 
-table {
+/* table {
   table-layout: fixed;
-}
+} */
 td {
   border: 1px solid #000;
 }
@@ -12,8 +12,9 @@ th {
 }
 
 th,
-tr {
+td {
   font-size: 1.8rem;
+  padding: 5px;
 }
 
 thead {

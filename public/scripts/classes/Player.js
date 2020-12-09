@@ -1,5 +1,5 @@
-import { uuidv4 } from './utilities.js';
-import BirthChart from './BirthChart.js'
+import { uuidv4 } from '../utilities.js';
+import BirthChart, { planets } from './BirthChart.js'
 
 /****************************************************************
  * Constructor for a player
@@ -27,7 +27,27 @@ class Player extends BirthChart {
       this.chart = new BirthChart(chartData);
     }
 
+    this.score = 0;
+    this.complete = false;
+
   }
+
+  // args: {planet, sign}
+  markCalled(callItem) {
+    super.markCalled(callItem);
+
+    for(const planet of planets) {
+      if(this[planet].called) {
+        this.score += 1;
+      }
+    }
+
+    if(this.score === planets.length) {
+      this.complete = true;
+    }
+
+  }
+
 }
 
 export default Player;

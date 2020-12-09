@@ -1,5 +1,5 @@
-import AstrologyBingoGameController from "./AstrologyBingoGameController.js";
-import BingoDisplayGrid from "./BingoDisplayGrid.js";
+import AstrologyBingoGameController from "./classes/AstrologyBingoGameController.js";
+import BingoDisplayGrid from "./components/BingoDisplayGrid.js";
 
 /****************************************************************
  * The DOM script for the ADMIN grid page (w/ call button, etc.)

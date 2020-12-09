@@ -1,6 +1,6 @@
-import BirthChart from "./BirthChart.js";
-import AstrologyBingoGameController from "./AstrologyBingoGameController.js";
-import { isElement } from "./utilities.js";
+import BirthChart from "../classes/BirthChart.js";
+import AstrologyBingoGameController from "../classes/AstrologyBingoGameController.js";
+import { isElement } from "../utilities.js";
 
 /****************************************************************************
  * A component that constructs the visual grid (both public and admin views)

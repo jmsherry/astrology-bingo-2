@@ -1,9 +1,9 @@
 import { makeCall } from "./utilities.js";
 import { GEO_API_KEY, TIME_API_KEY } from "./config.js";
-import BirthChart from "./BirthChart.js";
+import BirthChart from "./classes/BirthChart.js";
 // import BirthChartList from "./BirthChartList.js";
-import BingoGameController from './AstrologyBingoGameController.js';
-import Player from './Player.js';
+import BingoGameController from './classes/AstrologyBingoGameController.js';
+import Player from './classes/Player.js';
 
 // const birthChartList = new BirthChartList();
 
@@ -195,8 +195,8 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
 
     console.log("chartData", chartData);
     const player = new Player({chartData});
-
     renderFn(player);
+    bingoGameController.addPlayer(player);
   } catch (err) {
     console.log(err);
   }

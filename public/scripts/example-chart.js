@@ -1,5 +1,5 @@
-import BirthChart from "./BirthChart.js";
-import Player from "./Player.js";
+import BirthChart from "./classes/BirthChart.js";
+import Player from "./classes/Player.js";
 
 const alice = {
   Ascendant: "Scorpio",

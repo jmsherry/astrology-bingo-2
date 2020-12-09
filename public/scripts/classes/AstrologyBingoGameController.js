@@ -1,10 +1,10 @@
 import BirthChart from "./BirthChart.js";
-import BirthChartList from "./BirthChartList.js";
+import Player from './Player.js';
 import {
   connectToWebSocket,
   deepFreeze,
   getRandomIntInclusive,
-} from "./utilities.js";
+} from "../utilities.js";
 
 /****************************************************************
  * The controller for a game
@@ -114,6 +114,15 @@ class AstrologyBingoGameController {
     );
   }
 
+  addPlayer(data) {
+    let p = data;
+    if(!(data instanceof Player)) {
+      p = new Player(data);
+    }
+    this.players.push(p);
+    this.savePlayers();
+  }
+
   pullState() {
     const potentialsData = localStorage.getItem(
       AstrologyBingoGameController.storageLabels.potentialPicks
@@ -170,14 +179,7 @@ class AstrologyBingoGameController {
     }
     this.potentialCallList = [...this.potentialCallList, ...this.alreadyCalled];
     this.alreadyCalled = [];
-    localStorage.setItem(
-      AstrologyBingoGameController.storageLabels.potentialPicks,
-      JSON.stringify(this.potentialCallList)
-    );
-    localStorage.setItem(
-      AstrologyBingoGameController.storageLabels.alreadyCalled,
-      JSON.stringify(this.alreadyCalled)
-    );
+    this.saveItems();
 
     cb();
   }
@@ -201,15 +203,7 @@ class AstrologyBingoGameController {
     pickedItem.callPosition = this.alreadyCalled.length + 1;
     this.alreadyCalled.push(pickedItem);
 
-    // Save in case you change page
-    localStorage.setItem(
-      AstrologyBingoGameController.storageLabels.potentialPicks,
-      JSON.stringify(this.potentialCallList)
-    );
-    localStorage.setItem(
-      AstrologyBingoGameController.storageLabels.alreadyCalled,
-      JSON.stringify(this.alreadyCalled)
-    );
+    this.saveItems();
 
     // Send to other page
     this.socket.send(JSON.stringify({ type: "call", item: pickedItem }));
@@ -251,8 +245,28 @@ class AstrologyBingoGameController {
     return this.catchPhraseDict[planet][sign];
   }
 
+  saveItems(){
+        // Save in case you change page
+        localStorage.setItem(
+          AstrologyBingoGameController.storageLabels.potentialPicks,
+          JSON.stringify(this.potentialCallList)
+        );
+        localStorage.setItem(
+          AstrologyBingoGameController.storageLabels.alreadyCalled,
+          JSON.stringify(this.alreadyCalled)
+        );
+  }
+
+  savePlayers(){
+    localStorage.setItem(
+      AstrologyBingoGameController.storageLabels.players,
+      JSON.stringify(this.players)
+    );
+  }
+
   save() {
-    super.save();
+    this.saveItems();
+    this.savePlayers();
   }
 
   static getRandomPlanet() {

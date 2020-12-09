@@ -1,5 +1,5 @@
-import AstrologyBingoGameController from "./AstrologyBingoGameController.js";
-import PlayerListDisplay from './PlayerListDisplay.js';
+import AstrologyBingoGameController from "./classes/AstrologyBingoGameController.js";
+import PlayerListDisplay from './components/PlayerListDisplay.js';
 
 /****************************************************************
  * The DOM script for the player list
@@ -11,6 +11,6 @@ console.log("game", game);
 const mountNode = document.getElementById("birthchart-list-container");
 console.log("mountNode", mountNode);
 
-const playerListDisplay = new PlayerListDisplay({ game, mountNode})
+const playerListDisplay = new PlayerListDisplay({ game, mountNode })
 
 playerListDisplay.render();
