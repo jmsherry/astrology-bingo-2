@@ -1,5 +1,3 @@
-
-
 /* table {
   table-layout: fixed;
 } */
@@ -69,10 +67,49 @@ td:hover {
   font-weight: bold;
 }
 
-.lastCalled {
-  transform: scale(2);
+.called .phrase,
+.called .call-position {
+  display: none;
+}
+
+.called .title {
+  font-size: 1rem;
+  margin: 0;
+}
+
+
+.lastCalled,
+.lastCalled:hover,
+.lastCalled:focus {
+  /* transform: scale(2); */
   background-color: rgb(244, 124, 33);
 }
+
+.lastCalled.open {
+  position: fixed;
+  top: 20vh;
+  left: 20vw;
+  width: 60vw;
+  height: 60vh;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.lastCalled.open .phrase,
+.lastCalled.open .call-position {
+  display: block;
+  font-size: 3rem;
+  margin: 0;
+}
+
+.lastCalled.open .title {
+  font-size: 3rem;
+}
+
+/* .lastCalled.open .phrase {
+  font-size: 3rem;
+} */
 
 .phrase {
   font-size: 2rem;

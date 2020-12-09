@@ -4,6 +4,7 @@ import {
   connectToWebSocket,
   deepFreeze,
   getRandomIntInclusive,
+  uuidv4,
 } from "../utilities.js";
 
 /****************************************************************
@@ -18,6 +19,8 @@ class AstrologyBingoGameController {
     players: "players",
   };
   constructor() {
+
+    this._id = uuidv4();
 
     const potentialsData = localStorage.getItem(
       AstrologyBingoGameController.storageLabels.potentialPicks
@@ -80,17 +83,17 @@ class AstrologyBingoGameController {
 
         switch (evt.type) {
           case "reset":
-            this.reset(evt.cb);
+            this.reset();
+            this.socket.send(JSON.stringify({ type: 'updated-state', appId: this._id}))
             break;
-          case "call":
+          case "picked":
             console.log("call from game");
             if (
-              evt.item.callPosition !==
-              this.alreadyCalled[this.alreadyCalled.length - 1].callPosition
+              evt.controllerId !== this._id
             ) {
               this.pullState();
             }
-            this.pick(evt.cb);
+            this.socket.send(JSON.stringify({ type: 'updated-state', appId: this._id}))
             break;
           default:
             console.log(`received a ${evt.type}`);
@@ -184,11 +187,11 @@ class AstrologyBingoGameController {
   }
 
   reset(cb = () => {}) {
-    if (typeof cb !== "function") {
-      throw new Error(
-        `Expected a callback function fot BingoGame.reset; instead received ${cb} (type: ${typeof cb})`
-      );
-    }
+    // if (typeof cb !== "function") {
+    //   throw new Error(
+    //     `Expected a callback function fot BingoGame.reset; instead received ${cb} (type: ${typeof cb})`
+    //   );
+    // }
     for (const item of this.alreadyCalled) {
       delete item.callPosition;
     }
@@ -196,15 +199,18 @@ class AstrologyBingoGameController {
     this.alreadyCalled = [];
     this.saveItems();
 
-    cb();
+    this.socket.send(JSON.stringify({ type: "reset", appId: this._id }));
+
+    // cb();
   }
 
-  pick(cb = () => {}) {
-    if (typeof cb !== "function") {
-      throw new Error(
-        `Expected a callback function for AstrologyBingoGameController.pick; instead received ${cb} (type: ${typeof cb})`
-      );
-    }
+  // cb = () => {}
+  pick() {
+    // if (typeof cb !== "function") {
+    //   throw new Error(
+    //     `Expected a callback function for AstrologyBingoGameController.pick; instead received ${cb} (type: ${typeof cb})`
+    //   );
+    // }
     const planetPicked = AstrologyBingoGameController.getRandomPlanet();
     const signPicked = AstrologyBingoGameController.getRandomSign();
 
@@ -221,9 +227,9 @@ class AstrologyBingoGameController {
     this.saveItems();
 
     // Send to other page
-    this.socket.send(JSON.stringify({ type: "call", item: pickedItem }));
+    this.socket.send(JSON.stringify({ type: "picked", item: pickedItem, controllerId: this._id }));
 
-    cb(this);
+    // cb(this);
   }
 
   static getCatchPhrase(planet, sign) {

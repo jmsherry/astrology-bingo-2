@@ -17,7 +17,7 @@ class BingoDisplayGrid {
       lastCalledClass = "lastCalled",
       ...supplemental
     },
-    options = {},
+    options,
   }) {
     this.game = game;
     this.gridArea = gridArea;
@@ -29,7 +29,11 @@ class BingoDisplayGrid {
       lastCalledClass,
       ...supplemental,
     };
-    this.options = options;
+    const defaults = {
+      showPickedTime: 5000,
+    };
+    this.options = { ...defaults, ...options };
+    this.modal = null;
 
     // Connection opened
     const { socket, alreadyCalled, reset } = this.game;
@@ -43,11 +47,11 @@ class BingoDisplayGrid {
       const evt = JSON.parse(event.data);
       console.log("evt", evt);
       switch (evt.type) {
-        case "reset":
-          reset(this.resetUI.bind(this));
-          break;
-        case "call":
-          this.markCalled({ alreadyCalled: alreadyCalled });
+        case "updated-state":
+          if (evt.appId === this.game._id) {
+            this.render();
+            // this.markCalled({ alreadyCalled: alreadyCalled });
+          }
           break;
         default:
           console.log(`received a ${event.data.type}`);
@@ -58,17 +62,37 @@ class BingoDisplayGrid {
     socket.addEventListener("error", (err) => {
       console.log("error from the grid", err);
     });
+
+    let modalElem = document.getElementById("pick-modal");
+
+    if (!modalElem) {
+      modalElem = document.createElement("div");
+      modalElem.classList.add("modal", "pick-modal");
+      modalElem.id = "pick-modal";
+      modalElem.innerHTML = `
+            <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+            <div class="modal-content"></div>
+            `;
+      document.body.append(modalElem);
+    }
+    const modalOptions = {};
+    console.log("sdfsdfsdfsd", M.Modal.init(modalElem, modalOptions));
+    this.modal = M.Modal.init(modalElem, modalOptions);
   }
 
   addControls() {
-    const button = document.createElement("button");
-    button.classList.add("btn", "danger");
-    button.textContent = "Reset game";
-    button.addEventListener("click", (e) => {
-      this.game.reset(this.resetUI.bind(this));
-      this.game.socket.send(JSON.stringify({ type: "reset" }));
-    });
-    this.controls.append(button);
+    if (!this.controls.querySelector("#reset")) {
+      const button = document.createElement("button");
+      button.id = "reset";
+      button.classList.add("btn", "danger");
+      button.textContent = "Reset game";
+      button.addEventListener("click", (e) => {
+        this.game.reset();
+      });
+      this.controls.append(button);
+    }
   }
 
   clearPhrase() {
@@ -104,7 +128,6 @@ class BingoDisplayGrid {
     const tr = document.createElement("tr");
     const td = document.createElement("td");
     td.id = "blank-cell";
-
 
     tr.append(td);
 
@@ -145,11 +168,11 @@ class BingoDisplayGrid {
     }
     table.append(tbody);
 
-    const tfoot = document.createElement('tfoot');
-    tfoot.append(tr.cloneNode(true))
+    const tfoot = document.createElement("tfoot");
+    tfoot.append(tr.cloneNode(true));
     table.append(tfoot);
 
-    if (settings.features.controls) {
+    if (settings.features.controls && !td.querySelector("#call")) {
       // Put the call button in
       const callButton = document.createElement("button");
       callButton.textContent = "call";
@@ -157,9 +180,14 @@ class BingoDisplayGrid {
       callButton.classList.add("btn", "new-call");
 
       callButton.addEventListener("click", () => {
-        this.game.pick(this.markCalled.bind(this));
+        this.game.pick();
+        this.markCalled();
         // this.game.socket.send(JSON.stringify({ type: 'call'}));
       });
+
+      if (!this.game.potentialCallList.length) {
+        callButton.setAttribute("disabled", "disabled");
+      }
       td.append(callButton);
     }
 
@@ -210,13 +238,13 @@ class BingoDisplayGrid {
     });
   }
 
-  markCalled(gameData) {
-    if (gameData == null) {
-      throw new Error(
-        `Expected an game data in BingoGridDisplay.markCalled; instead received ${gameData} (type: ${typeof gameData})`
-      );
-    }
-    const { alreadyCalled: called } = gameData;
+  markCalled() {
+    // if (gameData == null) {
+    //   throw new Error(
+    //     `Expected an game data in BingoGridDisplay.markCalled; instead received ${gameData} (type: ${typeof gameData})`
+    //   );
+    // }
+    const { alreadyCalled: called } = this.game;
     if (!called.length) {
       return;
     }
@@ -228,18 +256,39 @@ class BingoDisplayGrid {
     }
     for (const [i, { planet, sign, callPosition }] of called.entries()) {
       const item = grid.querySelector(`.${planet}.${sign}`);
-      item.textContent = callPosition;
+      // item.textContent = callPosition;
       item.classList.add(calledClass);
-      if (i === called.length - 1) {
+      const isLastPicked = i === called.length - 1;
+      if (isLastPicked) {
+        // item.classList.add(lastCalledClass, "open");
         item.classList.add(lastCalledClass);
       }
+
+      const text =
+        planet === "Ascendant" || planet === "Descendant"
+          ? `${sign} ${planet}`
+          : `${planet} in ${sign}`;
+      const HTML = `
+        <p class="call-position">${callPosition} .</p>
+        <h2 class="title">${text}</h2>
+        <p class="phrase">${AstrologyBingoGameController.catchPhraseDict[planet][sign]}</p>
+      `;
+
+      item.innerHTML = HTML;
+      const contentDiv = this.modal.el.querySelector(".modal-content");
+      contentDiv.innerHTML = HTML;
+      this.modal.open();
+
+      setTimeout(() => {
+        // item.classList.remove("open");
+        this.modal.close();
+      }, this.options.showPickedTime);
     }
-    const phrase = document.createElement("p");
-    const { planet, sign } = called[called.length - 1];
-    phrase.textContent =
-      AstrologyBingoGameController.catchPhraseDict[planet][sign];
-    this.phraseDisplay.innerHTML = "";
-    this.phraseDisplay.append(phrase);
+    // const phrase = document.createElement("p");
+    // const { planet, sign } = called[called.length - 1];
+    //   AstrologyBingoGameController.catchPhraseDict[planet][sign];
+    // this.phraseDisplay.innerHTML = "";
+    // this.phraseDisplay.append(phrase);
   }
 
   clearCalled(grid = this.gridArea) {
