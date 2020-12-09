@@ -77,8 +77,8 @@ td.called .title {
   margin: 0;
 }
 
-td.hover {
-  background-color: #eee;
+td.hover:not(.called) {
+  background-color: #efefef;
 }
 
 
