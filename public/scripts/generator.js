@@ -25,6 +25,7 @@ const grid = new BingoDisplayGrid({
       hoverguides: true,
       clickable: true,
       showModal: false,
+      showPhrases: true,
     },
   },
 });

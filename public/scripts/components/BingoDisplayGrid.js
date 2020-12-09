@@ -314,19 +314,21 @@ class BingoDisplayGrid {
       `;
 
       item.innerHTML = HTML;
-      const contentDiv = this.modal.el.querySelector(".modal-content");
-      contentDiv.innerHTML = HTML;
-      this.modal.open();
+      if (this.settings.features.showModal) {
+        const contentDiv = this.modal.el.querySelector(".modal-content");
+        contentDiv.innerHTML = HTML;
+        this.modal.open();
 
-      setTimeout(() => {
-        // item.classList.remove("open");
-        this.modal.close();
-      }, this.settings.showPickedTime);
+        setTimeout(() => {
+          // item.classList.remove("open");
+          this.modal.close();
+        }, this.settings.showPickedTime);
+      }
     }
     if (this.settings.features.showPhrases) {
       const phrase = document.createElement("p");
       const { planet, sign } = called[called.length - 1];
-      AstrologyBingoGameController.catchPhraseDict[planet][sign];
+      phrase.textContent = AstrologyBingoGameController.catchPhraseDict[planet][sign];
       this.phraseDisplay.innerHTML = "";
       this.phraseDisplay.append(phrase);
     }

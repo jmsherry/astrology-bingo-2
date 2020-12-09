@@ -204,8 +204,8 @@ class AstrologyBingoGameController {
   }
 
   updateData(){
-    updatePicks();
-    updatePlayers();
+    this.updatePicks();
+    this.updatePlayers();
   }
 
   reset() {

@@ -36,7 +36,7 @@ const datePickerOptions = {
   format: "yyyymmdd",
   autoClose: true,
   yearRange: [1930, 2020],
-  // defaultDate: "19800101",
+  defaultDate: new Date(80, 0),
 
   // onOpenEnd: function(){....}
 };
@@ -104,6 +104,7 @@ async function getGeo({ placename }) {
     locationForm.setAttribute("disabled", "disabled");
   });
 
+  choicesMount.innerHTML = "";
   choicesMount.append(select);
 
   const lbl = document.createElement("label");
@@ -113,7 +114,7 @@ async function getGeo({ placename }) {
 
   const elems = document.querySelectorAll("select");
   const options = {};
-  const instances = M.FormSelect.init(elems, options);
+  M.FormSelect.init(elems, options);
 }
 
 /****************** SECOND FORM *************************/
