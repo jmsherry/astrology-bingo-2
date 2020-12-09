@@ -59,7 +59,7 @@ td:hover {
   background-color: rgb(206, 210, 134);
 }
 
-.called {
+td.called {
   background-color: rgb(134, 210, 134);
   text-align: center;
   font-size: 1.5rem;
@@ -67,25 +67,29 @@ td:hover {
   font-weight: bold;
 }
 
-.called .phrase,
-.called .call-position {
+td.called .phrase,
+td.called .call-position {
   display: none;
 }
 
-.called .title {
+td.called .title {
   font-size: 1rem;
   margin: 0;
 }
 
+td.hover {
+  background-color: #eee;
+}
 
-.lastCalled,
-.lastCalled:hover,
-.lastCalled:focus {
+
+td.lastCalled,
+td.lastCalled:hover,
+td.lastCalled:focus {
   /* transform: scale(2); */
   background-color: rgb(244, 124, 33);
 }
 
-.lastCalled.open {
+/* td.lastCalled.open {
   position: fixed;
   top: 20vh;
   left: 20vw;
@@ -96,16 +100,16 @@ td:hover {
     justify-content: center;
 }
 
-.lastCalled.open .phrase,
-.lastCalled.open .call-position {
+td.lastCalled.open .phrase,
+td.lastCalled.open .call-position {
   display: block;
   font-size: 3rem;
   margin: 0;
 }
 
-.lastCalled.open .title {
+td.lastCalled.open .title {
   font-size: 3rem;
-}
+} */
 
 /* .lastCalled.open .phrase {
   font-size: 3rem;

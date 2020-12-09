@@ -31,6 +31,7 @@ class BingoDisplayGrid {
     };
     const defaults = {
       showPickedTime: 5000,
+      modalOpacity: 0.8,
     };
     this.options = { ...defaults, ...options };
     this.modal = null;
@@ -77,7 +78,9 @@ class BingoDisplayGrid {
             `;
       document.body.append(modalElem);
     }
-    const modalOptions = {};
+    const modalOptions = {
+      opacity: this.options.modalOpacity,
+    };
     console.log("sdfsdfsdfsd", M.Modal.init(modalElem, modalOptions));
     this.modal = M.Modal.init(modalElem, modalOptions);
   }
@@ -127,7 +130,6 @@ class BingoDisplayGrid {
     const thead = document.createElement("thead");
     const tr = document.createElement("tr");
     const td = document.createElement("td");
-    td.id = "blank-cell";
 
     tr.append(td);
 
@@ -142,6 +144,7 @@ class BingoDisplayGrid {
     }
 
     tr.append(td.cloneNode());
+    
 
     thead.append(tr);
     table.append(thead);
@@ -171,6 +174,9 @@ class BingoDisplayGrid {
     const tfoot = document.createElement("tfoot");
     tfoot.append(tr.cloneNode(true));
     table.append(tfoot);
+
+    // Put this here after the cloning.
+    td.id = "blank-cell";
 
     if (settings.features.controls && !td.querySelector("#call")) {
       // Put the call button in
@@ -219,10 +225,12 @@ class BingoDisplayGrid {
       for (const el of oldEls) {
         el.classList.remove(hoverClass);
       }
-      if (e.target?.matches("td:not(#blank-cell)")) {
+      console.log('target', e?.target?.closest( "td:not(#blank-cell)"))
+      const target = e?.target?.closest( "td:not(#blank-cell)")
+      if (target) {
         const {
           dataset: { planet, sign },
-        } = e.target;
+        } = target;
         // console.log("p", planet, "s", sign);
 
         const planetCells = document.querySelectorAll(`.${planet}`);
