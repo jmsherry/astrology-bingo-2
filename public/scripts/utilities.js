@@ -74,6 +74,9 @@ export function connectToWebSocket(
   },
   errorHandler = function errorHandler(err) {
     console.log(err);
+  },
+  closeHandler = function closeHandler() {
+    console.log('Socket closed', arguments);
   }
 ) {
   // Create WebSocket connection.
@@ -87,6 +90,9 @@ export function connectToWebSocket(
 
   // Listen for errors
   socket.addEventListener("error", errorHandler);
+
+  // Listen for close
+  socket.addEventListener('close', closeHandler);
 
   return socket;
 }
