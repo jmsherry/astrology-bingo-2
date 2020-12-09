@@ -6,6 +6,11 @@ import {
   getRandomIntInclusive,
 } from "./utilities.js";
 
+/****************************************************************
+ * The controller for a game
+ * Hold the players, potential call list and alreadyCalled items
+ ****************************************************************/
+
 class AstrologyBingoGameController extends BirthChartList {
   static storageLabels = {
     potentialPicks: "potentials",

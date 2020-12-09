@@ -1,6 +1,11 @@
 import { uuidv4 } from './utilities.js';
 import BirthChart from './BirthChart.js'
 
+/****************************************************************
+ * Constructor for a player
+ * Name, birthchart & id
+ ****************************************************************/
+
 class Player {
   constructor({ name, birthchart, _id=uuidv4() }) {
     this._id = _id;

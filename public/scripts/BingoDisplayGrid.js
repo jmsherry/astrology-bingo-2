@@ -2,6 +2,11 @@ import BirthChart from "./BirthChart.js";
 import AstrologyBingoGameController from "./AstrologyBingoGameController.js";
 import { isElement } from "./utilities.js";
 
+/****************************************************************************
+ * A component that constructs the visual grid (both public and admin views)
+ * Basic (grid with items); Admin (lineguides and call button)
+ ***************************************************************************/
+
 class BingoDisplayGrid {
   constructor({
     game,

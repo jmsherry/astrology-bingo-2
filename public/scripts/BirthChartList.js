@@ -1,6 +1,11 @@
 import BirthChart from "./BirthChart.js";
 import { isElement } from "./utilities.js";
 
+/****************************************************************
+ * Holds a list of Birthcharts
+ * Responsible for CRUD ops and persistence
+ ****************************************************************/
+
 class BirthChartList {
   list = [];
   // / CONSTRUCTOR WHEN BIRTHCHARTDATA IS AN ARRAY

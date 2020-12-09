@@ -1,6 +1,10 @@
 import AstrologyBingoGameController from "./AstrologyBingoGameController.js";
 import BingoDisplayGrid from "./BingoDisplayGrid.js";
 
+/****************************************************************
+ * The DOM script for the public grid page
+ ****************************************************************/
+
 const grid = new BingoDisplayGrid({
   game: new AstrologyBingoGameController(),
   domNodes: {

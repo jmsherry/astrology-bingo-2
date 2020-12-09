@@ -2,10 +2,14 @@ import { makeCall } from "./utilities.js";
 import { GEO_API_KEY, TIME_API_KEY } from "./config.js";
 import BirthChart from "./BirthChart.js";
 import BirthChartList from "./BirthChartList.js";
+import Player from './Player.js';
 
 const birthChartList = new BirthChartList();
 
-// Utility
+/****************************************************************
+ * The DOM script for the form page
+ * Creates the player from form data and displays their chart
+ ****************************************************************/
 
 // UI elements
 const timeInput = document.getElementById("tob");

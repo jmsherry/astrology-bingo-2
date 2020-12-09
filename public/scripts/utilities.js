@@ -1,3 +1,7 @@
+/****************************************************************
+ * Holds utility functions
+ ****************************************************************/
+
 export function uuidv4() {
   return "xxxxx".replace(/[xy]/g, function (c) {
     var r = (Math.random() * 16) | 0,

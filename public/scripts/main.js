@@ -2,6 +2,10 @@ import BirthChart from "./BirthChart.js";
 // import BirthChartList from "./BirthChartList.js";
 import AstrologyBingoGameController from "./AstrologyBingoGameController.js";
 
+/****************************************************************
+ * The DOM script for the player list
+ ****************************************************************/
+
 const { planets } = BirthChart;
 
 // Components
