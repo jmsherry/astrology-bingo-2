@@ -134,6 +134,14 @@ personalDataForm.addEventListener("submit", (e) => {
   personalDataForm.setAttribute("disabled", "disabled");
 });
 
+function reloadForms(){
+  const {forms} = document;
+  for (const form of forms) {
+    form.setAttribute("disabled", "")
+  }
+  M.updateTextFields();
+}
+
 function renderChart(player, mount = chartMountNode) {
   if(!(player instanceof Player)) {
     throw new Error(`player supplied to renderChart must be an instance of Player; instead received ${player} (type: ${typeof player} of class ${player?.__proto__?.constructor})`); 
@@ -144,6 +152,8 @@ function renderChart(player, mount = chartMountNode) {
       behavior: "smooth",
     });
   }, 250);
+  reloadForms();
+  document.forms[0].elements[0].focus();
 }
 
 function createBirthChartURL({
