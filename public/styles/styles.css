@@ -73,6 +73,11 @@ body {
   padding: 10px;
 }
 
+.modal {
+  max-height: 85%;
+  width: 75%;
+}
+
 .cip-controls .delete-chart {
   margin-inline-end: 15px;
 }

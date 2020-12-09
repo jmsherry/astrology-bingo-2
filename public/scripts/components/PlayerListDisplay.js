@@ -14,7 +14,7 @@ class PlayerListDisplay {
       throw new Error(
         `PlayerList needs a an AstrologyBingoGameController; instead received: ${game} (type: ${typeof game}, class: ${
           game?.__proto__?.constructor
-        })`
+        })`,
       );
     }
     this.game = game;
@@ -23,7 +23,7 @@ class PlayerListDisplay {
       throw new Error(
         `PlayerList needs an element to mount into; instead received: ${mountNode} (type: ${typeof mountNode}, class: ${
           mountNode?.__proto__?.constructor
-        })`
+        })`,
       );
     }
     this.mountNode = mountNode;
@@ -93,7 +93,7 @@ class PlayerListDisplay {
           const { icon: path } = player[planet];
           const icon = document.createElementNS(
             "http://www.w3.org/2000/svg",
-            "svg"
+            "svg",
           );
           icon.setAttribute("viewBox", "0 0 250 250");
           icon.setAttribute("width", "50");
@@ -118,7 +118,7 @@ class PlayerListDisplay {
           "waves-light",
           "btn",
           "red",
-          "delete-chart"
+          "delete-chart",
         );
         delbtn.addEventListener("click", (e) => {
           this.game.removePlayer(player);
@@ -133,7 +133,7 @@ class PlayerListDisplay {
           "waves-effect",
           "waves-light",
           "btn",
-          "view-chart"
+          "view-chart",
         );
         viewChartBtn.addEventListener("click", (e) => {
           console.log("player", player);
@@ -141,7 +141,7 @@ class PlayerListDisplay {
           contentDiv.innerHTML = "";
           const heading = document.createElement("h2");
           heading.classList.add("chart-heading");
-          heading.textContent = `${player.ownerName}'s BirthChart`;
+          heading.textContent = `${player.ownerName}`;
           contentDiv.append(heading);
           contentDiv.append(player.generateChartImage());
           this.modal.open();

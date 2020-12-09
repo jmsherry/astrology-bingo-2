@@ -1,5 +1,5 @@
 import BirthChart from "./BirthChart.js";
-import Player from './Player.js';
+import Player from "./Player.js";
 import {
   connectToWebSocket,
   deepFreeze,
@@ -19,17 +19,16 @@ class AstrologyBingoGameController {
     players: "players",
   };
   constructor() {
-
     this._id = uuidv4();
 
     const potentialsData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.potentialPicks
+      AstrologyBingoGameController.storageLabels.potentialPicks,
     );
     const calledData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.alreadyCalled
+      AstrologyBingoGameController.storageLabels.alreadyCalled,
     );
     const playerData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.players
+      AstrologyBingoGameController.storageLabels.players,
     );
     const potentials = JSON.parse(potentialsData);
     const called = JSON.parse(calledData);
@@ -40,7 +39,7 @@ class AstrologyBingoGameController {
     } else {
       if (potentials != null && !Array.isArray(potentials)) {
         console.warn(
-          `Corrupted data. 'potentials' should be an array, instead got ${potentials}`
+          `Corrupted data. 'potentials' should be an array, instead got ${potentials}`,
         );
       }
       this.potentialCallList = [];
@@ -56,18 +55,20 @@ class AstrologyBingoGameController {
     } else {
       if (called != null && !Array.isArray(called)) {
         console.warn(
-          `Corrupted data. 'called' should be an array, instead got ${called}`
+          `Corrupted data. 'called' should be an array, instead got ${called}`,
         );
       }
       this.alreadyCalled = [];
     }
 
     if (players != null && Array.isArray(players)) {
-      this.players = players.map((player) => new Player({ chartData: player, _id: player._id}));
+      this.players = players.map(
+        (player) => new Player({ chartData: player, _id: player._id }),
+      );
     } else {
       if (players != null && !Array.isArray(players)) {
         console.warn(
-          `Corrupted data. 'players' should be an array, instead got ${players}`
+          `Corrupted data. 'players' should be an array, instead got ${players}`,
         );
       }
       this.players = [];
@@ -84,72 +85,74 @@ class AstrologyBingoGameController {
         switch (evt.type) {
           case "reset":
             this.reset();
-            this.socket.send(JSON.stringify({ type: 'updated-state', appId: this._id}))
+            this.socket.send(
+              JSON.stringify({ type: "updated-state", appId: this._id }),
+            );
             break;
           case "picked":
             console.log("call from game");
-            if (
-              evt.controllerId !== this._id
-            ) {
+            if (evt.controllerId !== this._id) {
               this.pullState();
             }
-            this.socket.send(JSON.stringify({ type: 'updated-state', appId: this._id}))
+            this.socket.send(
+              JSON.stringify({ type: "updated-state", appId: this._id }),
+            );
             break;
           default:
             console.log(`received a ${evt.type}`);
         }
       },
-      undefined
+      undefined,
     );
 
     // save
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.potentialPicks,
-      JSON.stringify(this.potentialCallList)
+      JSON.stringify(this.potentialCallList),
     );
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.alreadyCalled,
-      JSON.stringify(this.alreadyCalled)
+      JSON.stringify(this.alreadyCalled),
     );
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.players,
-      JSON.stringify(this.players)
+      JSON.stringify(this.players),
     );
   }
 
   addPlayer(data) {
     let p = data;
-    if(!(data instanceof Player)) {
+    if (!(data instanceof Player)) {
       p = new Player(data);
     }
     this.players.push(p);
     this.savePlayers();
-    this.socket.send(JSON.stringify({type: 'playerAdded'}));
+    this.socket.send(JSON.stringify({ type: "playerAdded" }));
   }
 
   removePlayer(player) {
-    if(!(player instanceof Player)) {
+    if (!(player instanceof Player)) {
       throw new Error(
         `AstrologyBingoGameController.removePlayer needs a Player object; instead received: ${player} (type: ${typeof player}, class: ${
           player?.__proto__?.constructor
-        })`
+        })`,
       );
     }
-    const idx = this.players.findIndex(({_id}) => _id === player._id);
+    const idx = this.players.findIndex(({ _id }) => _id === player._id);
     this.players.splice(idx, 1);
     this.savePlayers();
-    this.socket.send(JSON.stringify({type: 'playerRemoved'}));
+    this.socket.send(JSON.stringify({ type: "playerRemoved" }));
   }
 
   pullState() {
     const potentialsData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.potentialPicks
+      AstrologyBingoGameController.storageLabels.potentialPicks,
     );
     const calledData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.alreadyCalled
+      AstrologyBingoGameController.storageLabels.alreadyCalled,
     );
     const playerData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.players
+      AstrologyBingoGameController.storageLabels.players,
     );
     const potentials = JSON.parse(potentialsData);
     const called = JSON.parse(calledData);
@@ -160,7 +163,7 @@ class AstrologyBingoGameController {
     } else {
       if (potentials != null && !Array.isArray(potentials)) {
         console.warn(
-          `Corrupted data. 'potentials' should be an array, instead got ${potentials}`
+          `Corrupted data. 'potentials' should be an array, instead got ${potentials}`,
         );
       }
     }
@@ -170,7 +173,7 @@ class AstrologyBingoGameController {
     } else {
       if (called != null && !Array.isArray(called)) {
         console.warn(
-          `Corrupted data. 'called' should be an array, instead got ${called}`
+          `Corrupted data. 'called' should be an array, instead got ${called}`,
         );
       }
     }
@@ -180,7 +183,7 @@ class AstrologyBingoGameController {
     } else {
       if (players != null && !Array.isArray(players)) {
         console.warn(
-          `Corrupted data. 'players' should be an array, instead got ${players}`
+          `Corrupted data. 'players' should be an array, instead got ${players}`,
         );
       }
     }
@@ -216,7 +219,7 @@ class AstrologyBingoGameController {
 
     // Find the object
     const pickedItemIndex = this.potentialCallList.findIndex(
-      ({ sign, planet }) => sign === signPicked && planet === planetPicked
+      ({ sign, planet }) => sign === signPicked && planet === planetPicked,
     );
 
     // move from 'potentialCallList' to 'alreadyCalled'
@@ -227,7 +230,13 @@ class AstrologyBingoGameController {
     this.saveItems();
 
     // Send to other page
-    this.socket.send(JSON.stringify({ type: "picked", item: pickedItem, controllerId: this._id }));
+    this.socket.send(
+      JSON.stringify({
+        type: "picked",
+        item: pickedItem,
+        controllerId: this._id,
+      }),
+    );
 
     // cb(this);
   }
@@ -235,13 +244,13 @@ class AstrologyBingoGameController {
   static getCatchPhrase(planet, sign) {
     if (typeof planet !== "string") {
       throw new Error(
-        `Planet supplied to getCatchPhrase must be a string. Received ${planet} (type: ${planet})`
+        `Planet supplied to getCatchPhrase must be a string. Received ${planet} (type: ${planet})`,
       );
     }
 
     if (typeof sign !== "string") {
       throw new Error(
-        `Sign supplied to getCatchPhrase must be a string. Received ${sign} (type: ${sign})`
+        `Sign supplied to getCatchPhrase must be a string. Received ${sign} (type: ${sign})`,
       );
     }
 
@@ -250,38 +259,38 @@ class AstrologyBingoGameController {
     if (!planets.includes(planet)) {
       throw new Error(
         `Planet supplied to getCatchPhrase must be a recognised planet (One of ${planets.join(
-          ", "
-        )}). Received ${planet}`
+          ", ",
+        )}). Received ${planet}`,
       );
     }
 
     if (!signs.includes(sign)) {
       throw new Error(
         `Planet supplied to getCatchPhrase must be a recognised sign (One of ${signs.join(
-          ", "
-        )}). Received ${sign}`
+          ", ",
+        )}). Received ${sign}`,
       );
     }
 
     return this.catchPhraseDict[planet][sign];
   }
 
-  saveItems(){
-        // Save in case you change page
-        localStorage.setItem(
-          AstrologyBingoGameController.storageLabels.potentialPicks,
-          JSON.stringify(this.potentialCallList)
-        );
-        localStorage.setItem(
-          AstrologyBingoGameController.storageLabels.alreadyCalled,
-          JSON.stringify(this.alreadyCalled)
-        );
+  saveItems() {
+    // Save in case you change page
+    localStorage.setItem(
+      AstrologyBingoGameController.storageLabels.potentialPicks,
+      JSON.stringify(this.potentialCallList),
+    );
+    localStorage.setItem(
+      AstrologyBingoGameController.storageLabels.alreadyCalled,
+      JSON.stringify(this.alreadyCalled),
+    );
   }
 
-  savePlayers(){
+  savePlayers() {
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.players,
-      JSON.stringify(this.players)
+      JSON.stringify(this.players),
     );
   }
 
@@ -465,7 +474,7 @@ class AstrologyBingoGameController {
       Aries: "Married at first sight, Aries Descendant",
       Taurus: "You’re my lobster, Taurus Descendant",
       Gemini: "Easy Breezy Beautiful Cover Girls Gemini Descendant",
-      Cancer: "<TODO></TODO>",
+      Cancer: "Total independence",
       Leo: "Live, Laugh, Love, Leo Descendant",
       Virgo: "Split the bill, Virgo Descendant",
       Libra: "There’s no I in team, but there is an I in Libra Descendant",

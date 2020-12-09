@@ -144,7 +144,6 @@ class BingoDisplayGrid {
     }
 
     tr.append(td.cloneNode());
-    
 
     thead.append(tr);
     table.append(thead);
@@ -194,7 +193,8 @@ class BingoDisplayGrid {
       if (!this.game.potentialCallList.length) {
         callButton.setAttribute("disabled", "disabled");
       }
-      td.append(callButton);
+      // td.append(callButton);
+      this.controls.append(callButton);
     }
 
     this.gridArea.innerHTML = "";
@@ -212,11 +212,11 @@ class BingoDisplayGrid {
 
   setUpHoverGuides(
     grid = this.gridArea,
-    hoverClass = this.classes.hoveringClass
+    hoverClass = this.classes.hoveringClass,
   ) {
     if (!isElement(grid)) {
       throw new Error(
-        `You must provide a DOM node to insert the grid in. Received ${grid}`
+        `You must provide a DOM node to insert the grid in. Received ${grid}`,
       );
     }
 
@@ -225,8 +225,8 @@ class BingoDisplayGrid {
       for (const el of oldEls) {
         el.classList.remove(hoverClass);
       }
-      console.log('target', e?.target?.closest( "td:not(#blank-cell)"))
-      const target = e?.target?.closest( "td:not(#blank-cell)")
+      console.log("target", e?.target?.closest("td:not(#blank-cell)"));
+      const target = e?.target?.closest("td:not(#blank-cell)");
       if (target) {
         const {
           dataset: { planet, sign },
