@@ -1,10 +1,13 @@
 import { makeCall } from "./utilities.js";
 import { GEO_API_KEY, TIME_API_KEY } from "./config.js";
 import BirthChart from "./BirthChart.js";
-import BirthChartList from "./BirthChartList.js";
+// import BirthChartList from "./BirthChartList.js";
+import BingoGameController from './AstrologyBingoGameController.js';
 import Player from './Player.js';
 
-const birthChartList = new BirthChartList();
+// const birthChartList = new BirthChartList();
+
+const bingoGameController = new BingoGameController();
 
 /****************************************************************
  * The DOM script for the form page
@@ -14,11 +17,9 @@ const birthChartList = new BirthChartList();
 // UI elements
 const timeInput = document.getElementById("tob");
 const dateInput = document.getElementById("dob");
-const loc1Input = document.getElementById("location1");
-const loc2Input = document.getElementById("location2");
 const geoMountLat = document.getElementById("location1");
 const geoMountLong = document.getElementById("location2");
-const timeMount = document.getElementById("utcoffset");
+const utcOffsetInput = document.getElementById("utcoffset");
 
 const datePickerElems = document.querySelectorAll(".datepicker");
 const timePickerElems = document.querySelectorAll(".timepicker");
@@ -97,8 +98,8 @@ utcButton.addEventListener("click", function (e) {
 
   const inputtedDate = dateInput.value;
   console.log("inputtedDate", inputtedDate);
-  const inputtedloc1 = loc1Input.value;
-  const inputtedloc2 = loc2Input.value;
+  const inputtedloc1 = geoMountLat.value;
+  const inputtedloc2 = geoMountLong.value;
 
   const year = inputtedDate.slice(0, 4);
   console.log("year", year);
@@ -133,12 +134,11 @@ personalDataForm.addEventListener("submit", (e) => {
   personalDataForm.setAttribute("disabled", "disabled");
 });
 
-function renderChart(chart, mount = chartMountNode) {
-  if (!chart) {
-    mount.innerHTML = "<p>No chart</p>"; // can't see how that would happen
-  } else {
-    BirthChart.renderChart(chart, mount); // NEED TO ADD PLAYER TO GAME, not statically generate
+function renderChart(player, mount = chartMountNode) {
+  if(!(player instanceof Player)) {
+    throw new Error(`player supplied to renderChart must be an instance of Player; instead received ${player} (type: ${typeof player} of class ${player?.__proto__?.constructor})`); 
   }
+  player.renderChart({ mountNode: mount });
   setTimeout(() => {
     mount.scrollIntoView({
       behavior: "smooth",
@@ -194,8 +194,9 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     chartData.ownerName = `${firstname} ${lastname}`;
 
     console.log("chartData", chartData);
-    const newBC = birthChartList.addBirthChart(chartData);
-    renderFn(newBC);
+    const player = new Player({chartData});
+
+    renderFn(player);
   } catch (err) {
     console.log(err);
   }
@@ -207,16 +208,16 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
 //   return TIME_API_URL;
 // }
 
-function renderUTC(report, mount = timeMount) {
+function renderUTC(report, mount = utcOffsetInput) {
   if (!report) {
-    timeMount.innerHTML = "No UTC report";
+    utcOffsetInput.innerHTML = "No UTC report";
     return;
   }
   const offset = (report.rawOffset += report.dstOffset);
   console.log("offset", offset);
   const offsetUTC = Math.floor(offset / 60 / 60);
   console.log("offsetUTC", offsetUTC);
-  timeMount.value = offsetUTC;
+  utcOffsetInput.value = offsetUTC;
 }
 
 async function getUTC(currentURL, handler = renderUTC) {

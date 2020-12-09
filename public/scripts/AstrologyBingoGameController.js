@@ -11,14 +11,13 @@ import {
  * Hold the players, potential call list and alreadyCalled items
  ****************************************************************/
 
-class AstrologyBingoGameController extends BirthChartList {
+class AstrologyBingoGameController {
   static storageLabels = {
     potentialPicks: "potentials",
     alreadyCalled: "called",
     players: "players",
   };
-  constructor(...args) {
-    super(args);
+  constructor() {
 
     const potentialsData = localStorage.getItem(
       AstrologyBingoGameController.storageLabels.potentialPicks

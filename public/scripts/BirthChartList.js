@@ -34,7 +34,9 @@ class BirthChartList {
   }
 
   addBirthChart(data) {
-    if (!data) throw new Error("No data provided to addBirthChart method");
+    if (data == null) {
+      throw new Error(`No data provided to addBirthChart method. Instead received `);
+    }
     let newBirthChart = data;
     if (!(newBirthChart instanceof BirthChart)) {
       newBirthChart = new BirthChart(data);

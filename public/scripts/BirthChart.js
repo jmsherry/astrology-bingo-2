@@ -330,11 +330,11 @@ class BirthChart {
       mountNode.innerHTML = "";
     }
 
-    if (recreate || this.img == null) {
+    if (recreate || this.image == null) {
       this.generateChartImg();
     }
 
-    mountNode.append(this.img);
+    mountNode.append(this.image);
 
     const defaults = {
       showControls: true,
@@ -350,7 +350,7 @@ class BirthChart {
 
       const heading = document.createElement("h2");
       heading.classList.add("chart-heading");
-      heading.textContent = `${this.name}'s BirthChart`;
+      heading.textContent = `${this.ownerName}'s BirthChart`;
       controls.append(heading);
 
       const printButton = document.createElement("button");
@@ -398,20 +398,20 @@ class BirthChart {
     }
 
     if (showBirthday) {
-      const birthday = document.createElement("ul");
-      birthday.classList.add("birthday");
-      const date = document.createElement("li");
-      date.textContent = `Birthday: ${chart.birthday}`;
-      const time = document.createElement("li");
-      time.textContent = `Time: ${chart.time}`;
-      const location = document.createElement("li");
-      location.textContent = `Lat: ${chart.latitude.toFixed(
+      const birthdayDisplay = document.createElement("ul");
+      birthdayDisplay.classList.add("birthday");
+      const dateDisplay = document.createElement("li");
+      dateDisplay.textContent = `Birthday: ${this.birthday}`;
+      const timeDisplay = document.createElement("li");
+      timeDisplay.textContent = `Time: ${this.time.slice(0,2)}:${this.time.slice(2)}`;
+      const locationDisplay = document.createElement("li");
+      locationDisplay.textContent = `Lat: ${this.latitude.toFixed(
         2
-      )}, Long: ${chart.longitude.toFixed(2)}`;
-      console.log(date, time);
-      birthday.append(date, time, location);
-      // heading.append(birthday);
-      mountNode.append(birthday);
+      )}, Long: ${this.longitude.toFixed(2)}`;
+      console.log(dateDisplay, timeDisplay);
+      birthdayDisplay.append(dateDisplay, timeDisplay, locationDisplay);
+      // heading.append(birthdayDisplay);
+      mountNode.append(birthdayDisplay);
     }
   }
 
@@ -452,15 +452,15 @@ class BirthChart {
         "sign",
         "word",
         "chart",
-        `${sign.toLowerCase()}`
+        `${sign.sign.toLowerCase()}`
       );
       currentWord.innerHTML = sign.word;
       currentWord.location = sign.wordLocation;
       const toRotate = currentWord.firstChild;
-      toRotate.classList.add("inner-word", `${sign.toLowerCase()}`);
+      toRotate.classList.add("inner-word", `${sign.sign.toLowerCase()}`);
       const degrees = sign.wordRotation;
       const anchor = sign.textAnchor;
-      toRotate.setAttribute("transform", `${degrees}`);
+      // toRotate.setAttribute("transform", `${degrees}`); // no rotataion
       toRotate.setAttribute("text-anchor", `${anchor}`);
       gsap.to(
         currentSymbol,
