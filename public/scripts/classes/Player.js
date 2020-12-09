@@ -10,8 +10,10 @@ const { planets } = BirthChart;
 
 class Player extends BirthChart {
   constructor({chartData, _id=uuidv4() }) {
+
     super(chartData)
     this._id = _id;
+    this.created = Date.now();
 
     const { ownerName:name } = chartData;
 

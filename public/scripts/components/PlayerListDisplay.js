@@ -27,10 +27,11 @@ class PlayerListDisplay {
       );
     }
     this.mountNode = mountNode;
+    this.modal = null;
   }
 
-  render({ mountNode=null, renderFn, options = {} }={}) {
-    if(!mountNode) {
+  render({ mountNode = null, renderFn, options = {} } = {}) {
+    if (!mountNode) {
       mountNode = this.mountNode;
     }
     if (renderFn && typeof renderFn === "function") {
@@ -45,10 +46,23 @@ class PlayerListDisplay {
     const { modals: showModals } = { ...defaults, ...options };
 
     if (showModals) {
-      //       const modalElem = document.querySelector(".modal");
-      // const modalContentArea = modalElem.querySelector(".modal-content");
-      // const options = {};
-      // const modalInstance = M.Modal.init(modalElem, options);
+      const modalElem = document.createElement("div");
+      modalElem.classList.add("modal");
+      modalElem.id = "chart-modal";
+
+      modalElem.innerHTML = `
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+      <div class="modal-content">
+
+      </div>
+
+      `;
+      document.body.append(modalElem);
+      const options = {};
+      // console.log('sdfsdfsdfsd', M.Modal.init(modalElem, options));
+      this.modal = M.Modal.init(modalElem, options);
     }
 
     const {
@@ -59,7 +73,7 @@ class PlayerListDisplay {
       mountNode.innerHTML = "<p>No players yet...</p>";
     } else {
       const list = document.createElement("ol");
-      list.classList.add('list-group');
+      list.classList.add("list-group");
       for (const player of players) {
         console.log(player);
         const { name, value = 7, img, _id: id } = player;
@@ -69,7 +83,6 @@ class PlayerListDisplay {
         title.textContent = name;
         title.classList.add("owner");
         li.append(title);
-
 
         // Icons display
         const iconsDisplay = document.createElement("ul");
@@ -108,7 +121,8 @@ class PlayerListDisplay {
           "delete-chart"
         );
         delbtn.addEventListener("click", (e) => {
-          // implement delete/hide
+          this.game.removePlayer(player);
+          this.render();
         });
         controls.append(delbtn);
 
@@ -123,15 +137,21 @@ class PlayerListDisplay {
         );
         viewChartBtn.addEventListener("click", (e) => {
           console.log("player", player);
-          // modalContentArea.innerHTML = player.img;
-          // modalInstance.open();
+          const contentDiv = this.modal.el.querySelector(".modal-content");
+          contentDiv.innerHTML = "";
+          const heading = document.createElement("h2");
+          heading.classList.add("chart-heading");
+          heading.textContent = `${player.ownerName}'s BirthChart`;
+          contentDiv.append(heading);
+          contentDiv.append(player.generateChartImage());
+          this.modal.open();
         });
         controls.append(viewChartBtn);
 
         li.append(controls);
         list.append(li);
       }
-      mountNode.innerHTML = '';
+      mountNode.innerHTML = "";
       mountNode.append(list);
     }
   }

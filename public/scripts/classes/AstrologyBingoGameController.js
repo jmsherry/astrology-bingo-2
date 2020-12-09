@@ -60,7 +60,7 @@ class AstrologyBingoGameController {
     }
 
     if (players != null && Array.isArray(players)) {
-      this.players = players;
+      this.players = players.map((player) => new Player({ chartData: player, _id: player._id}));
     } else {
       if (players != null && !Array.isArray(players)) {
         console.warn(
@@ -121,6 +121,21 @@ class AstrologyBingoGameController {
     }
     this.players.push(p);
     this.savePlayers();
+    this.socket.send(JSON.stringify({type: 'playerAdded'}));
+  }
+
+  removePlayer(player) {
+    if(!(player instanceof Player)) {
+      throw new Error(
+        `AstrologyBingoGameController.removePlayer needs a Player object; instead received: ${player} (type: ${typeof player}, class: ${
+          player?.__proto__?.constructor
+        })`
+      );
+    }
+    const idx = this.players.findIndex(({_id}) => _id === player._id);
+    this.players.splice(idx, 1);
+    this.savePlayers();
+    this.socket.send(JSON.stringify({type: 'playerRemoved'}));
   }
 
   pullState() {
