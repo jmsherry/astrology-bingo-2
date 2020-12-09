@@ -43,6 +43,8 @@ button {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  max-width: 150px;
+  margin: auto;
 }
 
 .icons-list .icon-item {
@@ -164,12 +166,14 @@ path {
 } */
 
 .called.icon-item {
-  background-color: rgb(244, 54, 238) !important;
+  background-color: rgb(215, 38, 165) !important;
 }
 
 .called .sign.icon path {
   fill: #fcfcfc;
 }
+
+/* WORD ROTATION */
 
 .inner-word.sun {
   transform: rotate(-69deg);
@@ -237,4 +241,66 @@ g.transparent > path {
 g.transparent > line {
   fill: none !important;
   stroke: transparent !important;
+}
+
+/* ICONS IN SHOW CHART  */
+
+.icon-item.icon-sun {
+  order: 1;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-mercury {
+  order: 2;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-venus {
+  order: 3;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-mars {
+  order: 4;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-jupiter {
+  order: 5;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-saturn {
+  order: 6;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-uranus {
+  order: 7;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-neptune {
+  order: 8;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-pluto {
+  order: 9;
+  background-color: rgb(245, 228, 202);
+}
+
+.icon-item.icon-ascendant {
+  order: 10;
+  background-color: rgb(245, 228, 202);
+}
+
+.icon-item.icon-descendant {
+  order: 11;
+  background-color: rgb(245, 228, 202);
+}
+
+.icon-item.icon-moon {
+  order: 12;
+  background-color: rgb(245, 228, 202);
 }

@@ -146,7 +146,10 @@ class PlayerListDisplay {
         iconsDisplay.classList.add("icons-list");
         for (const planet of planets) {
           const iconListItem = document.createElement("li");
-          iconListItem.classList.add("icon-item");
+          iconListItem.classList.add(
+            "icon-item",
+            `icon-${planet.toLowerCase()}`,
+          );
           const { icon: path, called } = player[planet];
           const icon = document.createElementNS(
             "http://www.w3.org/2000/svg",

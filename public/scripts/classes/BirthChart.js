@@ -14,8 +14,6 @@ class BirthChart {
     longitude,
     ownerName,
     Sun,
-    Moon,
-    Ascendant,
     Mercury,
     Venus,
     Mars,
@@ -24,7 +22,9 @@ class BirthChart {
     Uranus,
     Neptune,
     Pluto,
+    Ascendant,
     Descendant,
+    Moon,
     _id = uuidv4(),
     image = null,
   }) {
@@ -53,34 +53,6 @@ class BirthChart {
             called: false,
           }
         : Sun;
-
-    this.Moon =
-      typeof Moon === "string"
-        ? {
-            sign: Moon,
-            icon: BirthChart.getIconSVG(Moon),
-            location: { x: 430, y: -190 },
-            word: BirthChart.getSignWordSVG(Moon),
-            wordLocation: { x: 315, y: -250 },
-            viewBox: "-100 60 600 600",
-            textAnchor: "start",
-            called: false,
-          }
-        : Moon;
-
-    this.Ascendant =
-      typeof Ascendant === "string"
-        ? {
-            sign: Ascendant,
-            icon: BirthChart.getIconSVG(Ascendant),
-            location: { x: 300, y: -65 },
-            word: BirthChart.getSignWordSVG(Ascendant),
-            wordLocation: { x: 90, y: 40 },
-            viewBox: "-50 60 600 600",
-            textAnchor: "start",
-            called: false,
-          }
-        : Ascendant;
 
     this.Mercury =
       typeof Mercury === "string"
@@ -191,6 +163,20 @@ class BirthChart {
           }
         : Pluto;
 
+    this.Ascendant =
+      typeof Ascendant === "string"
+        ? {
+            sign: Ascendant,
+            icon: BirthChart.getIconSVG(Ascendant),
+            location: { x: 300, y: -65 },
+            word: BirthChart.getSignWordSVG(Ascendant),
+            wordLocation: { x: 90, y: 40 },
+            viewBox: "-50 60 600 600",
+            textAnchor: "start",
+            called: false,
+          }
+        : Ascendant;
+
     this.Descendant =
       typeof Descendant === "string"
         ? {
@@ -203,6 +189,20 @@ class BirthChart {
             called: false,
           }
         : Descendant;
+
+    this.Moon =
+      typeof Moon === "string"
+        ? {
+            sign: Moon,
+            icon: BirthChart.getIconSVG(Moon),
+            location: { x: 430, y: -190 },
+            word: BirthChart.getSignWordSVG(Moon),
+            wordLocation: { x: 315, y: -250 },
+            viewBox: "-100 60 600 600",
+            textAnchor: "start",
+            called: false,
+          }
+        : Moon;
 
     this._id = _id;
   }
