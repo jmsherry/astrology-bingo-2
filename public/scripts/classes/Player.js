@@ -27,18 +27,21 @@ class Player extends BirthChart {
     }
 
     this.name = name;
-
-    if (chartData instanceof BirthChart) {
-      this.chart = chartData;
-    } else {
-      this.chart = new BirthChart(chartData);
-    }
-
     this.score = 0;
     this.complete = false;
   }
 
-  markCalled(callItem) {}
+  markCalled(callItem) {
+    super.unMarkCalled(callItem);
+    for (const planet of planets) {
+      if(this[planet].called) {
+        this.score += 1;
+      }
+    }
+    if (this.score === 12) {
+      this.complete = true;
+    }
+  }
 
   // args: {planet, sign}
   unMarkCalled() {
