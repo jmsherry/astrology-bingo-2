@@ -139,8 +139,8 @@ utcButton.addEventListener("click", function (e) {
 
   const inputtedDate = dateInput.value;
   // console.log("inputtedDate", inputtedDate);
-  const inputtedloc1 = geoMountLat.value;
-  const inputtedloc2 = geoMountLong.value;
+  const latitude = geoMountLat.value;
+  const longitude = geoMountLong.value;
 
   const year = inputtedDate.slice(0, 4);
   // console.log("year", year);
@@ -157,7 +157,7 @@ utcButton.addEventListener("click", function (e) {
   const timestamp = Date.parse(dateTime) / 1000;
   // console.log("timestamp", timestamp);
 
-  const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${inputtedloc1},${inputtedloc2}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
+  const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${latitude},${longitude}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
   // console.log("fetchURLUTC", fetchURLUTC);
   getUTC(fetchURLUTC, renderUTC);
 });
