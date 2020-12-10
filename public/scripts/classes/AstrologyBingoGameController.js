@@ -99,7 +99,7 @@ class AstrologyBingoGameController {
           case "picked":
             if (evt.controllerId !== this._id) {
               console.log("from another controller; updating", this._id);
-              this.updateData();
+              this.refreshData();
             }
             console.log(
               `${this._id} sending the updated-state signal for grids`
@@ -108,19 +108,24 @@ class AstrologyBingoGameController {
               JSON.stringify({ type: "updated-state", controllerId: this._id })
             );
             break;
+          // case "toggle-result-visibility":
+          //   if (evt.controllerId === this._id) {
+          //     this.refreshData();
+          //   }
+          //   break;
           case "player-added":
             if (evt.controllerId !== this._id) {
               console.log("from another controller; player-added", this._id);
               this.updatePlayers();
             }
-            console.log(
-              `${this._id} sending the updated-state signal for grids`
-            );
+            // console.log(
+            //   `${this._id} sending the updated-state signal for grids`
+            // );
             this.socket.send(
               JSON.stringify({ type: "updated-state", controllerId: this._id })
             );
             break;
-          case "player-added":
+          case "player-deleted":
             if (evt.controllerId !== this._id) {
               this.updatePlayers();
             }
@@ -159,9 +164,10 @@ class AstrologyBingoGameController {
     if (!(data instanceof Player)) {
       p = new Player(data);
     }
+    p.bcReport();
     this.players.push(p);
     this.savePlayers();
-    this.socket.send(JSON.stringify({ type: "playerAdded" }));
+    this.socket.send(JSON.stringify({ type: "player-added" }));
   }
 
   removePlayer(player) {
@@ -175,7 +181,28 @@ class AstrologyBingoGameController {
     const idx = this.players.findIndex(({ _id }) => _id === player._id);
     this.players.splice(idx, 1);
     this.savePlayers();
-    this.socket.send(JSON.stringify({ type: "playerRemoved" }));
+    this.socket.send(JSON.stringify({ type: "player-deleted" }));
+  }
+
+  sortPlayers(showingResults = false) {
+    if (showingResults) {
+      console.log("Showing results: sorting by score");
+      this.players
+        .sort((p1, p2) => {
+          console.log(`${p1.name} score: ${p1.score}`);
+          console.log(`${p2.name} score: ${p2.score}`);
+          return p1.score - p2.score;
+        })
+        .reverse();
+    } else {
+      console.log("[un]sorting by created");
+      this.players.sort((p1, p2) => {
+        console.log(`${p1.name} created: ${p1.created}`);
+        console.log(`${p2.name} created: ${p2.created}`);
+        return p1.created - p2.created;
+      });
+    }
+    this.savePlayers();
   }
 
   updatePicks() {
@@ -227,7 +254,7 @@ class AstrologyBingoGameController {
     }
   }
 
-  updateData() {
+  refreshData() {
     this.updatePicks();
     this.updatePlayers();
   }
@@ -338,7 +365,7 @@ class AstrologyBingoGameController {
   }
 
   savePlayers() {
-    console.log("this.players", this.players);
+    // console.log("this.players", this.players);
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.players,
       JSON.stringify(this.players)

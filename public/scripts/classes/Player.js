@@ -12,9 +12,9 @@ class Player extends BirthChart {
   constructor({ chartData, _id = uuidv4() }) {
     super(chartData);
     this._id = _id;
-    this.created = Date.now();
+    this.created = chartData.created || Date.now();
 
-    const { ownerName: name } = chartData;
+    const { ownerName: name, score, complete } = chartData;
 
     if (typeof name !== "string") {
       throw new Error(
@@ -27,23 +27,24 @@ class Player extends BirthChart {
     }
 
     this.name = name;
-    this.score = 0;
-    this.complete = false;
+    this.score = score ?? 0;
+    this.complete = complete ?? false;
   }
 
   markCalled(callItem) {
     super.markCalled(callItem);
+    let noOfCalledItems = 0;
     for (const planet of planets) {
       if(this[planet].called) {
-        this.score += 1;
+        noOfCalledItems += 1;
       }
     }
+    this.score = noOfCalledItems;
     if (this.score === 12) {
       this.complete = true;
     }
   }
 
-  // args: {planet, sign}
   unMarkCalled() {
     super.unMarkCalled();
     this.score = 0;
