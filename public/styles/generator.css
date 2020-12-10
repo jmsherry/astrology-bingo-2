@@ -76,7 +76,8 @@ td.called .title {
   margin: 0;
   font-variant-caps: all-petite-caps;
   font-weight: bold;
-  line-height: 0.744;
+  /* line-height: 0.744; */
+  transform: translateY(-3px);
 }
 
 td.hover:not(.called) {

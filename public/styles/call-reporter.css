@@ -35,7 +35,6 @@ td.called .title {
   display: flex!important;
 }
 
-
 .modal.open .modal-content {
   flex-grow: 1;
   display: flex;
