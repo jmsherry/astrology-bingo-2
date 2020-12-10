@@ -30,8 +30,20 @@ td.called .title {
 
 .modal {
   height: 60%;
+  display: flex!important;
+}
+.modal-content {
+  flex-grow: 1;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
 }
 
 .modal h2 {
   font-size: 10rem;
+  width: 100%;
+}
+.modal-footer {
+  position: absolute;
 }
