@@ -78,39 +78,44 @@ class AstrologyBingoGameController {
       undefined,
       undefined,
       (event) => {
-        console.log("message from the game", event.data);
         const evt = JSON.parse(event.data);
-        console.log("evt", evt);
+        console.log("game reveives message", event);
 
         switch (evt.type) {
           case "reset":
             // this makes games in other tabs reset
-            if(evt.controllerId !== this._id) {
-              this.reset();
+            if (evt.controllerId !== this._id) {
+              console.log('from another controller; reseting', this._id);
+              this.reset({ signal: false });
             }
             // this makes the grids re-render
+            console.log(`${this._id} sending the updated-state signal for grids`);
             this.socket.send(
               JSON.stringify({ type: "updated-state", controllerId: this._id })
             );
             break;
           case "picked":
             if (evt.controllerId !== this._id) {
+              console.log('from another controller; updating', this._id);
               this.updateData();
             }
+            console.log(`${this._id} sending the updated-state signal for grids`);
             this.socket.send(
               JSON.stringify({ type: "updated-state", controllerId: this._id })
             );
             break;
-            case "player-added":
-              if (evt.controllerId !== this._id) {
-                this.updatePlayers();
-              }
-              this.socket.send(
-                JSON.stringify({ type: "updated-state", controllerId: this._id })
-              );
-              break;
+          case "player-added":
+            if (evt.controllerId !== this._id) {
+              console.log('from another controller; player-added', this._id);
+              this.updatePlayers();
+            }
+            console.log(`${this._id} sending the updated-state signal for grids`);
+            this.socket.send(
+              JSON.stringify({ type: "updated-state", controllerId: this._id })
+            );
+            break;
           default:
-            console.log(`received a ${evt.type}`);
+            console.log(`game ${this._id} received unknown evt`, evt, 'doing nothing');
         }
       },
       undefined
@@ -184,10 +189,9 @@ class AstrologyBingoGameController {
         );
       }
     }
-
   }
 
-  updatePlayers(){
+  updatePlayers() {
     const playerData = localStorage.getItem(
       AstrologyBingoGameController.storageLabels.players
     );
@@ -203,20 +207,27 @@ class AstrologyBingoGameController {
     }
   }
 
-  updateData(){
+  updateData() {
     this.updatePicks();
     this.updatePlayers();
   }
 
-  reset() {
+  reset({ signal = true } = {}) {
     for (const item of this.alreadyCalled) {
       delete item.callPosition;
     }
     this.potentialCallList = [...this.potentialCallList, ...this.alreadyCalled];
     this.alreadyCalled = [];
-    this.saveItems();
+    for (const player of this.players) {
+      player.unMarkCalled();
+    }
+    this.save();
 
-    this.socket.send(JSON.stringify({ type: "reset", controllerId: this._id }));
+    if (signal) {
+      this.socket.send(
+        JSON.stringify({ type: "reset", controllerId: this._id })
+      );
+    }
   }
 
   // cb = () => {}
@@ -226,6 +237,7 @@ class AstrologyBingoGameController {
     //     `Expected a callback function for AstrologyBingoGameController.pick; instead received ${cb} (type: ${typeof cb})`
     //   );
     // }
+    console.log('in app.pick', picked, `appId: ${this._id}`);
     if (!picked.planet) {
       picked.planet = AstrologyBingoGameController.getRandomPlanet();
       picked.sign = AstrologyBingoGameController.getRandomSign();
@@ -241,8 +253,7 @@ class AstrologyBingoGameController {
     pickedItem.callPosition = this.alreadyCalled.length + 1;
     this.alreadyCalled.push(pickedItem);
 
-
-    for(const player of this.players) {
+    for (const player of this.players) {
       player.markCalled(pickedItem);
     }
 
@@ -307,6 +318,7 @@ class AstrologyBingoGameController {
   }
 
   savePlayers() {
+    console.log("this.players", this.players);
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.players,
       JSON.stringify(this.players)
@@ -321,14 +333,14 @@ class AstrologyBingoGameController {
   static getRandomPlanet() {
     const Rn = getRandomIntInclusive(0, BirthChart.planets.length - 1);
     let planetToCall = BirthChart.planets[Rn];
-    // console.log("planetToCall", planetToCall);
+    // // console.log("planetToCall", planetToCall);
     return planetToCall;
   }
 
   static getRandomSign() {
     const Rn = getRandomIntInclusive(0, BirthChart.signs.length - 1);
     let signToCall = BirthChart.signs[Rn];
-    // console.log("signToCall", signToCall);
+    // // console.log("signToCall", signToCall);
     return signToCall;
   }
 

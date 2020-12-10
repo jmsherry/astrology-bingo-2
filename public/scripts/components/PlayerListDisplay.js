@@ -41,14 +41,14 @@ class PlayerListDisplay {
     // Connection opened
     const { socket, alreadyCalled, reset } = this.game;
     socket.addEventListener("open", () => {
-      console.log("open from the grid");
+      // console.log("open from the grid");
     });
 
     // Listen for messages
     socket.addEventListener("message", (event) => {
-      console.log("message from the grid", event.data);
+      // console.log("message from the grid", event.data);
       const evt = JSON.parse(event.data);
-      console.log("evt", evt);
+      // console.log("evt", evt);
       switch (evt.type) {
         case "updated-state":
           if (evt.controllerId === this.game._id) {
@@ -62,7 +62,7 @@ class PlayerListDisplay {
 
     // Listen for errors
     socket.addEventListener("error", (err) => {
-      console.log("error from the grid", err);
+      // console.log("error from the grid", err);
     });
 
     let modalElem = document.getElementById("pick-modal");
@@ -82,7 +82,7 @@ class PlayerListDisplay {
     const modalOptions = {
       opacity: this.options.modalOpacity,
     };
-    // console.log("sdfsdfsdfsd", M.Modal.init(modalElem, modalOptions));
+    // // console.log("sdfsdfsdfsd", M.Modal.init(modalElem, modalOptions));
     this.modal = M.Modal.init(modalElem, modalOptions);
   }
 
@@ -193,7 +193,7 @@ class PlayerListDisplay {
           "view-chart"
         );
         viewChartBtn.addEventListener("click", (e) => {
-          console.log("player", player);
+          // console.log("player", player);
           const contentDiv = this.modal.el.querySelector(".modal-content");
           contentDiv.innerHTML = "";
           const heading = document.createElement("h2");
@@ -214,8 +214,8 @@ class PlayerListDisplay {
   }
 
   toggleResultVisibility() {
-    console.log("toggleResultVisibility");
-    let arg = undefined
+    // console.log("toggleResultVisibility");
+    let arg = undefined;
     if (this.options.showingResults) {
       const sorted = this.game.players.sort((p1, p2) => {
         return p1.score - p2.score;
@@ -243,10 +243,10 @@ export default PlayerListDisplay;
 // // Create application instance
 
 // const game = new AstrologyBingoGameController();
-// console.log("game", game);
+// // console.log("game", game);
 
 // const listNode = document.getElementById("birthchart-list-container");
-// console.log("listNode", listNode);
+// // console.log("listNode", listNode);
 
 // const htmlRender = (mount, players) => {
 //   mount.innerHTML = "";
@@ -254,7 +254,7 @@ export default PlayerListDisplay;
 //     mount.append(noContentDisplay.cloneNode(true));
 //     return;
 //   }
-//   console.log("players", players);
+//   // console.log("players", players);
 //   const list = document.createElement("ol");
 //   list.id = "birthchart-list";
 //   list.classList.add("list-group", "birthchart-list");
@@ -322,7 +322,7 @@ export default PlayerListDisplay;
 //       "view-chart"
 //     );
 //     viewChartBtn.addEventListener("click", (e) => {
-//       console.log("player", player);
+//       // console.log("player", player);
 //       // modalContentArea.innerHTML = player.img;
 //       // modalInstance.open();
 //     });

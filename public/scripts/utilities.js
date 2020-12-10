@@ -66,11 +66,11 @@ export async function makeCall(url = "", options = {}) {
 export function connectToWebSocket(
   socketURL = "ws://localhost:3001/",
   connectionHandler = function connectionHandler(event) {
-    console.log("Socket open!!");
+    // console.log("Socket open!!");
   },
   messageHandler = function messageHandler(event) {
     console.dir(event);
-    console.log("Message from server ", event.data);
+    // console.log("Message from server ", event.data);
   },
   errorHandler = function errorHandler(err) {
     console.log(err);
@@ -90,22 +90,26 @@ export function connectToWebSocket(
   // Listen for errors
   socket.addEventListener("error", errorHandler);
 
+  let ch =
+    closeHandler ||
+    function closeHandler() {
+      // alert('socket closed');
+      // console.log("Socket closed", arguments);
+      // setTimeout(() => {
+      //   if (i < 20) {
+      //     socket = connectToWebSocket(
+      //       socketURL,
+      //       connectionHandler,
+      //       errorHandler,
+      //       closeHandler
+      //     );
+      //     i += 1;
+      //   }
+      // }, i * 200);
+    };
+
   // Listen for close
-  socket.addEventListener("close", function closeHandler() {
-    // alert('socket closed');
-    console.log("Socket closed", arguments);
-    setTimeout(() => {
-      if (i < 20) {
-        socket = connectToWebSocket(
-          socketURL,
-          connectionHandler,
-          errorHandler,
-          closeHandler
-        );
-        i += 1;
-      }
-    }, i * 200);
-  });
+  socket.addEventListener("close", ch);
 
   return socket;
 }

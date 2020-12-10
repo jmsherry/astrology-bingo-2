@@ -23,22 +23,20 @@ wss.on("connection", function connection(ws, req) {
   // or req.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
 
   ws.on("message", function incoming(message) {
-    console.log("received: %s", message);
+    // console.log("received: %s", message);
     console.log(util.inspect(message, false, 7, true));
 
-    for(const client of wss.clients) {
+    for (const client of wss.clients) {
       // console.log('client', client);
       if (client.readyState === WebSocket.OPEN) {
         client.send(message);
       }
     }
   });
-
-
 });
 
 wss.on("error", function connection(err) {
-console.log(err);
+  console.log(err);
 });
 
 export default app;

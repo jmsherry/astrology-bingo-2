@@ -28,7 +28,7 @@ class BirthChart {
     _id = uuidv4(),
     image = null,
   }) {
-    console.log("chart", arguments[0]);
+    // console.log("chart", arguments[0]);
     if (typeof ownerName !== "string" || !ownerName.length) {
       throw new Error(`No ownerName provided. Instead received ${ownerName}`);
     }
@@ -213,6 +213,11 @@ class BirthChart {
       planet.called = true;
     }
   }
+  unMarkCalled() {
+    for (const planet of BirthChart.planets) {
+      this[planet].called = false;
+    }
+  }
 
   bcReport() {
     return `${this.Sun}  ${this.Moon} ${this.Ascendant} ${this.Mercury} ${this.Venus} ${this.Mars}  ${this.Jupiter}  ${this.Saturn}  ${this.Uranus}  ${this.Neptune}  ${this._id}`;
@@ -289,7 +294,7 @@ class BirthChart {
             return;
           }
         }
-        // console.log("children", children);
+        // // console.log("children", children);
         // children.classList.add("transparent");
         // outline.classList.add("transparent");
       });
@@ -323,9 +328,9 @@ class BirthChart {
     const { planets } = BirthChart;
     // Created a document fragment, so we append lis as few times as possible
     // const imgfrag = document.createDocumentFragment();
-    console.log("chart to be rendered", this);
+    // console.log("chart to be rendered", this);
     const symbolsToPopulate = [];
-    console.log("planets", planets);
+    // console.log("planets", planets);
     for (const [planet, sign] of Object.entries(this)) {
       console.log(planet, sign);
       if (!planets.includes(planet)) {
@@ -342,7 +347,7 @@ class BirthChart {
         "http://www.w3.org/2000/svg",
         "svg"
       );
-      console.log("currentWord", currentWord);
+      // console.log("currentWord", currentWord);
       currentSymbol.setAttribute("viewBox", "0 0 300 300");
       currentSymbol.setAttribute("width", "60");
       currentSymbol.classList.add("sign", "icon", "chart");
@@ -386,12 +391,12 @@ class BirthChart {
       symbolsToPopulate.push(currentSymbol, currentWord);
       // symbolsToPopulate.push( currentWord);
     }
-    console.log("symbolsToPopulate", symbolsToPopulate);
+    // console.log("symbolsToPopulate", symbolsToPopulate);
 
     ///BINGO CARD USING AN IMG
 
     // const chartImg = document.createElement("img");
-    // console.log("chartImg", chartImg);
+    // // console.log("chartImg", chartImg);
     // chartImg.classList.add("bc-template", "materialboxed");
     // chartImg.src = "./assets/img/fake-bc-template.svg";
 
@@ -401,7 +406,7 @@ class BirthChart {
       "http://www.w3.org/2000/svg",
       "svg"
     );
-    console.log("chartImg", chartImg);
+    // console.log("chartImg", chartImg);
     chartImg.id = "chart";
     chartImg.classList.add("bc-template", "materialboxed", "chart-outline");
     chartImg.setAttribute("viewBox", "-30 -30 1060 1060");
@@ -463,7 +468,7 @@ class BirthChart {
         return `<path d="M241.33.08q14,0,28,0c.36,0,1.17-.47,1,.56A289.28,289.28,0,0,0,246,30.84c-19.78,28.21-33.44,58.87-37.26,93.45-.33,2.94-.53,5.9-.8,9h60.64v21.35H208c0,.69,0,1.22,0,1.75a188.87,188.87,0,0,0,8.67,55.19,209.9,209.9,0,0,0,30.07,59.26,257.6,257.6,0,0,0,23.63,28.5c.18.9-.51.57-.88.57-4.1,0-8.2,0-12.3,0H239.57a14.72,14.72,0,0,0-.89-1.29,251,251,0,0,1-43.2-70.4c-9.58-23.34-15.81-47.45-16-72.87a3.48,3.48,0,0,0-.13-.69H120.7c0,.54-.08,1-.09,1.49A168.71,168.71,0,0,1,115.5,195c-9.3,36.93-26.3,70-50.36,99.41L60.63,300H29.3a276.05,276.05,0,0,0,23.92-28.83c14.23-19.87,25.21-41.35,31.87-64.94A190.32,190.32,0,0,0,92.16,156c0-.42,0-.84-.09-1.41H31.5V133.23H92.13a167.14,167.14,0,0,0-3.25-25C84.2,85.4,75.2,64.33,63.12,44.52A289.12,289.12,0,0,0,29.3.08H58.87c.27.34.52.7.82,1A250.4,250.4,0,0,1,86.56,35.6a218.18,218.18,0,0,1,33.83,96.13c.13,1.22.53,1.6,1.79,1.59q27.88-.06,55.78,0c.48,0,.95,0,1.49-.08.05-.31.08-.55.12-.78,1-6.32,1.71-12.67,2.9-19a218.83,218.83,0,0,1,35.2-84A261.25,261.25,0,0,1,241.33.08Z" transform="translate(-29.3 0)"/>`;
         break;
       default:
-        // console.log("default");
+        // // console.log("default");
         break;
     }
   }
@@ -531,7 +536,7 @@ class BirthChart {
   </text>`;
         break;
       default:
-        console.log("default");
+        // console.log("default");
         break;
     }
   }

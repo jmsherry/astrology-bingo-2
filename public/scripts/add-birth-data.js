@@ -56,18 +56,29 @@ locationForm.addEventListener("submit", (e) => {
   e.preventDefault(locationForm);
   const FD = new FormData(locationForm);
   const data = Object.fromEntries(FD);
-  console.log("data", data);
+  // console.log("data", data);
+  const submitBtn = document.getElementById("placename-btn");
+  locationForm.setAttribute("disabled", "disabled");
+  console.log(locationForm.elements);
+  for (const el of locationForm.elements) {
+    console.log(el);
+    el.setAttribute("disabled", "disabled");
+    el.classList.add("disabled");
+    el.classList.remove("valid");
+    el.value = "";
+    el.blur();
+  }
 
   getGeo(data);
 });
 
 async function getGeo({ placename }) {
-  console.log("placename", placename);
+  // console.log("placename", placename);
   const GEO_API_URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${placename}&key=${GEO_API_KEY}`;
   console.log(GEO_API_URL);
 
   const { results } = await makeCall(GEO_API_URL);
-  console.log("results", results);
+  // console.log("results", results);
 
   // Show a list or warn no match and reset
   if (!results.length) {
@@ -122,32 +133,32 @@ utcButton.addEventListener("click", function (e) {
   e.preventDefault();
 
   const inputtedTime = timeInput.value;
-  console.log("inputtedTime", inputtedTime);
+  // console.log("inputtedTime", inputtedTime);
   const timeToGo = inputtedTime.replace(":", "");
   timeInput.value = timeToGo;
 
   const inputtedDate = dateInput.value;
-  console.log("inputtedDate", inputtedDate);
+  // console.log("inputtedDate", inputtedDate);
   const inputtedloc1 = geoMountLat.value;
   const inputtedloc2 = geoMountLong.value;
 
   const year = inputtedDate.slice(0, 4);
-  console.log("year", year);
+  // console.log("year", year);
 
   const month = inputtedDate.slice(4, 6);
-  console.log("month", month);
+  // console.log("month", month);
 
   const day = inputtedDate.slice(6, 8);
-  console.log("day", day);
+  // console.log("day", day);
 
   const dateTime = `${year}-${month}-${day} ${inputtedTime}:00`;
-  console.log("dateTime", dateTime);
+  // console.log("dateTime", dateTime);
 
   const timestamp = Date.parse(dateTime) / 1000;
-  console.log("timestamp", timestamp);
+  // console.log("timestamp", timestamp);
 
   const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${inputtedloc1},${inputtedloc2}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
-  console.log("fetchURLUTC", fetchURLUTC);
+  // console.log("fetchURLUTC", fetchURLUTC);
   getUTC(fetchURLUTC, renderUTC);
 });
 
@@ -156,7 +167,7 @@ personalDataForm.addEventListener("submit", (e) => {
 
   const FD = new FormData(e.target);
   const data = Object.fromEntries(FD);
-  console.log("data", data);
+  // console.log("data", data);
 
   const fetchURL = createBirthChartURL(data);
   getBirthChart(fetchURL, renderChart, data);
@@ -166,8 +177,14 @@ personalDataForm.addEventListener("submit", (e) => {
 
 function reloadForms() {
   const { forms } = document;
+  const choicesMount = document.getElementById("location-choices");
+  choicesMount.innerHTML = "";
   for (const form of forms) {
-    form.setAttribute("disabled", "");
+    form.removeAttribute("disabled");
+    for (const input of form.elements) {
+      input.removeAttribute("disabled");
+      input.classList.remove("disabled");
+    }
   }
   M.updateTextFields();
 }
@@ -198,14 +215,14 @@ function createBirthChartURL({
   utcoffset,
 }) {
   const year = Number(dob.slice(0, 4));
-  console.log("year", year);
+  // console.log("year", year);
   const month = Number(dob.slice(4, 6));
-  console.log("month", month);
+  // console.log("month", month);
   const jsMonth = month - 1;
   const date = Number(dob.slice(6, 8));
-  console.log("date", date);
+  // console.log("date", date);
   const [hours, minutes] = tob.split(":");
-  console.log("hours", hours, "minutes", minutes);
+  // console.log("hours", hours, "minutes", minutes);
   const d = new Date(year, jsMonth, date, Number(hours), Number(minutes));
   const timestamp = d.getTime();
 
@@ -214,10 +231,10 @@ function createBirthChartURL({
   params.append("timestamp", timestamp);
   params.append("key", TIME_API_KEY);
 
-  console.log("params", params);
+  // console.log("params", params);
 
   const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${location1}&location2=${location2}&utc=${utcoffset}&action=`;
-  console.log("fetchURL", fetchURL);
+  // console.log("fetchURL", fetchURL);
   return fetchURL;
 }
 
@@ -228,14 +245,14 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     if (!response.ok) throw response;
     let chartData = await response.json();
     chartData = JSON.parse(chartData); // twice because stupid python
-    console.log("chartData", chartData);
+    // console.log("chartData", chartData);
     chartData.Ascendant = chartData.Asc;
     chartData.Descendant = BirthChart.descDict[chartData.Ascendant];
     delete chartData.Asc;
 
     chartData.ownerName = `${firstname} ${lastname}`;
 
-    console.log("chartData", chartData);
+    // console.log("chartData", chartData);
     const player = new Player({ chartData });
     renderFn(player);
     bingoGameController.addPlayer(player);
@@ -256,9 +273,9 @@ function renderUTC(report, mount = utcOffsetInput) {
     return;
   }
   const offset = (report.rawOffset += report.dstOffset);
-  console.log("offset", offset);
+  // console.log("offset", offset);
   const offsetUTC = Math.floor(offset / 60 / 60);
-  console.log("offsetUTC", offsetUTC);
+  // console.log("offsetUTC", offsetUTC);
   utcOffsetInput.value = offsetUTC;
 }
 

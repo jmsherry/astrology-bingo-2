@@ -24,8 +24,12 @@ const alice = {
 
 ///render chart
 function renderChart(player, mount = document.getElementById("exampleMount")) {
-  if(!(player instanceof Player)) {
-    throw new Error(`player supplied to renderChart must be an instance of Player; instead received ${player} (type: ${typeof player} of class ${player?.__proto__?.constructor})`); 
+  if (!(player instanceof Player)) {
+    throw new Error(
+      `player supplied to renderChart must be an instance of Player; instead received ${player} (type: ${typeof player} of class ${
+        player?.__proto__?.constructor
+      })`
+    );
   }
   player.renderChart({ mountNode: mount });
   setTimeout(() => {
@@ -35,8 +39,7 @@ function renderChart(player, mount = document.getElementById("exampleMount")) {
   }, 250);
 }
 const player = new Player({ chartData: alice });
-console.log("example birthChart", player);
+// console.log("example birthChart", player);
 renderChart(player);
 
 //remove buttons
-

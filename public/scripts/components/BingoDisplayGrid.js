@@ -42,29 +42,29 @@ class BingoDisplayGrid {
     // Connection opened
     const { socket, alreadyCalled, reset } = this.game;
     socket.addEventListener("open", () => {
-      console.log("open from the grid");
+      // console.log("open from the grid");
     });
 
     // Listen for messages
     socket.addEventListener("message", (event) => {
-      console.log("message from the grid", event.data);
+      console.log("grid received message", event.data);
       const evt = JSON.parse(event.data);
-      console.log("evt", evt);
+      // console.log("evt", evt);
       switch (evt.type) {
         case "updated-state":
           if (evt.controllerId === this.game._id) {
+            console.log(`grid for controller ${evt.controllerId} re-endering`);
             this.render();
-            // this.markCalled({ alreadyCalled: alreadyCalled });
           }
           break;
         default:
-          console.log(`received a ${event.data.type}`);
+          console.log(`grid for controller ${evt.controllerId} doing nothing`);
       }
     });
 
     // Listen for errors
     socket.addEventListener("error", (err) => {
-      console.log("error from the grid", err);
+      // console.log("error from the grid", err);
     });
 
     if (this.settings.features.showModal) {
@@ -85,7 +85,7 @@ class BingoDisplayGrid {
       const modalOptions = {
         opacity: this.settings.modalOpacity,
       };
-      console.log("sdfsdfsdfsd", M.Modal.init(modalElem, modalOptions));
+      // console.log("sdfsdfsdfsd", M.Modal.init(modalElem, modalOptions));
       this.modal = M.Modal.init(modalElem, modalOptions);
     }
   }
@@ -103,14 +103,14 @@ class BingoDisplayGrid {
     }
   }
 
-  clearPhrase() {
-    this.phraseDisplay.innerHTML = "";
-  }
+  // clearPhrase() {
+  //   this.phraseDisplay.innerHTML = "";
+  // }
 
-  resetUI() {
-    this.clearCalled();
-    this.clearPhrase();
-  }
+  // resetUI() {
+  //   this.clearCalled();
+  //   this.clearPhrase();
+  // }
 
   render(overrides = {}) {
     const defaults = {
@@ -221,25 +221,31 @@ class BingoDisplayGrid {
   }
 
   setUpClickable() {
-    this.gridArea.addEventListener("click", (e) => {
-      console.log("target", e?.target?.closest("td:not(.blank-cell)"));
-      const target = e?.target?.closest("td:not(.blank-cell)");
-      if (target) {
-        const { planet, sign } = target.dataset;
-        const pick = {
-          planet,
-          sign,
-        };
-        this.game.pick(pick);
-        this.game.socket.send(
-          JSON.stringify({
-            type: "forced-pick",
-            data: pick,
-            controllerId: this.game._id,
-          })
-        );
-      }
-    });
+    if (!this.gridArea.dataset.evtBound) {
+      const clickHandler = (e) => {
+        // console.log("target", e?.target?.closest("td:not(.blank-cell)"));
+        const target = e?.target?.closest("td:not(.blank-cell)");
+        if (target) {
+          const { planet, sign } = target.dataset;
+          const pick = {
+            planet,
+            sign,
+          };
+          console.log(`in grid, abut to pick`, pick);
+          console.log("trigger element was ", target);
+          this.game.pick(pick);
+          // this.game.socket.send(
+          //   JSON.stringify({
+          //     type: "forced-pick",
+          //     data: pick,
+          //     controllerId: this.game._id,
+          //   })
+          // );
+        }
+      };
+      this.gridArea.addEventListener("click", clickHandler);
+    }
+    this.gridArea.dataset.evtBound = true;
   }
 
   setUpHoverGuides(
@@ -257,13 +263,13 @@ class BingoDisplayGrid {
       for (const el of oldEls) {
         el.classList.remove(hoverClass);
       }
-      console.log("target", e?.target?.closest("td:not(.blank-cell)"));
+      // console.log("target", e?.target?.closest("td:not(.blank-cell)"));
       const target = e?.target?.closest("td:not(.blank-cell)");
       if (target) {
         const {
           dataset: { planet, sign },
         } = target;
-        // console.log("p", planet, "s", sign);
+        // // console.log("p", planet, "s", sign);
 
         const planetCells = document.querySelectorAll(`.${planet}`);
         for (const cell of planetCells) {
@@ -284,8 +290,12 @@ class BingoDisplayGrid {
     //     `Expected an game data in BingoGridDisplay.markCalled; instead received ${gameData} (type: ${typeof gameData})`
     //   );
     // }
+    console.log("in grid markCalled");
     const { alreadyCalled: called } = this.game;
     if (!called.length) {
+      if (this.settings.features.showPhrases) {
+        this.phraseDisplay.innerHTML = "";
+      }
       return;
     }
     const { gridArea: grid } = this;
@@ -328,20 +338,21 @@ class BingoDisplayGrid {
     if (this.settings.features.showPhrases) {
       const phrase = document.createElement("p");
       const { planet, sign } = called[called.length - 1];
-      phrase.textContent = AstrologyBingoGameController.catchPhraseDict[planet][sign];
+      phrase.textContent =
+        AstrologyBingoGameController.catchPhraseDict[planet][sign];
       this.phraseDisplay.innerHTML = "";
       this.phraseDisplay.append(phrase);
     }
   }
 
-  clearCalled(grid = this.gridArea) {
-    const { calledClass, lastCalledClass } = this.classes;
-    const markedSquares = grid.querySelectorAll(`.${calledClass}`);
-    for (const square of markedSquares) {
-      square.classList.remove(calledClass, lastCalledClass);
-      square.innerHTML = "";
-    }
-  }
+  // clearCalled(grid = this.gridArea) {
+  //   const { calledClass, lastCalledClass } = this.classes;
+  //   const markedSquares = grid.querySelectorAll(`.${calledClass}`);
+  //   for (const square of markedSquares) {
+  //     square.classList.remove(calledClass, lastCalledClass);
+  //     square.innerHTML = "";
+  //   }
+  // }
 }
 
 export default BingoDisplayGrid;
