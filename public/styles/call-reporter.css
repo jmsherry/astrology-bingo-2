@@ -30,9 +30,13 @@ td.called .title {
 
 .modal {
   height: 60%;
+}
+.modal.open {
   display: flex!important;
 }
-.modal-content {
+
+
+.modal.open .modal-content {
   flex-grow: 1;
   display: flex;
   justify-items: center;
@@ -44,6 +48,6 @@ td.called .title {
   font-size: 10rem;
   width: 100%;
 }
-.modal-footer {
+.modal.open .modal-footer {
   position: absolute;
 }
