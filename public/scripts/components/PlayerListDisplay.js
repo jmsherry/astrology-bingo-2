@@ -133,7 +133,7 @@ class PlayerListDisplay {
       list.classList.add("list-group");
       console.table(this.game.alreadyCalled);
       for (const player of data || players) {
-        console.table(player, ["sign"]);
+        console.table(player, ["sign", "value"]);
         const { name, value = 7, img, _id: id } = player;
         const li = document.createElement("li");
         li.classList.add("list-group-item");

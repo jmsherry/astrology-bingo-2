@@ -32,7 +32,7 @@ class Player extends BirthChart {
   }
 
   markCalled(callItem) {
-    super.unMarkCalled(callItem);
+    super.markCalled(callItem);
     for (const planet of planets) {
       if(this[planet].called) {
         this.score += 1;
