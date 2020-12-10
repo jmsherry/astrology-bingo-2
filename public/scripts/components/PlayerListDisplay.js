@@ -131,8 +131,9 @@ class PlayerListDisplay {
     } else {
       const list = document.createElement("ol");
       list.classList.add("list-group");
+      console.table(this.game.alreadyCalled);
       for (const player of data || players) {
-        console.log(player);
+        console.table(player, ["sign"]);
         const { name, value = 7, img, _id: id } = player;
         const li = document.createElement("li");
         li.classList.add("list-group-item");
