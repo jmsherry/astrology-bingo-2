@@ -18,7 +18,7 @@ const alice = {
   birthday: "1990/07/04",
   latitude: 53.4083714,
   longitude: -2.9915726,
-  ownerName: "Alice Day",
+  ownerName: "Alice",
   time: "1800",
 };
 

@@ -77,55 +77,55 @@ async function getGeo({ placename }) {
   const GEO_API_URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${placename}&key=${GEO_API_KEY}`;
   console.log(GEO_API_URL);
 
-  const { results } = await makeCall(GEO_API_URL);
-  // console.log("results", results);
+    const { results } = await makeCall(GEO_API_URL);
+    // console.log("results", results);
 
-  // Show a list or warn no match and reset
-  if (!results.length) {
-    alert(`${placename} Not found`);
-    return;
-  }
+    // Show a list or warn no match and reset
+    if (!results?.length) {
+      M.toast({html: `<h2>Error</h2><p>${placename} Not found</p>`, classes: ['toast', 'error']});
+      return;
+    }
 
-  const choicesMount = document.getElementById("location-choices");
-  const select = document.createElement("select");
-  const holdingOption = document.createElement("option");
-  holdingOption.textContent = "Choose your location";
-  holdingOption.setAttribute("disabled", "disabled");
-  holdingOption.setAttribute("selected", "selected");
-  holdingOption.setAttribute("value", "");
-  select.append(holdingOption);
+    const choicesMount = document.getElementById("location-choices");
+    const select = document.createElement("select");
+    const holdingOption = document.createElement("option");
+    holdingOption.textContent = "Choose your location";
+    holdingOption.setAttribute("disabled", "disabled");
+    holdingOption.setAttribute("selected", "selected");
+    holdingOption.setAttribute("value", "");
+    select.append(holdingOption);
 
-  for (const [idx, val] of results.entries()) {
-    const opt = document.createElement("option");
-    opt.textContent = val.formatted_address;
-    opt.setAttribute("value", idx);
-    select.append(opt);
-  }
+    for (const [idx, val] of results.entries()) {
+      const opt = document.createElement("option");
+      opt.textContent = val.formatted_address;
+      opt.setAttribute("value", idx);
+      select.append(opt);
+    }
 
-  select.addEventListener("change", (e) => {
-    const {
-      geometry: {
-        location: { lat, lng },
-      },
-    } = results[e.target.value];
+    select.addEventListener("change", (e) => {
+      const {
+        geometry: {
+          location: { lat, lng },
+        },
+      } = results[e.target.value];
 
-    geoMountLat.value = lat;
-    geoMountLong.value = lng;
-    locationForm.reset();
-    locationForm.setAttribute("disabled", "disabled");
-  });
+      geoMountLat.value = lat;
+      geoMountLong.value = lng;
+      locationForm.reset();
+      locationForm.setAttribute("disabled", "disabled");
+    });
 
-  choicesMount.innerHTML = "";
-  choicesMount.append(select);
+    choicesMount.innerHTML = "";
+    choicesMount.append(select);
 
-  const lbl = document.createElement("label");
-  lbl.textContent = "Choose your location";
+    const lbl = document.createElement("label");
+    lbl.textContent = "Choose your location";
 
-  choicesMount.append(lbl);
+    choicesMount.append(lbl);
 
-  const elems = document.querySelectorAll("select");
-  const options = {};
-  M.FormSelect.init(elems, options);
+    const elems = document.querySelectorAll("select");
+    const options = {};
+    M.FormSelect.init(elems, options);
 }
 
 /****************** SECOND FORM *************************/
@@ -258,6 +258,7 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     bingoGameController.addPlayer(player);
   } catch (err) {
     console.log(err);
+    M.toast({html: `<h2>Error with Python server</h2><p>${err.message}</p>`, classes: ['toast', 'error']});
   }
 }
 
@@ -288,6 +289,7 @@ async function getUTC(currentURL, handler = renderUTC) {
     const data = await response.json();
     handler(data);
   } catch (err) {
+    M.toast({html: `<h2>Error getting UTC</h2><p>${err.message}</p>`, classes: ['toast', 'error']});
     console.log(err);
   }
 }

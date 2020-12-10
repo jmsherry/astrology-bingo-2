@@ -184,7 +184,7 @@ class BingoDisplayGrid {
     // Put this here after the cloning.
     td.id = "blank-cell";
 
-    if (settings.features.controls && !td.querySelector("#call")) {
+    if (settings.features.controls && !this.controls.querySelector("#call")) {
       // Put the call button in
       const callButton = document.createElement("button");
       callButton.textContent = "call";
@@ -200,7 +200,8 @@ class BingoDisplayGrid {
       if (!this.game.potentialCallList.length) {
         callButton.setAttribute("disabled", "disabled");
       }
-      td.append(callButton);
+      // td.append(callButton);
+      this.controls.append(callButton);
     }
 
     this.gridArea.innerHTML = "";
@@ -250,11 +251,11 @@ class BingoDisplayGrid {
 
   setUpHoverGuides(
     grid = this.gridArea,
-    hoverClass = this.classes.hoveringClass
+    hoverClass = this.classes.hoveringClass,
   ) {
     if (!isElement(grid)) {
       throw new Error(
-        `You must provide a DOM node to insert the grid in. Received ${grid}`
+        `You must provide a DOM node to insert the grid in. Received ${grid}`,
       );
     }
 
@@ -319,7 +320,7 @@ class BingoDisplayGrid {
           ? `${sign} ${planet}`
           : `${planet} in ${sign}`;
       const HTML = `
-        <p class="call-position">${callPosition} .</p>
+
         <h2 class="title">${text}</h2>
       `;
 

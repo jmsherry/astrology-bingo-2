@@ -5,6 +5,10 @@ body {
   /* "Courier New", */
   padding-bottom: 64px;
 }
+/* 
+.cursor {
+  cursor: url("../assets/img/mouse-planet.png"), auto;
+} */
 
 .birthchart-section-container {
   padding: 15px;
@@ -13,6 +17,7 @@ body {
 .owner {
   margin: 0;
   font-size: 2.56rem;
+  padding-bottom: 5px;
 }
 
 .list-group {
@@ -26,21 +31,32 @@ body {
 .list-group-item {
   padding: 7px 15px 15px;
   border: 1px black solid;
+  border-radius: 15px;
+  background-color: lavender;
+}
+
+button {
+  font-family: "Wolpe Pegasus", Courier, monospace;
 }
 
 .icons-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  max-width: 150px;
+  margin: auto;
 }
 
 .icons-list .icon-item {
   /* margin-inline-end: 5px; */
   padding: 5px;
-  background-color: black;
-  color: #fff;
+  background-color: #fff;
+  color: black;
   margin-block-end: 10px;
+  margin-inline-end: 5px;
   display: flex;
+  /* border-radius: 4px; */
+  outline: 1px solid black;
 }
 
 .icons-list .icon-item.called {
@@ -72,6 +88,11 @@ body {
 
 .chart {
   padding: 10px;
+}
+
+.modal {
+  max-height: 85%;
+  width: 75%;
 }
 
 .cip-controls .delete-chart {
@@ -145,12 +166,14 @@ path {
 } */
 
 .called.icon-item {
-  background-color: #f4433641 !important;
+  background-color: rgb(215, 38, 165) !important;
 }
 
 .called .sign.icon path {
-  fill: #1218bd;
+  fill: #fcfcfc;
 }
+
+/* WORD ROTATION */
 
 .inner-word.sun {
   transform: rotate(-69deg);
@@ -218,4 +241,66 @@ g.transparent > path {
 g.transparent > line {
   fill: none !important;
   stroke: transparent !important;
+}
+
+/* ICONS IN SHOW CHART  */
+
+.icon-item.icon-sun {
+  order: 1;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-mercury {
+  order: 2;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-venus {
+  order: 3;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-mars {
+  order: 4;
+  background-color: rgb(198, 244, 244);
+}
+
+.icon-item.icon-jupiter {
+  order: 5;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-saturn {
+  order: 6;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-uranus {
+  order: 7;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-neptune {
+  order: 8;
+  background-color: rgb(238, 210, 244);
+}
+
+.icon-item.icon-pluto {
+  order: 9;
+  background-color: rgb(245, 228, 202);
+}
+
+.icon-item.icon-ascendant {
+  order: 10;
+  background-color: rgb(245, 228, 202);
+}
+
+.icon-item.icon-descendant {
+  order: 11;
+  background-color: rgb(245, 228, 202);
+}
+
+.icon-item.icon-moon {
+  order: 12;
+  background-color: rgb(245, 228, 202);
 }

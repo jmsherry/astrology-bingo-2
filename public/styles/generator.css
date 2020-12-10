@@ -73,14 +73,14 @@ td.called .call-position {
 }
 
 td.called .title {
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin: 0;
+  font-variant-caps: all-petite-caps;
 }
 
 td.hover:not(.called) {
   background-color: #efefef;
 }
-
 
 td.lastCalled,
 td.lastCalled:hover,
@@ -115,13 +115,20 @@ td.lastCalled.open .title {
   font-size: 3rem;
 } */
 
-.phrase {
-  font-size: 2rem;
-}
+
 
 .upper-controls {
   display: flex;
   justify-content: space-around;
   align-items: center;
   min-height: 100px;
+}
+
+.phrase {
+  font-size: 2rem;
+  flex-grow: 1;
+}
+
+.upper-controls button {
+  margin-inline-end: 15px;
 }

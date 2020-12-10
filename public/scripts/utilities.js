@@ -59,6 +59,7 @@ export async function makeCall(url = "", options = {}) {
     const data = await response.json();
     return data;
   } catch (err) {
+    M.toast({html: `<h2>Error</h2><p>${err.message}</p>`, classes: ['toast', 'error']});
     return err;
   }
 }
