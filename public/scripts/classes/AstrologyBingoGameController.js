@@ -164,8 +164,15 @@ class AstrologyBingoGameController {
     if (!(data instanceof Player)) {
       p = new Player(data);
     }
-    p.bcReport();
     this.players.push(p);
+
+    // for (let i = 0; i < 50; i += 1) {
+    //   if (!(data instanceof Player)) {
+    //     p = new Player(data);
+    //   }
+    //   this.players.push(p);
+    // }
+
     this.savePlayers();
     this.socket.send(JSON.stringify({ type: "player-added" }));
   }
