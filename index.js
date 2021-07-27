@@ -7,7 +7,7 @@ const isProd = NODE_ENV === "production";
 
 // Read users.json file
 const config = JSON.parse(
-  fs.readFileSync("./.vscode/settings.json", { encoding: "utf8" })
+  fs.readFileSync("./.vscode/settings.json", { encoding: "utf8" }),
 );
 const DEV_SERVER_PORT = config["liveServer.settings.port"];
 
@@ -17,15 +17,15 @@ app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
   console.log(`Birthchart List page: http://localhost:${WEB_HOST_PORT}/`);
   console.log(
-    `Add Birthchart page:  http://localhost:${WEB_HOST_PORT}/add-birth-data.html`
+    `Add Birthchart page:  http://localhost:${WEB_HOST_PORT}/add-birth-data.html`,
   );
   console.log(
-    `Calling Page:  http://localhost:${WEB_HOST_PORT}/generator.html`
+    `Calling Page:  http://localhost:${WEB_HOST_PORT}/generator.html`,
   );
   console.log(
-    `Public grid page:  http://localhost:${WEB_HOST_PORT}/call-reporter.html`
+    `Public grid page:  http://localhost:${WEB_HOST_PORT}/call-reporter.html`,
   );
   console.log(
-    `Example Chart page:  http://localhost:${WEB_HOST_PORT}/example-chart.html`
+    `Example Chart page:  http://localhost:${WEB_HOST_PORT}/example-chart.html`,
   );
 });
