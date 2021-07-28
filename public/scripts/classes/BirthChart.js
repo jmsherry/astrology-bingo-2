@@ -277,12 +277,12 @@ class BirthChart {
         "print-btn",
       );
       printButton.addEventListener("click", () => {
-        console.log("window", window);
+        // console.log("window", window);
         window.print();
         // printJS({
-        //   printable: "chart",
+        //   printable: "modalContent",
         //   type: "html",
-        //   css: "./styles/styles.css",
+        //   css: ["../styles/styles.css", "../styles/print-styles.css"],
         // });
       });
 

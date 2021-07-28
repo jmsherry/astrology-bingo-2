@@ -305,16 +305,4 @@ g.transparent > line {
   background-color: rgb(245, 228, 202);
 }
 
-/* PRINTNG CHART */
-@media print {
-  button,
-  header,
-  main,
-  footer {
-    display: none !important;
-  }
-  body {
-    min-height: auto;
-    padding-bottom: 0;
-  }
-}
+

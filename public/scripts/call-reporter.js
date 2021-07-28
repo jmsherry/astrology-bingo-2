@@ -20,7 +20,7 @@ const grid = new BingoDisplayGrid({
   },
   options: {
     features: {
-      showModal: true,
+      showModal: false,
       showPhrases: false,
     },
   },

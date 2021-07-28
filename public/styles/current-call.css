@@ -1,0 +1,13 @@
+.call-display-section .title {
+  font-size: 2rem;
+}
+
+.call-container {
+  max-width: 80%;
+  margin: auto;
+}
+
+.current-call {
+  padding: 5rem;
+  font-size: 10rem;
+}

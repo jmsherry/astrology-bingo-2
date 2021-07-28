@@ -1,0 +1,14 @@
+/* PRINTNG CHART */
+@media print {
+  button,
+  header,
+  a,
+  main,
+  footer {
+    display: none !important;
+  }
+  body {
+    min-height: auto;
+    padding-bottom: 0;
+  }
+}

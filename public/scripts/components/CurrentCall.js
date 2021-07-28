@@ -10,7 +10,7 @@ class CurrentCall {
     // Connection opened
     const { socket, alreadyCalled, reset } = this.game;
     socket.addEventListener("open", () => {
-      console.log("open from the current call");
+      // console.log("open from the current call");
     });
 
     // Listen for messages
@@ -52,7 +52,7 @@ class CurrentCall {
       renderFn();
       return;
     }
-    console.log("rendering");
+    // console.log("rendering");
     let callElem = document.getElementById("callContainer");
     if (!alreadyCalled.length) {
       callElem.innerHTML = `No calls yet...`;
