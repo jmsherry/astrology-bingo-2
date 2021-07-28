@@ -239,7 +239,7 @@ class BirthChart {
       throw new Error(
         `You must provide a DOM node to insert the chart in. Received ${mountNode} of type: ${typeof mountNode}; class: ${
           mountNode?.__proto__?.constructor
-        }`
+        }`,
       );
     }
 
@@ -274,7 +274,7 @@ class BirthChart {
         "btn",
         "waves-effect",
         "waves-light",
-        "print-btn"
+        "print-btn",
       );
       printButton.addEventListener("click", () => {
         window.print();
@@ -291,7 +291,7 @@ class BirthChart {
         "btn",
         "waves-effect",
         "waves-light",
-        "trans-btn"
+        "trans-btn",
       );
       transButton.addEventListener("click", () => {
         const outline = document.getElementById("chart");
@@ -321,11 +321,11 @@ class BirthChart {
       const timeDisplay = document.createElement("li");
       timeDisplay.textContent = `Time: ${this.time.slice(
         0,
-        2
+        2,
       )}:${this.time.slice(2)}`;
       const locationDisplay = document.createElement("li");
       locationDisplay.textContent = `Lat: ${this.latitude.toFixed(
-        2
+        2,
       )}, Long: ${this.longitude.toFixed(2)}`;
       console.log(dateDisplay, timeDisplay);
       birthdayDisplay.append(dateDisplay, timeDisplay, locationDisplay);
@@ -350,12 +350,12 @@ class BirthChart {
 
       const currentSymbol = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "svg"
+        "svg",
       );
 
       const currentWord = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "svg"
+        "svg",
       );
       // console.log("currentWord", currentWord);
       currentSymbol.setAttribute("viewBox", "0 0 300 300");
@@ -371,7 +371,7 @@ class BirthChart {
         "sign",
         "word",
         "chart",
-        `${sign.sign.toLowerCase()}`
+        `${sign.sign.toLowerCase()}`,
       );
       currentWord.innerHTML = sign.word;
       currentWord.location = sign.wordLocation;
@@ -389,7 +389,7 @@ class BirthChart {
             x: `${currentSymbol.location.x}`,
             y: `${currentSymbol.location.y}`,
           },
-        }
+        },
       );
       gsap.to(currentWord, {
         attr: {
@@ -414,7 +414,7 @@ class BirthChart {
 
     const chartImg = document.createElementNS(
       "http://www.w3.org/2000/svg",
-      "svg"
+      "svg",
     );
     // console.log("chartImg", chartImg);
     chartImg.id = "chart";

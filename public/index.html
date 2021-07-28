@@ -13,7 +13,9 @@
   <!-- 3rd party styles -->
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.5.0/print.min.css"
     integrity="sha512-zrPsLVYkdDha4rbMGgk9892aIBPeXti7W77FwOuOBV85bhRYi9Gh+gK+GWJzrUnaCiIEm7YfXOxW8rzYyTuI1A=="
     crossorigin="anonymous" />
@@ -29,7 +31,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.5.0/print.min.js"
     integrity="sha512-lzGE9ZqdrztBEk1wtq4O60N3WbsTlIvvm6ULCxWRt+CwpRD4WUbgC5aatbtourCUC15PJpqcpZk3VLs12vpNoA=="
     crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" defer></script>
 
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
     integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg=="
@@ -84,7 +86,8 @@
             <a class="grey-text text-lighten-3" href="/index.html">Birth charts in play</a>
             <a class="grey-text text-lighten-3" href="/add-birth-data.html">Add birth chart</a>
             <a class="grey-text text-lighten-3" href="/generator.html">Random call generator</a>
-            <a class="grey-text text-lighten-3" href="/call-reporter.html">Public Display</a>
+            <a class="grey-text text-lighten-3" href="/call-reporter.html">Grid</a>
+            <a class="grey-text text-lighten-3" href="/current-call.html">Current call</a>
             <a class="grey-text text-lighten-3" href="/example-chart.html">Example chart</a>
           </nav>
         </div>
@@ -96,7 +99,7 @@
 
   <!-- Modal Structure -->
   <div id="birthchart-modal" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" id="modalPlayerViewMount">
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>

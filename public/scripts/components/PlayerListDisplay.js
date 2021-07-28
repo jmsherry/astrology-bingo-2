@@ -1,4 +1,5 @@
 import BirthChart from "../classes/BirthChart.js";
+import Player from "../classes/Player.js";
 import AstrologyBingoGameController from "../classes/AstrologyBingoGameController.js";
 import { isElement } from "../utilities.js";
 
@@ -14,7 +15,7 @@ class PlayerListDisplay {
       throw new Error(
         `PlayerList needs a an AstrologyBingoGameController; instead received: ${game} (type: ${typeof game}, class: ${
           game?.__proto__?.constructor
-        })`
+        })`,
       );
     }
     this.game = game;
@@ -23,7 +24,7 @@ class PlayerListDisplay {
       throw new Error(
         `PlayerList needs an element to mount into; instead received: ${mountNode} (type: ${typeof mountNode}, class: ${
           mountNode?.__proto__?.constructor
-        })`
+        })`,
       );
     }
     this.mountNode = mountNode;
@@ -133,7 +134,7 @@ class PlayerListDisplay {
               type: "toggle-result-visibility",
               data: this.options.showingResults,
               controllerId: this.game._id,
-            })
+            }),
           );
         });
         this.controls.append(showResults);
@@ -169,12 +170,12 @@ class PlayerListDisplay {
           iconListItem.classList.add(
             "icon-item",
             `icon-${planet.toLowerCase()}`,
-            `${player[planet].sign.toLowerCase()}`
+            `${player[planet].sign.toLowerCase()}`,
           );
           const { icon: path, called } = player[planet];
           const icon = document.createElementNS(
             "http://www.w3.org/2000/svg",
-            "svg"
+            "svg",
           );
           icon.setAttribute("viewBox", "0 0 300 300");
           icon.setAttribute("width", "50");
@@ -199,7 +200,7 @@ class PlayerListDisplay {
           "waves-light",
           "btn",
           "red",
-          "delete-chart"
+          "delete-chart",
         );
         delbtn.addEventListener("click", (e) => {
           this.game.removePlayer(player);
@@ -214,17 +215,77 @@ class PlayerListDisplay {
           "waves-effect",
           "waves-light",
           "btn",
-          "view-chart"
+          "view-chart",
         );
         viewChartBtn.addEventListener("click", (e) => {
           // console.log("player", player);
           const contentDiv = this.modal.el.querySelector(".modal-content");
           contentDiv.innerHTML = "";
-          const heading = document.createElement("h2");
-          heading.classList.add("chart-heading");
-          heading.textContent = `${player.ownerName}`;
-          contentDiv.append(heading);
-          contentDiv.append(player.generateChartImage());
+          // const heading = document.createElement("h2");
+          // heading.classList.add("chart-heading");
+          // heading.textContent = `${player.ownerName}`;
+          // contentDiv.append(heading);
+          // contentDiv.append(player.generateChartImage());
+          // // Print fn
+          // const printButton = document.createElement("button");
+          // printButton.textContent = "print chart";
+          // printButton.classList.add(
+          //   "btn",
+          //   "waves-effect",
+          //   "waves-light",
+          //   "print-btn",
+          // );
+          // printButton.addEventListener("click", () => {
+          //   window.print();
+          //   // printJS({
+          //   //   printable: "chart",
+          //   //   type: "html",
+          //   //   css: "./styles/styles.css",
+          //   // });
+          // });
+
+          // // Remove outline
+          // const transButton = document.createElement("button");
+          // transButton.textContent = "Remove outline";
+          // transButton.classList.add(
+          //   "btn",
+          //   "waves-effect",
+          //   "waves-light",
+          //   "trans-btn",
+          // );
+          // transButton.addEventListener("click", () => {
+          //   const outline = document.getElementById("chart");
+          //   const children = outline.childNodes;
+          //   for (const child of children) {
+          //     if (!child.classList.contains("sign")) {
+          //       child.classList.toggle("transparent");
+          //     } else {
+          //       return;
+          //     }
+          //   }
+          //   // // console.log("children", children);
+          //   // children.classList.add("transparent");
+          //   // outline.classList.add("transparent");
+          // });
+          // contentDiv.append(printButton);
+          // contentDiv.append(transButton);
+          function renderChart(player, mount = contentDiv) {
+            if (!(player instanceof Player)) {
+              throw new Error(
+                `player supplied to renderChart must be an instance of Player; instead received ${player} (type: ${typeof player} of class ${
+                  player?.__proto__?.constructor
+                })`,
+              );
+            }
+            player.renderChart({ mountNode: mount, recreate: true });
+            setTimeout(() => {
+              mount.scrollIntoView({
+                behavior: "smooth",
+              });
+            }, 250);
+          }
+          console.log(player);
+          renderChart(player);
           this.modal.open();
         });
         controls.append(viewChartBtn);
@@ -236,7 +297,6 @@ class PlayerListDisplay {
       mountNode.append(list);
     }
   }
-
 }
 
 export default PlayerListDisplay;
