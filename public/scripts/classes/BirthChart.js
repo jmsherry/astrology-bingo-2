@@ -277,6 +277,7 @@ class BirthChart {
         "print-btn",
       );
       printButton.addEventListener("click", () => {
+        console.log("window", window);
         window.print();
         // printJS({
         //   printable: "chart",

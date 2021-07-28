@@ -221,54 +221,6 @@ class PlayerListDisplay {
           // console.log("player", player);
           const contentDiv = this.modal.el.querySelector(".modal-content");
           contentDiv.innerHTML = "";
-          // const heading = document.createElement("h2");
-          // heading.classList.add("chart-heading");
-          // heading.textContent = `${player.ownerName}`;
-          // contentDiv.append(heading);
-          // contentDiv.append(player.generateChartImage());
-          // // Print fn
-          // const printButton = document.createElement("button");
-          // printButton.textContent = "print chart";
-          // printButton.classList.add(
-          //   "btn",
-          //   "waves-effect",
-          //   "waves-light",
-          //   "print-btn",
-          // );
-          // printButton.addEventListener("click", () => {
-          //   window.print();
-          //   // printJS({
-          //   //   printable: "chart",
-          //   //   type: "html",
-          //   //   css: "./styles/styles.css",
-          //   // });
-          // });
-
-          // // Remove outline
-          // const transButton = document.createElement("button");
-          // transButton.textContent = "Remove outline";
-          // transButton.classList.add(
-          //   "btn",
-          //   "waves-effect",
-          //   "waves-light",
-          //   "trans-btn",
-          // );
-          // transButton.addEventListener("click", () => {
-          //   const outline = document.getElementById("chart");
-          //   const children = outline.childNodes;
-          //   for (const child of children) {
-          //     if (!child.classList.contains("sign")) {
-          //       child.classList.toggle("transparent");
-          //     } else {
-          //       return;
-          //     }
-          //   }
-          //   // // console.log("children", children);
-          //   // children.classList.add("transparent");
-          //   // outline.classList.add("transparent");
-          // });
-          // contentDiv.append(printButton);
-          // contentDiv.append(transButton);
           function renderChart(player, mount = contentDiv) {
             if (!(player instanceof Player)) {
               throw new Error(

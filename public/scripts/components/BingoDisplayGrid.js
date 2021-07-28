@@ -49,7 +49,7 @@ class BingoDisplayGrid {
     socket.addEventListener("message", (event) => {
       console.log("grid received message", event.data);
       const evt = JSON.parse(event.data);
-      // console.log("evt", evt);
+      console.log("evt", evt);
       switch (evt.type) {
         case "updated-state":
           if (evt.controllerId === this.game._id) {
