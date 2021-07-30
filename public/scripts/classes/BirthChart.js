@@ -497,7 +497,7 @@ class BirthChart {
   </text>`;
         break;
       case "Gemini":
-        return `<text transform="rotate(88.854 7.47 9.713)" font-size="252.05" font-family="WolpePegasus-Regular">
+        return `<text transform="rotate(88.854 7.47 9.713)" font-size="240" font-family="WolpePegasus-Regular">
     Gem
   </text>`;
         break;
