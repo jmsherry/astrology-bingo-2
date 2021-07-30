@@ -1,3 +1,17 @@
+body {
+  /* background-color: #700fb5; */
+  background-image: url("./../assets/img/space-floor.png"),
+    radial-gradient(circle, rgba(27, 20, 100, 1) 0%, rgba(112, 15, 181, 1) 100%);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  color: #fff;
+}
+
+.call-display-section {
+  height: 70vh;
+  display: flex;
+}
 .call-display-section .title {
   font-size: 2rem;
 }
@@ -8,6 +22,20 @@
 }
 
 .current-call {
-  padding: 5rem;
-  font-size: 10rem;
+  font-size: 15rem;
+}
+
+.logo-container {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logo {
+  max-width: 10%;
+}
+
+.page-footer,
+nav {
+  background-color: transparent;
 }

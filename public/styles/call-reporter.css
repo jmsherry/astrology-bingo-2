@@ -1,21 +1,36 @@
+body {
+  background-color: ivory;
+}
 .upper-controls {
   min-height: 0;
 }
 
-/* .called-list li {
-  padding-inline-start: 5px;
-} */
-
-/* th,
-tr {
-  font-size: 2rem;
-} */
 .call-table {
   height: calc(100vh - 128px);
 }
 
+tfoot,
+thead,
+tbody th,
+tbody th {
+  /* background-color: rgb(196, 182, 218); */
+  background-color: hsl(14, 100%, 72%);
+  /* font-variant: small-caps; */
+}
+td:hover,
+tfoot th:hover,
+tfoot th.hover,
+thead th:hover,
+thead th.hover,
+tbody th:hover,
+tbody th.hover {
+  background-color: rgb(99, 236, 106);
+  color: #000000;
+}
+
 td.called {
-  background-color: rgb(186, 216, 185);
+  /* background-color: rgb(186, 216, 185); */
+  background-color: #700fb5;
   text-align: center;
   font-size: 1.5rem;
   color: #fff;
@@ -24,7 +39,7 @@ td.called {
 
 td.called .title {
   font-variant-caps: all-petite-caps;
-  color: black;
+  color: #fff;
   font-size: 1.6rem;
 }
 
@@ -32,7 +47,7 @@ td.called .title {
   height: 60%;
 }
 .modal.open {
-  display: flex!important;
+  display: flex !important;
 }
 
 .modal.open .modal-content {
@@ -49,4 +64,10 @@ td.called .title {
 }
 .modal.open .modal-footer {
   position: absolute;
+}
+
+.page-footer,
+nav {
+  background-color: hsla(14, 100%, 72%, 30%);
+  color: #000000;
 }
