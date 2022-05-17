@@ -10,7 +10,7 @@ import { isElement } from "../utilities.js";
 class BingoDisplayGrid {
   constructor({
     game,
-    domNodes: { gridArea, controls, phraseDisplay },
+    domNodes: { gridArea, controls, phraseDisplay, prevCallDisplay },
     classes: {
       calledClass = "called",
       hoveringClass = "hover",
@@ -23,6 +23,7 @@ class BingoDisplayGrid {
     this.gridArea = gridArea;
     this.controls = controls;
     this.phraseDisplay = phraseDisplay;
+    this.prevCallDisplay = prevCallDisplay;
     this.classes = {
       calledClass,
       hoveringClass,
@@ -296,6 +297,7 @@ class BingoDisplayGrid {
     if (!called.length) {
       if (this.settings.features.showPhrases) {
         this.phraseDisplay.innerHTML = "";
+        this.prevCallDisplay.innerHTML = "";
       }
       return;
     }
@@ -338,11 +340,23 @@ class BingoDisplayGrid {
     }
     if (this.settings.features.showPhrases) {
       const phrase = document.createElement("p");
+      const prevCallEl = document.createElement("p");
       const { planet, sign } = called[called.length - 1];
+      const prevPlanet = called[called.length - 2].planet;
+      const prevSign = called[called.length - 2].sign;
       phrase.textContent =
         AstrologyBingoGameController.catchPhraseDict[planet][sign];
       this.phraseDisplay.innerHTML = "";
       this.phraseDisplay.append(phrase);
+
+      let prevCallText =
+        prevPlanet === "Ascendant" || prevSign === "Descendant"
+          ? `Previous call = ${prevSign} ${prevPlanet}`
+          : `Previous call = ${prevPlanet} in ${prevSign}`;
+      prevCallEl.textContent = prevCallText;
+
+      this.prevCallDisplay.innerHTML = "";
+      this.prevCallDisplay.append(prevCallEl);
     }
   }
 

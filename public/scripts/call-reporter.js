@@ -11,6 +11,7 @@ const grid = new BingoDisplayGrid({
     gridArea: document.getElementById("grid-container"),
     controls: document.getElementById("controls"),
     phraseDisplay: document.getElementById("phrase"),
+    prevCallDisplay: document.getElementById("prevCall"),
     // upperControls: document.getElementById("upperControls"),
   },
   classes: {

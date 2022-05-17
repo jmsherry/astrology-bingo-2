@@ -22,13 +22,13 @@ class AstrologyBingoGameController {
     this._id = uuidv4();
 
     const potentialsData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.potentialPicks
+      AstrologyBingoGameController.storageLabels.potentialPicks,
     );
     const calledData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.alreadyCalled
+      AstrologyBingoGameController.storageLabels.alreadyCalled,
     );
     const playerData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.players
+      AstrologyBingoGameController.storageLabels.players,
     );
     const potentials = JSON.parse(potentialsData);
     const called = JSON.parse(calledData);
@@ -39,7 +39,7 @@ class AstrologyBingoGameController {
     } else {
       if (potentials != null && !Array.isArray(potentials)) {
         console.warn(
-          `Corrupted data. 'potentials' should be an array, instead got ${potentials}`
+          `Corrupted data. 'potentials' should be an array, instead got ${potentials}`,
         );
       }
       this.potentialCallList = [];
@@ -55,7 +55,7 @@ class AstrologyBingoGameController {
     } else {
       if (called != null && !Array.isArray(called)) {
         console.warn(
-          `Corrupted data. 'called' should be an array, instead got ${called}`
+          `Corrupted data. 'called' should be an array, instead got ${called}`,
         );
       }
       this.alreadyCalled = [];
@@ -63,12 +63,12 @@ class AstrologyBingoGameController {
 
     if (players != null && Array.isArray(players)) {
       this.players = players.map(
-        (player) => new Player({ chartData: player, _id: player._id })
+        (player) => new Player({ chartData: player, _id: player._id }),
       );
     } else {
       if (players != null && !Array.isArray(players)) {
         console.warn(
-          `Corrupted data. 'players' should be an array, instead got ${players}`
+          `Corrupted data. 'players' should be an array, instead got ${players}`,
         );
       }
       this.players = [];
@@ -90,10 +90,10 @@ class AstrologyBingoGameController {
             }
             // this makes the grids re-render
             console.log(
-              `${this._id} sending the updated-state signal for grids`
+              `${this._id} sending the updated-state signal for grids`,
             );
             this.socket.send(
-              JSON.stringify({ type: "updated-state", controllerId: this._id })
+              JSON.stringify({ type: "updated-state", controllerId: this._id }),
             );
             break;
           case "picked":
@@ -102,10 +102,10 @@ class AstrologyBingoGameController {
               this.refreshData();
             }
             console.log(
-              `${this._id} sending the updated-state signal for grids`
+              `${this._id} sending the updated-state signal for grids`,
             );
             this.socket.send(
-              JSON.stringify({ type: "updated-state", controllerId: this._id })
+              JSON.stringify({ type: "updated-state", controllerId: this._id }),
             );
             break;
           // case "toggle-result-visibility":
@@ -122,7 +122,7 @@ class AstrologyBingoGameController {
             //   `${this._id} sending the updated-state signal for grids`
             // );
             this.socket.send(
-              JSON.stringify({ type: "updated-state", controllerId: this._id })
+              JSON.stringify({ type: "updated-state", controllerId: this._id }),
             );
             break;
           case "player-deleted":
@@ -130,32 +130,32 @@ class AstrologyBingoGameController {
               this.updatePlayers();
             }
             this.socket.send(
-              JSON.stringify({ type: "updated-state", controllerId: this._id })
+              JSON.stringify({ type: "updated-state", controllerId: this._id }),
             );
             break;
           default:
             console.log(
               `game ${this._id} received unknown evt`,
               evt,
-              "doing nothing"
+              "doing nothing",
             );
         }
       },
-      undefined
+      undefined,
     );
 
     // save
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.potentialPicks,
-      JSON.stringify(this.potentialCallList)
+      JSON.stringify(this.potentialCallList),
     );
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.alreadyCalled,
-      JSON.stringify(this.alreadyCalled)
+      JSON.stringify(this.alreadyCalled),
     );
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.players,
-      JSON.stringify(this.players)
+      JSON.stringify(this.players),
     );
   }
 
@@ -182,7 +182,7 @@ class AstrologyBingoGameController {
       throw new Error(
         `AstrologyBingoGameController.removePlayer needs a Player object; instead received: ${player} (type: ${typeof player}, class: ${
           player?.__proto__?.constructor
-        })`
+        })`,
       );
     }
     const idx = this.players.findIndex(({ _id }) => _id === player._id);
@@ -214,10 +214,10 @@ class AstrologyBingoGameController {
 
   updatePicks() {
     const potentialsData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.potentialPicks
+      AstrologyBingoGameController.storageLabels.potentialPicks,
     );
     const calledData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.alreadyCalled
+      AstrologyBingoGameController.storageLabels.alreadyCalled,
     );
     const potentials = JSON.parse(potentialsData);
     const called = JSON.parse(calledData);
@@ -227,7 +227,7 @@ class AstrologyBingoGameController {
     } else {
       if (potentials != null && !Array.isArray(potentials)) {
         console.warn(
-          `Corrupted data. 'potentials' should be an array, instead got ${potentials}`
+          `Corrupted data. 'potentials' should be an array, instead got ${potentials}`,
         );
       }
     }
@@ -237,7 +237,7 @@ class AstrologyBingoGameController {
     } else {
       if (called != null && !Array.isArray(called)) {
         console.warn(
-          `Corrupted data. 'called' should be an array, instead got ${called}`
+          `Corrupted data. 'called' should be an array, instead got ${called}`,
         );
       }
     }
@@ -245,17 +245,17 @@ class AstrologyBingoGameController {
 
   updatePlayers() {
     const playerData = localStorage.getItem(
-      AstrologyBingoGameController.storageLabels.players
+      AstrologyBingoGameController.storageLabels.players,
     );
     const players = JSON.parse(playerData);
     if (players != null && Array.isArray(players)) {
       this.players = players.map(
-        (player) => new Player({ chartData: player, _id: player._id })
+        (player) => new Player({ chartData: player, _id: player._id }),
       );
     } else {
       if (players != null && !Array.isArray(players)) {
         console.warn(
-          `Corrupted data. 'players' should be an array, instead got ${players}`
+          `Corrupted data. 'players' should be an array, instead got ${players}`,
         );
       }
     }
@@ -279,7 +279,7 @@ class AstrologyBingoGameController {
 
     if (signal) {
       this.socket.send(
-        JSON.stringify({ type: "reset", controllerId: this._id })
+        JSON.stringify({ type: "reset", controllerId: this._id }),
       );
     }
   }
@@ -299,7 +299,7 @@ class AstrologyBingoGameController {
 
     // Find the object
     const pickedItemIndex = this.potentialCallList.findIndex(
-      ({ sign, planet }) => sign === picked.sign && planet === picked.planet
+      ({ sign, planet }) => sign === picked.sign && planet === picked.planet,
     );
 
     // move from 'potentialCallList' to 'alreadyCalled'
@@ -319,7 +319,7 @@ class AstrologyBingoGameController {
         type: "picked",
         item: pickedItem,
         controllerId: this._id,
-      })
+      }),
     );
 
     // cb(this);
@@ -328,13 +328,13 @@ class AstrologyBingoGameController {
   static getCatchPhrase(planet, sign) {
     if (typeof planet !== "string") {
       throw new Error(
-        `Planet supplied to getCatchPhrase must be a string. Received ${planet} (type: ${planet})`
+        `Planet supplied to getCatchPhrase must be a string. Received ${planet} (type: ${planet})`,
       );
     }
 
     if (typeof sign !== "string") {
       throw new Error(
-        `Sign supplied to getCatchPhrase must be a string. Received ${sign} (type: ${sign})`
+        `Sign supplied to getCatchPhrase must be a string. Received ${sign} (type: ${sign})`,
       );
     }
 
@@ -343,16 +343,16 @@ class AstrologyBingoGameController {
     if (!planets.includes(planet)) {
       throw new Error(
         `Planet supplied to getCatchPhrase must be a recognised planet (One of ${planets.join(
-          ", "
-        )}). Received ${planet}`
+          ", ",
+        )}). Received ${planet}`,
       );
     }
 
     if (!signs.includes(sign)) {
       throw new Error(
         `Planet supplied to getCatchPhrase must be a recognised sign (One of ${signs.join(
-          ", "
-        )}). Received ${sign}`
+          ", ",
+        )}). Received ${sign}`,
       );
     }
 
@@ -363,11 +363,11 @@ class AstrologyBingoGameController {
     // Save in case you change page
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.potentialPicks,
-      JSON.stringify(this.potentialCallList)
+      JSON.stringify(this.potentialCallList),
     );
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.alreadyCalled,
-      JSON.stringify(this.alreadyCalled)
+      JSON.stringify(this.alreadyCalled),
     );
   }
 
@@ -375,7 +375,7 @@ class AstrologyBingoGameController {
     // console.log("this.players", this.players);
     localStorage.setItem(
       AstrologyBingoGameController.storageLabels.players,
-      JSON.stringify(this.players)
+      JSON.stringify(this.players),
     );
   }
 
@@ -424,14 +424,14 @@ class AstrologyBingoGameController {
       Scorpio: "Orlando Bloom, Scorpio Moon",
       Sagittarius: "Travels in June, Sagittarius Moon",
       Capricorn: "Swampy lagoon, Capricorn Moon",
-      Aquarius: "A bit of a loon, Aquarius Moon",
+      Aquarius: "See you soon, Aquarius Moon",
       Pisces: "Humming a tune, Pisces Moon",
     },
     Ascendant: {
       Aries: "1st amendment, Aries Ascendant",
-      Taurus: "Loves pie and we don&#39;t mean Pythagorus, Ascendant in Taurus",
+      Taurus: "Loves pie and we don't mean Pythagorus, Ascendant in Taurus",
       Gemini: "Personality will Multiply, Ascendent in Gemini",
-      Cancer: "Fiercely independent, Leo Ascendant",
+      Cancer: "Crabbies Ginger Ale, Cancer Ascendant",
       Leo: "Fiercely independent, Leo Ascendant",
       Virgo: "Work commitment, Virgo Ascendant",
       Libra: "Balancing Act, Libra Ascendant",
@@ -450,7 +450,7 @@ class AstrologyBingoGameController {
       Virgo: "The thinker who likes to tinker, Virgo Mercury",
       Libra: "Queen of Sheeba, Mercury Libra",
       Scorpio: "They’ll see through your perjury, Scorpio Mercury",
-      Sagittarius: "Gorgeous &amp; Gregarious, Mercury in Sagittarius",
+      Sagittarius: "Gorgeous & Gregarious, Mercury in Sagittarius",
       Capricorn: "Thorough to the bone, Mercury Capricorn",
       Aquarius: "By the way, you will bore us, Mercury Aquarius",
       Pisces: "Can you repeat the question? Pisces Mercury",
@@ -487,7 +487,7 @@ class AstrologyBingoGameController {
       Aries: "Bloody Mary’s! Jupiter Aries",
       Taurus: "Eat your way through the Virus, Jupiter Taurus",
       Gemini: "Social Butterfly Jupiter Gemini",
-      Cancer: "Being sad isn’t the answer, jupiter Cancer",
+      Cancer: "Being sad isn’t the answer, Jupiter Cancer",
       Leo: "Put up the gazebo, Jupiter Leo",
       Virgo: "On Furlough, Jupiter Virgo",
       Libra: "secret monsta, Jupiter Libra",
@@ -530,7 +530,7 @@ class AstrologyBingoGameController {
     Neptune: {
       Aries: "Covid Immune, Aries Neptune",
       Taurus: "Wake up at Noon, Taurus Neptune",
-      Gemini: "Bday in June, Gemini Neptune",
+      Gemini: "Fruit of the loom, Gemini Neptune",
       Cancer: "Swim to the moon, Cancer Neptune",
       Leo: "A bit of a goon, Leo Neptune",
       Virgo: "Ladies commune, Virgo Neptune",
@@ -553,13 +553,13 @@ class AstrologyBingoGameController {
       Sagittarius: "Tasty Prosciutto, Sagittarius Pluto",
       Capricorn: "Saving for a bungalow, Capricorn Pluto",
       Aquarius: "A Silly Dodo, Aquarius Pluto",
-      Pisces: "Mermaid Hoe, Pisces Pluto",
+      Pisces: "Delicious cod roe, Pisces Pluto",
     },
     Descendant: {
       Aries: "Married at first sight, Aries Descendant",
       Taurus: "You’re my lobster, Taurus Descendant",
       Gemini: "Easy Breezy Beautiful Cover Girls Gemini Descendant",
-      Cancer: "Total independence",
+      Cancer: "Total independence, Cancer Descendant",
       Leo: "Live, Laugh, Love, Leo Descendant",
       Virgo: "Split the bill, Virgo Descendant",
       Libra: "There’s no I in team, but there is an I in Libra Descendant",

@@ -1,7 +1,13 @@
+@font-face {
+  font-family: Chromate;
+  src: url("./../assets/fonts/Chromate-Regular.otf");
+}
+
 body {
   min-height: 100vh;
   text-align: center;
-  font-family: "Wolpe Pegasus", Courier, monospace;
+  /* font-family: "Wolpe Pegasus", Courier, monospace; */
+  font-family: Chromate;
   /* "Courier New", */
   padding-bottom: 64px;
 }
