@@ -9,6 +9,14 @@ const call = new CurrentCall({
   game: new AstrologyBingoGameController(),
   domNodes: {
     callDisplay: document.getElementById("call-container"),
+    controls: document.getElementById("upperControls"),
+  },
+  options: {
+    features: {
+      controls: true,
+      hoverguides: false,
+      clickable: false,
+    },
   },
 });
 

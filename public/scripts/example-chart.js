@@ -18,7 +18,7 @@ const alice = {
   birthday: "1990/07/04",
   latitude: 53.4083714,
   longitude: -2.9915726,
-  ownerName: "Alice",
+  ownerName: "Alice Fig",
   time: "1800",
 };
 
@@ -28,7 +28,7 @@ function renderChart(player, mount = document.getElementById("exampleMount")) {
     throw new Error(
       `player supplied to renderChart must be an instance of Player; instead received ${player} (type: ${typeof player} of class ${
         player?.__proto__?.constructor
-      })`
+      })`,
     );
   }
   player.renderChart({ mountNode: mount });
