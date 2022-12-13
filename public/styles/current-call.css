@@ -20,13 +20,12 @@ body {
   /* max-width: 80%;
   margin: auto; */
   display: grid;
-  grid-template-columns: 8% 19% 0% 42% 31%;
+  grid-template-columns: 1% 19% 1% 60% 39%;
   grid-template-rows: 9% 25% 11% 45% 10%;
   width: 100%;
 }
 
-.current-call {
-  font-size: 11rem;
+.lastcall-container {
   /* margin: 0; */
   grid-column-start: 4;
   grid-column-end: 5;
@@ -36,12 +35,20 @@ body {
   margin: auto;
 }
 
-.prev-call {
+.prevcall-container {
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 3;
   margin: auto;
+}
+
+.prevcall-container > h2 {
+  font-size: 4rem;
+}
+
+.lastcall-container > h2 {
+  font-size: 10.5rem;
 }
 
 .logo-container {

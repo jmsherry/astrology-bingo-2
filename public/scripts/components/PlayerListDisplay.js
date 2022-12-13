@@ -19,7 +19,7 @@ class PlayerListDisplay {
       );
     }
     this.game = game;
-
+    console.log("number of players:", game.players.length);
     if (!isElement(mountNode)) {
       throw new Error(
         `PlayerList needs an element to mount into; instead received: ${mountNode} (type: ${typeof mountNode}, class: ${
@@ -81,10 +81,10 @@ class PlayerListDisplay {
       modalElem.classList.add("modal", "pick-modal");
       modalElem.id = "pick-modal";
       modalElem.innerHTML = `
-            <div class="modal-footer">
+            <div class="modal-content" id="modalContent"></div>
+               <div class="modal-footer">
               <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
             </div>
-            <div class="modal-content" id="modalContent"></div>
             `;
       document.body.append(modalElem);
     }

@@ -100,29 +100,45 @@ class CurrentCall {
       this.addControls();
     }
 
-    let callElem = document.getElementById("callContainer");
+    // let callElem = document.getElementById("callContainer");
+    // if (!alreadyCalled.length) {
+    //   callElem.innerHTML = `No calls yet...`;
+    // }
+
+    let lastCallElem = document.getElementById("lastCallContainer");
+    let prevCallElem = document.getElementById("prevCallContainer");
+
     if (!alreadyCalled.length) {
-      callElem.innerHTML = `No calls yet...`;
+      lastCallElem.innerHTML = `No calls yet...`;
+      prevCallElem.innerHTML = `No previous call yet...`;
+    }
+
+    if (!alreadyCalled.length === 1) {
+      prevCallElem.innerHTML = `No previous call yet...`;
     }
 
     let lastCall = alreadyCalled[alreadyCalled.length - 1];
-    let prevCall = alreadyCalled[alreadyCalled.length - 2];
 
-    console.log("prevCall", prevCall);
+    // TODO if alreadyCalled = 0 let prevcall say no calls yet
+    if (alreadyCalled.length > 1) {
+      let prevCall = alreadyCalled[alreadyCalled.length - 2];
+      let prevCallText =
+        prevCall.planet === "Ascendant" || prevCall.planet === "Descendant"
+          ? `${prevCall.sign} ${prevCall.planet}`
+          : `${prevCall.planet} in ${prevCall.sign}`;
+      prevCallElem.innerHTML = ` <h2 class="prev-call">${prevCallText}</h2>`;
+    }
 
     let lastCallText =
       lastCall.planet === "Ascendant" || lastCall.planet === "Descendant"
         ? `${lastCall.sign} ${lastCall.planet}`
         : `${lastCall.planet} in ${lastCall.sign}`;
 
-    let prevCallText =
-      prevCall.planet === "Ascendant" || prevCall.planet === "Descendant"
-        ? `${prevCall.sign} ${prevCall.planet}`
-        : `${prevCall.planet} in ${prevCall.sign}`;
-    callElem.innerHTML = `
-      <h2 class="current-call">${lastCallText}</h2>
-      <h2 class="prev-call">${prevCallText}</h2>
-            `;
+    //  callElem.innerHTML = `
+    //       <h2 class="current-call">${lastCallText}</h2>
+    //       <h2 class="prev-call">${prevCallText}</h2>
+    //             `;
+    lastCallElem.innerHTML = `<h2 class="current-call">${lastCallText}</h2>`;
   }
 }
 

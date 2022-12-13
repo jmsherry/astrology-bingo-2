@@ -342,21 +342,22 @@ class BingoDisplayGrid {
       const phrase = document.createElement("p");
       const prevCallEl = document.createElement("p");
       const { planet, sign } = called[called.length - 1];
-      const prevPlanet = called[called.length - 2].planet;
-      const prevSign = called[called.length - 2].sign;
+      if (called.length > 1) {
+        const prevPlanet = called[called.length - 2].planet;
+        const prevSign = called[called.length - 2].sign;
+        let prevCallText =
+          prevPlanet === "Ascendant" || prevSign === "Descendant"
+            ? `Previous call = ${prevSign} ${prevPlanet}`
+            : `Previous call = ${prevPlanet} in ${prevSign}`;
+        prevCallEl.textContent = prevCallText;
+
+        this.prevCallDisplay.innerHTML = "";
+        this.prevCallDisplay.append(prevCallEl);
+      }
       phrase.textContent =
         AstrologyBingoGameController.catchPhraseDict[planet][sign];
       this.phraseDisplay.innerHTML = "";
       this.phraseDisplay.append(phrase);
-
-      let prevCallText =
-        prevPlanet === "Ascendant" || prevSign === "Descendant"
-          ? `Previous call = ${prevSign} ${prevPlanet}`
-          : `Previous call = ${prevPlanet} in ${prevSign}`;
-      prevCallEl.textContent = prevCallText;
-
-      this.prevCallDisplay.innerHTML = "";
-      this.prevCallDisplay.append(prevCallEl);
     }
   }
 

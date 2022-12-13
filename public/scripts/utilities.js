@@ -59,7 +59,10 @@ export async function makeCall(url = "", options = {}) {
     const data = await response.json();
     return data;
   } catch (err) {
-    M.toast({html: `<h2>Error</h2><p>${err.message}</p>`, classes: ['toast', 'error']});
+    M.toast({
+      html: `<h2>Error</h2><p>${err.message}</p>`,
+      classes: ["toast", "error"],
+    });
     return err;
   }
 }
@@ -76,7 +79,7 @@ export function connectToWebSocket(
   errorHandler = function errorHandler(err) {
     console.log(err);
   },
-  closeHandler
+  closeHandler,
 ) {
   let i = 1;
   // Create WebSocket connection.
