@@ -1,0 +1,46 @@
+.admin-section{
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+
+}
+
+.game-admin, .player-admin, .celeb-admin{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap:1rem;
+    flex-direction: column;
+    background-color:#ffdeeb;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+button#delete-players{
+    background-color: rgb(183, 61, 61);
+}
+
+#confirm-modal.hidden {
+    display: none;
+  }
+  
+  #confirm-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+  }
+  
+  .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+  }
+  
+  .modal-box {
+    position: relative;
+    margin: 15% auto;
+    background: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 8px;
+  }

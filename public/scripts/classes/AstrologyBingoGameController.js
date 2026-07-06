@@ -170,10 +170,18 @@ class AstrologyBingoGameController {
 
     let p = data;
 
-    // TODO THIS IS THE BIT THAT NEEDS TO CHANGE BASED ON CELEBS 
+    // TODO I THINK THIS IS THE BIT THAT NEEDS TO CHANGE BASED ON CELEBS 
+    // if (!(data instanceof Player)) {
+    //     p = new Player(data);
+    // }
+
     if (!(data instanceof Player)) {
-        p = new Player(data);
-    }
+
+      p = new Player({
+          chartData: data
+      });
+  
+  }
 
     this.players.push(p);
 
@@ -288,21 +296,21 @@ class AstrologyBingoGameController {
     }
   }
 
-  importCelebrities(celebs) {
-    let added = 0;
-    for (const celeb of celebs) {
-      console.log("data in import celebs", celeb);
-        const exists = this.players.some(
-            player => player.name === celeb.name
-        );
-        if (exists) {
-            continue;
-        }
-        this.addPlayer(celeb);
-        added++;
-    }
+  importCelebrities(celebs, limit = celebs.length) {
 
-    return added;
+    const available = [...celebs]
+        .filter(celeb =>
+            !this.players.some(
+                player => player.name === celeb.name
+            )
+        )
+        .sort(() => Math.random() - 0.5);
+
+    const toAdd = available.slice(0, limit);
+
+    toAdd.forEach(celeb => this.addPlayer(celeb));
+
+    return toAdd.length;
 }
 
   refreshData() {

@@ -23,7 +23,7 @@
 
   <!-- our own styles  -->
   <link rel="stylesheet" href="./styles/styles.css">
-  <link rel="stylesheet" href="./styles/print-styles.css">
+  <link rel="stylesheet" href="./styles/admin.css">
 
   <!-- 3rd party scripts -->
 
@@ -42,31 +42,52 @@
 </head>
 
 <body>
-  <header class="page-header">
+  <header class="">
     <nav>
-      <div class="nav-wrapper">
-        <a href="/" class="brand-logo center">Astrology Bingo</a>
-      </div>
-
+        <a href="/">Astrology Bingo</a>
+        <h1>Admin</h1>
     </nav>
   </header>
   <main>
-    <section id="admin-section">
-    <h1>Admin</h1>
+    <section id="admin-section" class="admin-section">
 
+ 
+   <div class="player-admin">    
+    <h3>Players</h3>
     <p id="player-count">Player count</p>
     
-    <button id="reset-game">
-    Reset Game
-    </button>
-    
-    <button id="delete-players">
+    <button id="delete-players" class="danger">
     Delete All Players
     </button>
-    
+    </div>
+    <div class="celeb-admin"> 
+    <h3>Celebrities</h3>
     <button id="import-celebs">
     Import Celebrities
     </button>
+  </div>
+  <div class="game-admin">
+    <h3> Current game</h3>
+     <p >Called: <span id="call-count"></span></p>
+    <p> Remaining calls: <span id="remaining-call-count"></span></p>
+      <button id="reset-game">
+         Reset Game
+         </button>
+  </div>
+</section>
+<section>
+  <div id="confirm-modal" class="hidden">
+    <div class="modal-backdrop"></div>
+  
+    <div class="modal-box">
+      <p id="confirm-message"></p>
+  
+      <div class="modal-actions">
+        <button id="confirm-no">Cancel</button>
+        <button id="confirm-yes">Confirm</button>
+      </div>
+    </div>
+  </div>
 </section>
   </main>
   <footer class="page-footer">
@@ -75,12 +96,14 @@
         <div class="col s12">
 
           <nav class="footer-nav">
-            <a class="grey-text text-lighten-3" href="/index.html">Birth charts in play</a>
-            <a class="grey-text text-lighten-3" href="/add-birth-data.html">Add birth chart</a>
-            <a class="grey-text text-lighten-3" href="/generator.html">Random call generator</a>
-            <a class="grey-text text-lighten-3" href="/call-reporter.html">Grid</a>
-            <a class="grey-text text-lighten-3" href="/current-call.html">Current call</a>
-            <a class="grey-text text-lighten-3" href="/example-chart.html">Example chart</a>
+            <a href="/index.html">Birth charts in play</a>
+            <a href="/add-birth-data.html">Add birth chart</a>
+            <a href="/generator.html">Random call generator</a>
+            <a href="/current-call.html">Current call</a>
+            <a href="/example-chart.html">Example chart</a>
+            <a href="/admin.html">
+              Admin
+              </a>
           </nav>
         </div>
       </div>

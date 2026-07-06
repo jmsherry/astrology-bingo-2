@@ -96,11 +96,9 @@ class CurrentCall {
       this.controls.append(callButton);
     }
 
-
-// Add delete button to controls 
-    // if (settings.features.controls) {
-    //   this.addControls();
-    // }
+    if (settings.features.controls) {
+      this.addControls();
+    }
 
     // let callElem = document.getElementById("callContainer");
     // if (!alreadyCalled.length) {

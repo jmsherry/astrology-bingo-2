@@ -348,8 +348,8 @@ class BingoDisplayGrid {
         const prevSign = called[called.length - 2].sign;
         let prevCallText =
           prevPlanet === "Ascendant" || prevSign === "Descendant"
-            ? `Previous call = ${prevSign} ${prevPlanet}`
-            : `Previous call = ${prevPlanet} in ${prevSign}`;
+            ? `Previous call: ${prevSign} ${prevPlanet}`
+            : `Previous call: ${prevPlanet} in ${prevSign}`;
         prevCallEl.textContent = prevCallText;
 
         this.prevCallDisplay.innerHTML = "";

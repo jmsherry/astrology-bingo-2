@@ -328,7 +328,7 @@ class BirthChart {
       locationDisplay.textContent = `Lat: ${this.latitude.toFixed(
         2,
       )}, Long: ${this.longitude.toFixed(2)}`;
-      console.log(dateDisplay, timeDisplay);
+      // console.log(dateDisplay, timeDisplay);
       birthdayDisplay.append(dateDisplay, timeDisplay, locationDisplay);
       // heading.append(birthdayDisplay);
       mountNode.append(birthdayDisplay);
@@ -343,7 +343,7 @@ class BirthChart {
     const symbolsToPopulate = [];
     // console.log("planets", planets);
     for (const [planet, sign] of Object.entries(this)) {
-      console.log(planet, sign);
+      // console.log(planet, sign);
       if (!planets.includes(planet)) {
         console.log(`skipping ${planet}`);
         continue;

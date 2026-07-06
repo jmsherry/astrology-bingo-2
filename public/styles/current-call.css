@@ -8,6 +8,10 @@ body {
   color: #fff;
 }
 
+nav.footer-nav.current-call  {
+  background-color: transparent;
+}
+
 .call-display-section {
   height: 90vh;
   display: flex;

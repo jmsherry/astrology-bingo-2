@@ -122,11 +122,22 @@ td.lastCalled.open .title {
   justify-content: space-around;
   align-items: center;
   min-height: 100px;
+  padding: 1rem;
+}
+
+.upper-controls > #prevCall{
+  max-width: 100px;
+  text-align: left;
 }
 
 .phrase {
   font-size: 3rem;
   flex-grow: 1;
+
+}
+
+.phrase > p{
+  margin: 0;
 }
 
 .upper-controls button {

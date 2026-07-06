@@ -13,7 +13,7 @@ const call = new CurrentCall({
   },
   options: {
     features: {
-      controls: true,
+      controls: false,
       hoverguides: false,
       clickable: false,
     },
