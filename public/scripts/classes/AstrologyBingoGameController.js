@@ -18,6 +18,7 @@ class AstrologyBingoGameController {
     alreadyCalled: "called",
     players: "players",
   };
+  static MAX_PLAYERS = 150;
   constructor() {
     this._id = uuidv4();
 
@@ -160,22 +161,30 @@ class AstrologyBingoGameController {
   }
 
   addPlayer(data) {
-    let p = data;
-    if (!(data instanceof Player)) {
-      p = new Player(data);
+
+    if (this.players.length >= AstrologyBingoGameController.MAX_PLAYERS) {
+        throw new Error(
+            `Maximum number of players (${AstrologyBingoGameController.MAX_PLAYERS}) reached`
+        );
     }
+
+    let p = data;
+
+    if (!(data instanceof Player)) {
+        p = new Player(data);
+    }
+
     this.players.push(p);
 
-    // for (let i = 0; i < 50; i += 1) {
-    //   if (!(data instanceof Player)) {
-    //     p = new Player(data);
-    //   }
-    //   this.players.push(p);
-    // }
-
     this.savePlayers();
-    this.socket.send(JSON.stringify({ type: "player-added" }));
-  }
+
+    this.socket.send(
+        JSON.stringify({
+            type: "player-added",
+            controllerId: this._id,
+        })
+    );
+}
 
   removePlayer(player) {
     if (!(player instanceof Player)) {
@@ -190,6 +199,8 @@ class AstrologyBingoGameController {
     this.savePlayers();
     this.socket.send(JSON.stringify({ type: "player-deleted" }));
   }
+
+  
 
   sortPlayers(showingResults = false) {
     if (showingResults) {

@@ -256,6 +256,7 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     const player = new Player({ chartData });
     renderFn(player);
     bingoGameController.addPlayer(player);
+    
   } catch (err) {
     console.log(err);
     M.toast({html: `<h2>Error with Python server</h2><p>${err.message}</p>`, classes: ['toast', 'error']});
