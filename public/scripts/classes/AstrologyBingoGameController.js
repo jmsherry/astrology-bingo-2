@@ -267,6 +267,13 @@ class AstrologyBingoGameController {
   }
 
   reset({ signal = true } = {}) {
+    // const confirm = window.confirm("Are you sure?");
+    // if (confirm) {
+    //   console.log("yes");
+    // } else {
+    //   console.log("no");
+    // }
+
     for (const item of this.alreadyCalled) {
       delete item.callPosition;
     }
@@ -509,7 +516,7 @@ class AstrologyBingoGameController {
       Scorpio: "Feel the burn, Scorpio Saturn",
       Sagittarius: "Why, Why, Why Sagittarius Saturn",
       Capricorn: "Tony Robbins, Capricorn Saturn",
-      Aquarius: "Elvis Presley Aquarius in Saturn",
+      Aquarius: "Elvis Presley, Saturn in Aquarius",
       Pisces: "Jesus christ, Dalai Lama and Isaac Newton Pisces in Saturn",
     },
     Uranus: {
@@ -518,8 +525,7 @@ class AstrologyBingoGameController {
       Gemini: "A hole in 2 Gemini Uranus",
       Cancer: "Dream catcher earring, Cancer Uranus",
       Leo: "Despacito, Uranus Leo",
-      Virgo:
-        "Possibly Vegan/It’s better to burn out than fade away, Virgo Uranus",
+      Virgo: "Possibly Vegan, Virgo Uranus",
       Libra: "Making arty farty, Libra Uranus",
       Scorpio: "Shakira Shakira Scorpio Uranus",
       Sagittarius: "Pretty precarious Uranus Sagittarius",
@@ -532,7 +538,7 @@ class AstrologyBingoGameController {
       Taurus: "Wake up at Noon, Taurus Neptune",
       Gemini: "Fruit of the loom, Gemini Neptune",
       Cancer: "Swim to the moon, Cancer Neptune",
-      Leo: "A bit of a goon, Leo Neptune",
+      Leo: "Pastry of filo, Neptune in Leo",
       Virgo: "Ladies commune, Virgo Neptune",
       Libra: "Vidal Sassoon, Libra Neptune",
       Scorpio: "Bonking by noon, Scorpio Neptune",
