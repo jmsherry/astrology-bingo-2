@@ -1,4 +1,4 @@
-[
+const celebs = [
     {
       "birthday": "1943/08/17",
       "time": "0300",
@@ -23115,3 +23115,6 @@
       "complete": false
     }
   ]
+
+
+  export default celebs;

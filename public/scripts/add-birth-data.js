@@ -255,6 +255,7 @@ async function getBirthChart(fetchURL = "", renderFn, { firstname, lastname }) {
     // console.log("chartData", chartData);
     const player = new Player({ chartData });
     renderFn(player);
+    console.log("player to add", player)
     bingoGameController.addPlayer(player);
     
   } catch (err) {

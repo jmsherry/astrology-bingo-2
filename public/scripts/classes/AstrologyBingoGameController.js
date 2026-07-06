@@ -161,7 +161,7 @@ class AstrologyBingoGameController {
   }
 
   addPlayer(data) {
-
+    console.log("data in add player", data);
     if (this.players.length >= AstrologyBingoGameController.MAX_PLAYERS) {
         throw new Error(
             `Maximum number of players (${AstrologyBingoGameController.MAX_PLAYERS}) reached`
@@ -170,6 +170,7 @@ class AstrologyBingoGameController {
 
     let p = data;
 
+    // TODO THIS IS THE BIT THAT NEEDS TO CHANGE BASED ON CELEBS 
     if (!(data instanceof Player)) {
         p = new Player(data);
     }
@@ -200,7 +201,22 @@ class AstrologyBingoGameController {
     this.socket.send(JSON.stringify({ type: "player-deleted" }));
   }
 
-  
+  deleteAllPlayers({ signal = true } = {}) {
+
+    this.players = [];
+
+    this.savePlayers();
+
+    if (signal) {
+        this.socket.send(
+            JSON.stringify({
+                type: "player-deleted",
+                controllerId: this._id,
+            })
+        );
+    }
+
+}
 
   sortPlayers(showingResults = false) {
     if (showingResults) {
@@ -271,6 +287,23 @@ class AstrologyBingoGameController {
       }
     }
   }
+
+  importCelebrities(celebs) {
+    let added = 0;
+    for (const celeb of celebs) {
+      console.log("data in import celebs", celeb);
+        const exists = this.players.some(
+            player => player.name === celeb.name
+        );
+        if (exists) {
+            continue;
+        }
+        this.addPlayer(celeb);
+        added++;
+    }
+
+    return added;
+}
 
   refreshData() {
     this.updatePicks();

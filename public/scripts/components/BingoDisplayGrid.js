@@ -208,9 +208,10 @@ class BingoDisplayGrid {
     this.gridArea.innerHTML = "";
     this.gridArea.append(table);
 
-    if (settings.features.controls) {
-      this.addControls();
-    }
+    // Add Reset button to controls 
+    // if (settings.features.controls) {
+    //   this.addControls();
+    // }
 
     if (settings.features.hoverguides) {
       this.setUpHoverGuides();
