@@ -48,11 +48,12 @@ nav.footer-nav.current-call  {
 }
 
 .prevcall-container > h2 {
-  font-size: 5rem;
+  font-size: clamp(2rem, 4vw, 5rem);
 }
 
 .lastcall-container > h2 {
-  font-size: 11rem;
+
+  font-size: clamp(4rem, 8vw, 11rem);
 }
 
 .logo-container {
